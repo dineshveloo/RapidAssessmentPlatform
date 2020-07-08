@@ -22,6 +22,10 @@ import Routes from './Routes';
 import store from "./store";
 import { Provider } from "react-redux";
 import { API_URL } from './config';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
   // Set auth token header auth
@@ -40,11 +44,17 @@ if (localStorage.jwtToken) {
     window.location.href = "./signin";
   }
 }
+toast.configure()
 class App extends Component {
-  state = {
-    collapseID: '',
-    loading: true
-  };
+  constructor() {
+    super();
+    this.state = {
+      collapseID: '',
+      loading: true
+    };
+    //toast('hi');
+  }
+
 
   componentDidMount = () => {
     fetch(`${API_URL}/wake-up`)
@@ -77,152 +87,152 @@ class App extends Component {
     const { collapseID } = this.state;
     return (
       <Provider store={store}>
-      <Router>
-        <div className='flyout'>
-          <MDBNavbar color='indigo' dark expand='md' fixed='top' scrolling>
-            <MDBNavbarBrand href='/' className='py-0 font-weight-bold'>
-              <strong className='align-middle'>Mphasis</strong>
-            </MDBNavbarBrand>
-            <MDBNavbarToggler
-              onClick={this.toggleCollapse('mainNavbarCollapse')}
-            />
-            <MDBCollapse id='mainNavbarCollapse' isOpen={collapseID} navbar>
-              <MDBNavbarNav right>
-              <MDBNavItem active>
-                  <MDBLink to='/'>Home</MDBLink>
-                </MDBNavItem>
-                <MDBNavItem>
-                  <MDBDropdown>
-                    <MDBDropdownToggle nav caret>
-                      <div className='d-none d-md-inline'>Rapid Process Discovery</div>
-                    </MDBDropdownToggle>
-                    <MDBDropdownMenu className='dropdown-default' right>
-                      <MDBDropdownItem href='#!'>Capture Process</MDBDropdownItem>
-                      <MDBDropdownItem href='#!'>
-                      View Process
+        <Router>
+          <div className='flyout'>
+            <MDBNavbar color='indigo' dark expand='md' fixed='top' scrolling>
+              <MDBNavbarBrand href='/' className='py-0 font-weight-bold'>
+                <strong className='align-middle'>Mphasis</strong>
+              </MDBNavbarBrand>
+              <MDBNavbarToggler
+                onClick={this.toggleCollapse('mainNavbarCollapse')}
+              />
+              <MDBCollapse id='mainNavbarCollapse' isOpen={collapseID} navbar>
+                <MDBNavbarNav right>
+                  <MDBNavItem active>
+                    <MDBLink to='/'>Home</MDBLink>
+                  </MDBNavItem>
+                  <MDBNavItem>
+                    <MDBDropdown>
+                      <MDBDropdownToggle nav caret>
+                        <div className='d-none d-md-inline'>Rapid Process Discovery</div>
+                      </MDBDropdownToggle>
+                      <MDBDropdownMenu className='dropdown-default' right>
+                        <MDBDropdownItem href='#!'>Capture Process</MDBDropdownItem>
+                        <MDBDropdownItem href='#!'>
+                          View Process
                       </MDBDropdownItem>
-                      <MDBDropdownItem href='#!'>
-                        Approve Process
+                        <MDBDropdownItem href='#!'>
+                          Approve Process
                       </MDBDropdownItem>
-                      <MDBDropdownItem href='#!'>
-                      Process Prioritization
+                        <MDBDropdownItem href='#!'>
+                          Process Prioritization
                       </MDBDropdownItem>
-                      <MDBDropdownItem href='#!'>
-                      Upload/Download Process
-                      </MDBDropdownItem>
-                    </MDBDropdownMenu>
-                  </MDBDropdown>
-                </MDBNavItem>
-                <MDBNavItem>
-                  <MDBDropdown>
-                    <MDBDropdownToggle nav caret>
-                      <div className='d-none d-md-inline'>Process Flow</div>
-                    </MDBDropdownToggle>
-                    <MDBDropdownMenu className='dropdown-default' right>
-                      <MDBDropdownItem href='#!'>Capture Process Flow</MDBDropdownItem>
-                      <MDBDropdownItem href='#!'>
-                      View Process Flow
+                        <MDBDropdownItem href='#!'>
+                          Upload/Download Process
                       </MDBDropdownItem>
                       </MDBDropdownMenu>
-                  </MDBDropdown>
-                </MDBNavItem>
-                <MDBNavItem>
-                  <MDBDropdown>
-                    <MDBDropdownToggle nav caret>
-                      <div className='d-none d-md-inline'>Business Case & Roadmap</div>
-                    </MDBDropdownToggle>
-                    <MDBDropdownMenu className='dropdown-default' right>
-                      <MDBDropdownItem href='#!'>Select</MDBDropdownItem>
-                      <MDBDropdownItem href='#!'>
-                      View
-                      </MDBDropdownItem>                      
-                    </MDBDropdownMenu>
-                  </MDBDropdown>
-                </MDBNavItem>
-                <MDBNavItem>
-                  <MDBDropdown>
-                    <MDBDropdownToggle nav caret>
-                      <div className='d-none d-md-inline'>User Management</div>
-                    </MDBDropdownToggle>
-                    <MDBDropdownMenu className='dropdown-default' right>
-                      <MDBDropdownItem href='#!'>User Management Home</MDBDropdownItem>
-                      <MDBDropdownItem href='#!'>
-                      Create User
+                    </MDBDropdown>
+                  </MDBNavItem>
+                  <MDBNavItem>
+                    <MDBDropdown>
+                      <MDBDropdownToggle nav caret>
+                        <div className='d-none d-md-inline'>Process Flow</div>
+                      </MDBDropdownToggle>
+                      <MDBDropdownMenu className='dropdown-default' right>
+                        <MDBDropdownItem href='#!'>Capture Process Flow</MDBDropdownItem>
+                        <MDBDropdownItem href='#!'>
+                          View Process Flow
                       </MDBDropdownItem>
-                      <MDBDropdownItem href='#!'>
-                      View Users
-                      </MDBDropdownItem>                 
-                    </MDBDropdownMenu>
-                  </MDBDropdown>
-                </MDBNavItem>
-                <MDBNavItem>
-                  <MDBDropdown>
-                    <MDBDropdownToggle nav caret>
-                      <div className='d-none d-md-inline'>Configuration Details</div>
-                    </MDBDropdownToggle>
-                    <MDBDropdownMenu className='dropdown-default' right>
-                      <MDBDropdownItem href='#!'>Automation Anywhere</MDBDropdownItem>
-                      <MDBDropdownItem href='#!'>
-                      UiPath
+                      </MDBDropdownMenu>
+                    </MDBDropdown>
+                  </MDBNavItem>
+                  <MDBNavItem>
+                    <MDBDropdown>
+                      <MDBDropdownToggle nav caret>
+                        <div className='d-none d-md-inline'>Business Case & Roadmap</div>
+                      </MDBDropdownToggle>
+                      <MDBDropdownMenu className='dropdown-default' right>
+                        <MDBDropdownItem href='#!'>Select</MDBDropdownItem>
+                        <MDBDropdownItem href='#!'>
+                          View
                       </MDBDropdownItem>
-                      <MDBDropdownItem href='#!'>
-                      Pega Robotics
+                      </MDBDropdownMenu>
+                    </MDBDropdown>
+                  </MDBNavItem>
+                  <MDBNavItem>
+                    <MDBDropdown>
+                      <MDBDropdownToggle nav caret>
+                        <div className='d-none d-md-inline'>User Management</div>
+                      </MDBDropdownToggle>
+                      <MDBDropdownMenu className='dropdown-default' right>
+                        <MDBDropdownItem href='#!'>User Management Home</MDBDropdownItem>
+                        <MDBDropdownItem href='#!'>
+                          Create User
                       </MDBDropdownItem>
-                      <MDBDropdownItem href='#!'>
-                     Blue Prism
+                        <MDBDropdownItem href='#!'>
+                          View Users
                       </MDBDropdownItem>
-                    </MDBDropdownMenu>
-                  </MDBDropdown>
-                </MDBNavItem>
-                <MDBNavItem>
-                  <MDBLink to='/'>About</MDBLink>
-                </MDBNavItem>
-                <MDBNavItem >
-                  <MDBLink to='/'>Contact</MDBLink>
-                </MDBNavItem>
-                <MDBNavItem >
-                  <MDBLink to='/'>Logout</MDBLink>
-                </MDBNavItem>
-                <MDBNavItem>
-                  <MDBLink className='waves-effect waves-light' to='#!'>
-                    <MDBIcon brand icon='twitter' />
-                  </MDBLink>
-                </MDBNavItem>
-                <MDBNavItem>
-                  <MDBLink className='waves-effect waves-light' to='#!'>
-                    <MDBIcon brand icon='google-plus' />
-                  </MDBLink>
-                </MDBNavItem>
-                <MDBNavItem>
-                  <MDBDropdown>
-                    <MDBDropdownToggle nav caret>
-                      <MDBIcon icon='user' />
-                    </MDBDropdownToggle>
-                    <MDBDropdownMenu right>
-                      <MDBDropdownItem href='/signin'>
-                        SignIn
+                      </MDBDropdownMenu>
+                    </MDBDropdown>
+                  </MDBNavItem>
+                  <MDBNavItem>
+                    <MDBDropdown>
+                      <MDBDropdownToggle nav caret>
+                        <div className='d-none d-md-inline'>Configuration Details</div>
+                      </MDBDropdownToggle>
+                      <MDBDropdownMenu className='dropdown-default' right>
+                        <MDBDropdownItem href='#!'>Automation Anywhere</MDBDropdownItem>
+                        <MDBDropdownItem href='#!'>
+                          UiPath
                       </MDBDropdownItem>
-                      <MDBDropdownItem href='/emailConfirm'>
-                        Register
+                        <MDBDropdownItem href='#!'>
+                          Pega Robotics
                       </MDBDropdownItem>
-                    </MDBDropdownMenu>
-                  </MDBDropdown>
-                </MDBNavItem>
-              </MDBNavbarNav>
-            </MDBCollapse>
-          </MDBNavbar>
-          {collapseID && overlay}
-          <main style={{ marginTop: '4rem' }}>
-            <Routes />
-          </main>
-          <MDBFooter color='indigo'>
-            <p className='footer-copyright mb-0 py-3 text-center'>
-              &copy; {new Date().getFullYear()}
-              <a href='https://www.mphasis.com'> Mphasis. </a> All rights reserved
+                        <MDBDropdownItem href='#!'>
+                          Blue Prism
+                      </MDBDropdownItem>
+                      </MDBDropdownMenu>
+                    </MDBDropdown>
+                  </MDBNavItem>
+                  <MDBNavItem>
+                    <MDBLink to='/'>About</MDBLink>
+                  </MDBNavItem>
+                  <MDBNavItem >
+                    <MDBLink to='/'>Contact</MDBLink>
+                  </MDBNavItem>
+                  <MDBNavItem >
+                    <MDBLink to='/'>Logout</MDBLink>
+                  </MDBNavItem>
+                  <MDBNavItem>
+                    <MDBLink className='waves-effect waves-light' to='#!'>
+                      <MDBIcon brand icon='twitter' />
+                    </MDBLink>
+                  </MDBNavItem>
+                  <MDBNavItem>
+                    <MDBLink className='waves-effect waves-light' to='#!'>
+                      <MDBIcon brand icon='google-plus' />
+                    </MDBLink>
+                  </MDBNavItem>
+                  <MDBNavItem>
+                    <MDBDropdown>
+                      <MDBDropdownToggle nav caret>
+                        <MDBIcon icon='user' />
+                      </MDBDropdownToggle>
+                      <MDBDropdownMenu right>
+                        <MDBDropdownItem href='/signin'>
+                          SignIn
+                      </MDBDropdownItem>
+                        <MDBDropdownItem href='/emailConfirm'>
+                          Register
+                      </MDBDropdownItem>
+                      </MDBDropdownMenu>
+                    </MDBDropdown>
+                  </MDBNavItem>
+                </MDBNavbarNav>
+              </MDBCollapse>
+            </MDBNavbar>
+            {collapseID && overlay}
+            <main style={{ marginTop: '4rem' }}>
+              <Routes />
+            </main>
+            <MDBFooter color='indigo'>
+              <p className='footer-copyright mb-0 py-3 text-center'>
+                &copy; {new Date().getFullYear()}
+                <a href='https://www.mphasis.com'> Mphasis. </a> All rights reserved
             </p>
-          </MDBFooter>
-        </div>
-      </Router>
+            </MDBFooter>
+          </div>
+        </Router>
       </Provider>
     );
   }

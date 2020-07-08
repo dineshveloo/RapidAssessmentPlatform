@@ -77,7 +77,7 @@ router.post("/signin", (req, res) => {
   User.findOne({ email }).then(user => {
     // Check if user exists
     if (!user) {
-      return res.status(404).json({ emailnotfound: "Email not found" });
+      return res.json({ msg: "email not found", status: 0 });
     }
 
     // Check password
@@ -120,11 +120,12 @@ router.post("/confirm", (req, res) => {
     if (user) {
       // res.json({msg: "here"})
       if (user && !user.confirmed) {
-        res.json({ msg: "here" })
-        // sendEmail(user.email, templates.confirm(user._id))
-        //   .then(() => res.json({ msg: msgs.resend }))
+        //res.json({ msg: "here" })
         res.json({ msg: msgs.resend, status: 0 })
       }
+      else if (user && user.confirmed) {
+        //res.json({ msg: "here" })
+       res.json({ msg: "you are already confirm", status: 2 })   
 
     } else {
       const newUser = new User({
@@ -140,21 +141,22 @@ router.post("/confirm", (req, res) => {
         .then(user => res.json({ msg: msgs.EmailSent, status: 1 }))
         .catch(err => console.log(err));
     }
+  }
   });
 });
 
 
 router.get('/approve/:email/:id', (req, res) => {
   let { email, id } = req.params;
- 
+
   //res.json({ msg: email})
   //first update confirm in db, trigger email to user  
   userEmail.emailUser(email)
 
   User.findByIdAndUpdate(id, { confirmed: true })
-          .then(() => res.json({ msg: "done" }))
-          .catch(err => console.log(err))
-    
+    .then(() => res.json({ msg: "done" }))
+    .catch(err => console.log(err))
+
 });
 
 module.exports = router;

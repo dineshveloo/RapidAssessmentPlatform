@@ -93,7 +93,7 @@ class SigninPage extends Component {
                         required
                       /><span className="red-text">
                         {errors.email}
-                        {errors.emailnotfound}
+                        {/* {errors.emailnotfound} */}
                       </span>
                       <MDBInput
                         onChange={this.onChange}

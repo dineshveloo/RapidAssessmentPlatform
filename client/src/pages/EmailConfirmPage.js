@@ -11,8 +11,9 @@ import {
     MDBAnimation
 } from 'mdbreact';
 import { API_URL } from '../config';
-// import { toast } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css'
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 class EmailConfirmPage extends Component {
     state = {
@@ -41,15 +42,18 @@ class EmailConfirmPage extends Component {
         })
             .then(res => res.json())
             .then(data => {
+                if (data.status === 1) {
+                    this.setState({ msg: data.msg })
+                    this.setState({ status: data.status })
+                    //console.log(data)
+                    toast(data.msg);
 
-                this.setState({ msg: data.msg })
-                this.setState({ status: data.status })
-                //console.log(data)
-                //toast(data.msg);
-                if (data.status === '1') {
+                } else if (data.status === 0) {
+                    toast(data.msg);
+                } else if (data.status === 2) {
+                    toast(data.msg);
                     this.props.history.push("/register");
                 }
-                // this.form.reset()
             })
             .catch(err => console.log(err))
     }
@@ -136,7 +140,6 @@ class EmailConfirmPage extends Component {
             </>
         );
     }
-
 }
 
 export default EmailConfirmPage;

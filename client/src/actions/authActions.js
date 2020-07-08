@@ -1,9 +1,9 @@
 import axios from "axios";
 import setAuthToken from "../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
-
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING } from "./types";
-
 // Register User
 export const RegisterUser = (userData, history) => dispatch => {
   axios
@@ -22,17 +22,22 @@ export const loginUser = userData => dispatch => {
   axios
     .post("/api/users/signin", userData)
     .then(res => {
+      //console.log(res);
       // Save to localStorage
+      if (res.data.status === 0) {
+        toast(res.data.msg);
+      } else {
+        // Set token to localStorage
+        const { token } = res.data;
+        localStorage.setItem("jwtToken", token);
+        // Set token to Auth header
+        setAuthToken(token);
+        // Decode token to get user data
+        const decoded = jwt_decode(token);
+        // Set current user
+        dispatch(setCurrentUser(decoded));
+      }
 
-      // Set token to localStorage
-      const { token } = res.data;
-      localStorage.setItem("jwtToken", token);
-      // Set token to Auth header
-      setAuthToken(token);
-      // Decode token to get user data
-      const decoded = jwt_decode(token);
-      // Set current user
-      dispatch(setCurrentUser(decoded));
     })
     .catch(err =>
       dispatch({
