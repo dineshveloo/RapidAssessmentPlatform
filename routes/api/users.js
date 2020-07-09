@@ -77,7 +77,7 @@ router.post("/signin", (req, res) => {
   User.findOne({ email }).then(user => {
     // Check if user exists
     if (!user) {
-      return res.json({ msg: "email not found", status: 0 });
+      return res.json({ msg: "your email id is not regisered to RAP. please regiser. ", status: 0 });
     }
 
     // Check password
@@ -125,9 +125,12 @@ router.post("/confirm", (req, res) => {
       }
       else if (user && user.confirmed) {
         //res.json({ msg: "here" })
-       res.json({ msg: "you are already confirm", status: 2 })   
+        res.json({ msg: "you are already confirm", status: 2 })
 
-    } else {
+      }
+    }
+    else {
+      // res.json({msg: "here"})
       const newUser = new User({
         name: req.body.name,
         email: req.body.email,
@@ -141,20 +144,19 @@ router.post("/confirm", (req, res) => {
         .then(user => res.json({ msg: msgs.EmailSent, status: 1 }))
         .catch(err => console.log(err));
     }
-  }
+
   });
 });
 
 
 router.get('/approve/:email/:id', (req, res) => {
   let { email, id } = req.params;
-
   //res.json({ msg: email})
   //first update confirm in db, trigger email to user  
   userEmail.emailUser(email)
 
   User.findByIdAndUpdate(id, { confirmed: true })
-    .then(() => res.json({ msg: "done" }))
+    .then(() => res.json({ msg: "your have approved the user successfully" }))
     .catch(err => console.log(err))
 
 });
