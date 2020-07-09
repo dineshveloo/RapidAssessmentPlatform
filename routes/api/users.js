@@ -1,3 +1,4 @@
+
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
@@ -20,7 +21,6 @@ const User = require("../../models/User");
 // @access Public
 router.post("/register", (req, res) => {
   // Form validation
-
   const { errors, isValid } = validateRegisterInput(req.body);
   ///console.log(req.body);
   // return req.body
@@ -30,29 +30,31 @@ router.post("/register", (req, res) => {
   }
 
   User.findOne({ email: req.body.email }).then(user => {
-    if (user) {
-      return res.status(400).json({ email: "Email already exists" });
-    } else {
+    if (user && user.confirmed) {
       const newUser = new User({
-        name: req.body.name,
-        email: req.body.email,
         password: req.body.password
       });
-      res.json({ msg: 'user' })
 
-      // console.log("---->" + newUser);
-      // return JSON.stringify(newUser);
-      // Hash password before saving in database
       bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(newUser.password, salt, (err, hash) => {
           if (err) throw err;
-          newUser.password = hash;
-          newUser
-            .save()
-            .then(user => res.json(user))
-            .catch(err => console.log(err));
+          if (user.password.length < 0) {
+            newUser.password = hash;
+            User.findByIdAndUpdate(user.id, { password: newUser.password })
+              .then(() => res.json({ msg: 'success', status: 1 }))
+              .catch(err => console.log(err))
+          } else {
+            res.json({ msg: "you're already a registered user", status: 4 })
+          }
+
         });
       });
+
+    } else if (user && !user.confirmed) {
+      res.json({ msg: "you're email'id is not registered wih us. please send a request to get register!", status: 2 })
+    }
+    else {
+      res.json({ msg: "please send request to get register.", status: 3 })
     }
   });
 });
@@ -77,7 +79,7 @@ router.post("/signin", (req, res) => {
   User.findOne({ email }).then(user => {
     // Check if user exists
     if (!user) {
-      return res.json({ msg: "your email id is not regisered to RAP. please regiser. ", status: 0 });
+      return res.json({ msg: "your email id is not regisered to RAP. please register. ", status: 0 });
     }
 
     // Check password
@@ -125,7 +127,7 @@ router.post("/confirm", (req, res) => {
       }
       else if (user && user.confirmed) {
         //res.json({ msg: "here" })
-        res.json({ msg: "you are already confirm", status: 2 })
+        res.json({ msg: "you're email'id got confirmed to RAP. please regiser with your confirmed email'id.", status: 2 })
 
       }
     }
@@ -142,6 +144,7 @@ router.post("/confirm", (req, res) => {
         .then(
           sendEmail.email(newUser))
         .then(user => res.json({ msg: msgs.EmailSent, status: 1 }))
+        .then(reset())
         .catch(err => console.log(err));
     }
 

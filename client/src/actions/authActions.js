@@ -8,7 +8,16 @@ import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING } from "./types";
 export const RegisterUser = (userData, history) => dispatch => {
   axios
     .post("/api/users/register", userData)
-    .then(res => history.push("/signin"))
+    .then(res => {
+      // alert(JSON.stringify(res.data));
+      if (res.data.status === 1) {
+        history.push("/signin")
+      } else if (res.data.status === 0) {
+        toast(res.data.msg);
+      } else {
+        toast(res.data.msg);
+      }
+    })
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
@@ -37,7 +46,6 @@ export const loginUser = userData => dispatch => {
         // Set current user
         dispatch(setCurrentUser(decoded));
       }
-
     })
     .catch(err =>
       dispatch({
