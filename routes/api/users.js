@@ -38,21 +38,25 @@ router.post("/register", (req, res) => {
       bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(newUser.password, salt, (err, hash) => {
           if (err) throw err;
-          if (user.password.length < 0) {
+          //res.json(res);
+          if (!user.password) {
             newUser.password = hash;
             User.findByIdAndUpdate(user.id, { password: newUser.password })
               .then(() => res.json({ msg: 'success', status: 1 }))
               .catch(err => console.log(err))
-          } else {
+          }
+
+          else {
             res.json({ msg: "you're already a registered user", status: 4 })
           }
 
         });
       });
-
+      // email is true but confirm is false
     } else if (user && !user.confirmed) {
-      res.json({ msg: "you're email'id is not registered wih us. please send a request to get register!", status: 2 })
+      res.json({ msg: "you're email id is no confirmed yet.", status: 2 })
     }
+    // email and confirm both are false
     else {
       res.json({ msg: "please send request to get register.", status: 3 })
     }
@@ -144,7 +148,6 @@ router.post("/confirm", (req, res) => {
         .then(
           sendEmail.email(newUser))
         .then(user => res.json({ msg: msgs.EmailSent, status: 1 }))
-        .then(reset())
         .catch(err => console.log(err));
     }
 

@@ -71,9 +71,15 @@ class App extends Component {
   //   this.props.logoutUser();
   // };
 
-  onChangeLogoutHandler = e => {
+  // onChangeLogoutHandler = e => {
+  //   e.preventDefault();
+  //   store.dispatch(logoutUser());
+  // }
+
+  logoutHandler = (e) => {
     e.preventDefault();
-    store.dispatch(logoutUser());
+    localStorage.removeItem('jwtToken');
+    window.location.href = "./signin";
   }
 
   toggleCollapse = collapseID => () =>
@@ -105,7 +111,7 @@ class App extends Component {
     // }else{
     //   isLogin = localStorage.getItem('jwtToken');
     // }
-    
+
     return (
       <Provider store={store}>
         <Router>
@@ -213,7 +219,7 @@ class App extends Component {
                   </MDBNavItem>
                   {/* {isLogin === 0 ? null:  */}
                   <MDBNavItem >
-                    <MDBLink>Logout</MDBLink>
+                    <MDBLink onClick={this.logoutHandler}>Logout</MDBLink>
                   </MDBNavItem>
                   {/* } */}
                   <MDBNavItem>
