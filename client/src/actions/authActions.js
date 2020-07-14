@@ -4,6 +4,7 @@ import jwt_decode from "jwt-decode";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING } from "./types";
+
 // Register User
 export const RegisterUser = (userData, history) => dispatch => {
   axios
@@ -14,7 +15,11 @@ export const RegisterUser = (userData, history) => dispatch => {
         history.push("/signin")
       } else if (res.data.status === 0) {
         toast(res.data.msg);
-      } else {
+      } 
+      else if (res.data.status === -1){
+        toast(res.data.msg);
+      }
+      else {
         toast(res.data.msg);
       }
     })
@@ -35,9 +40,14 @@ export const loginUser = userData => dispatch => {
       // Save to localStorage
       if (res.data.status === 0) {
         toast(res.data.msg);
-      } else {
+      }
+      else if (res.data.status === -1) {
+        toast(res.data.msg);
+      }
+
+      else {
         // Set token to localStorage
-        const { token } = res.data;
+       const { token } = res.data;
         localStorage.setItem("jwtToken", token);
         // Set token to Auth header
         setAuthToken(token);
@@ -67,7 +77,7 @@ export const setCurrentUser = decoded => {
 export const setUserLoading = () => {
   return {
     type: USER_LOADING
-  };
+         };
 };
 
 // Log user out

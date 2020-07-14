@@ -1,4 +1,3 @@
-
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
@@ -21,46 +20,51 @@ const User = require("../../models/User");
 // @access Public
 router.post("/register", (req, res) => {
   // Form validation
-  const { errors, isValid } = validateRegisterInput(req.body);
-  ///console.log(req.body);
-  // return req.body
-  // Check validation
-  if (!isValid) {
-    return res.status(400).json(errors);
-  }
+  try {
+    const { errors, isValid } = validateRegisterInput(req.body);
+    ///console.log(req.body);
 
-  User.findOne({ email: req.body.email }).then(user => {
-    if (user && user.confirmed) {
-      const newUser = new User({
-        password: req.body.password
-      });
+    // Check validation
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
 
-      bcrypt.genSalt(10, (err, salt) => {
-        bcrypt.hash(newUser.password, salt, (err, hash) => {
-          if (err) throw err;
-          //res.json(res);
-          if (!user.password) {
-            newUser.password = hash;
-            User.findByIdAndUpdate(user.id, { password: newUser.password })
-              .then(() => res.json({ msg: 'success', status: 1 }))
-              .catch(err => console.log(err))
-          }
-
-          else {
-            res.json({ msg: "you're already a registered user", status: 4 })
-          }
-
+    User.findOne({ email: req.body.email }).then(user => {
+      if (user && user.confirmed) {
+        const newUser = new User({
+          password: req.body.password
         });
-      });
-      // email is true but confirm is false
-    } else if (user && !user.confirmed) {
-      res.json({ msg: "you're email id is no confirmed yet.", status: 2 })
-    }
-    // email and confirm both are false
-    else {
-      res.json({ msg: "please send request to get register.", status: 3 })
-    }
-  });
+
+        bcrypt.genSalt(10, (err, salt) => {
+          bcrypt.hash(newUser.password, salt, (err, hash) => {
+            if (err) throw err;
+            //res.json(res);
+            if (!user.password) {
+              newUser.password = hash;
+              User.findByIdAndUpdate(user.id, { password: newUser.password })
+                .then(() => res.json({ msg: 'success', status: 1 }))
+                .catch(err => console.log(err))
+            }
+
+            else {
+              res.json({ msg: "you're already a registered user", status: 4 })
+            }
+
+          });
+        });
+        // email is true but confirm is false
+      } else if (user && !user.confirmed) {
+        res.json({ msg: "you're email id is no confirmed yet.", status: 2 })
+      }
+      // email and confirm both are false
+      else {
+        res.json({ msg: "please send request to get register.", status: 3 })
+      }
+    });
+  } catch (e) {
+    res.json({ msg: "server error. ", status: -1 });
+    console.log(e);
+  }
 });
 
 // @route POST api/users/signin
@@ -68,102 +72,118 @@ router.post("/register", (req, res) => {
 // @access Public
 router.post("/signin", (req, res) => {
   // Form validation
+  try {
+    const { errors, isValid } = validateLoginInput(req.body);
 
-  const { errors, isValid } = validateLoginInput(req.body);
-
-  // Check validation
-  if (!isValid) {
-    return res.status(400).json(errors);
-  }
-
-  const email = req.body.email;
-  const password = req.body.password;
-
-  // Find user by email
-  User.findOne({ email }).then(user => {
-    // Check if user exists
-    if (!user) {
-      return res.json({ msg: "your email id is not regisered to RAP. please register. ", status: 0 });
+    // Check validation
+    if (!isValid) {
+      return res.status(400).json(errors);
     }
 
-    // Check password
-    bcrypt.compare(password, user.password).then(isMatch => {
-      if (isMatch) {
-        // User matched
-        // Create JWT Payload
-        const payload = {
-          id: user.id,
-          name: user.name
-        };
+    const email = req.body.email;
+    const password = req.body.password;
 
-        // Sign token
-        jwt.sign(
-          payload,
-          keys.secretOrKey,
-          {
-            expiresIn: 31556926 // 1 year in seconds
-          },
-          (err, token) => {
-            res.json({
-              success: true,
-              token: "Bearer " + token
-            });
-          }
-        );
-      } else {
-        return res
-          .status(400)
-          .json({ passwordincorrect: "Password incorrect" });
+    // Find user by email
+    User.findOne({ email }).then(user => {
+      // Check if user exists
+      if (!user) {
+        return res.json({ msg: "your email id is not regisered to RAP. please register. ", status: 0 });
       }
+
+      // Check password
+      bcrypt.compare(password, user.password).then(isMatch => {
+        if (isMatch) {
+          // User matched
+          // Create JWT Payload
+          const payload = {
+            id: user.id,
+            name: user.name
+          };
+
+          // Sign token
+          jwt.sign(
+            payload,
+            keys.secretOrKey,
+            {
+              expiresIn: 31556926 // 1 year in seconds
+            },
+            (err, token) => {
+              res.json({
+                success: true,
+                token: "Bearer " + token
+              });
+            }
+          );
+        } else {
+          return res
+            .status(400)
+            .json({ passwordincorrect: "Password incorrect" });
+        }
+      });
     });
-  });
+
+  } catch (e) {
+    res.json({ msg: "server error. ", status: -1 });
+    console.log(e);
+  }
+
 });
 
 router.post("/confirm", (req, res) => {
+  try {
+    User.findOne({ email: req.body.email }).then(user => {
+      if (user) {
+        // res.json({msg: "here"})
+        if (user && !user.confirmed) {
+          //res.json({ msg: "here" })
+          res.json({ msg: msgs.resend, status: 0 })
+        }
+        else if (user && user.confirmed) {
+          //res.json({ msg: "here" })
+          res.json({ msg: "you're email'id got confirmed to RAP. please regiser with your confirmed email'id.", status: 2 })
 
-  User.findOne({ email: req.body.email }).then(user => {
-
-    if (user) {
-      // res.json({msg: "here"})
-      if (user && !user.confirmed) {
-        //res.json({ msg: "here" })
-        res.json({ msg: msgs.resend, status: 0 })
+        }
       }
-      else if (user && user.confirmed) {
-        //res.json({ msg: "here" })
-        res.json({ msg: "you're email'id got confirmed to RAP. please regiser with your confirmed email'id.", status: 2 })
+      else {
+      //res.json({msg: "here"})
+        const newUser = new User({
+          name: req.body.name,
+          email: req.body.email,
+          company: req.body.company
+        });
 
+        newUser
+          .save()
+          .then(sendEmail.email(newUser))
+         // res.json({msg: "here"})
+          .then(() => res.json({ msg: msgs.EmailSent, status: 1 }))
+          .catch(err => console.log(err));
       }
-    }
-    else {
-      // res.json({msg: "here"})
-      const newUser = new User({
-        name: req.body.name,
-        email: req.body.email,
-        company: req.body.company
-      });
 
-      newUser
-        .save()
-        .then(
-          sendEmail.email(newUser))
-        .then(user => res.json({ msg: msgs.EmailSent, status: 1 }))
-        .catch(err => console.log(err));
-    }
+    });
 
-  });
+  } catch (e) {
+    res.json({ msg: "server error. ", status: -1 });
+    console.log(e);
+  }
 });
 
 
 router.get('/approve/:email/:id', (req, res) => {
-  let { email, id } = req.params;
-  //res.json({ msg: email})
-  //first update confirm in db, trigger email to user  
-  userEmail.emailUser(email)
-
-  User.findByIdAndUpdate(id, { confirmed: true })
-    .then(() => res.json({ msg: "your have approved the user successfully" }))
-    .catch(err => console.log(err))
+  try{
+    let { email, id } = req.params;
+    //res.json({ msg: email})
+    //first update confirm in db, trigger email to user  
+    userEmail.emailUser(email)
+  
+    User.findByIdAndUpdate(id, { confirmed: true })
+      .then(() => res.json({ msg: "your have approved the user successfully" }))
+      .catch(err => console.log(err))
+  
+  }catch(e){
+    res.json({ msg: "server error. ", status: -1 });
+    console.log(e);
+  }
 
 });
 

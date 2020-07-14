@@ -14,19 +14,24 @@ import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from 'react-redux';
 import { RegisterUser } from '../actions/authActions';
-import classnames from "classnames";
+//import classnames from "classnames";
+const initialState = {
+    name: "",
+    email: "",
+    password: "",
+    password2: "",
+    nameError: "",
+    emailError: "",
+    passwordError: "",
+    password2Error: "",
+}
 
 class RegistrationPage extends Component {
     constructor() {
         super();
-        this.state = {
-            name: "",
-            email: "",
-            password: "",
-            password2: "",
-            errors: {}
-        };
+        this.state = initialState;
     }
+
     componentDidMount() {
         // If logged in and user navigates to Register page, should redirect them to dashboard
         if (this.props.auth.isAuthenticated) {
@@ -41,24 +46,72 @@ class RegistrationPage extends Component {
             });
         }
     }
+    validate = () => {
+        //debugger;
+        let nameError = "", emailError = "", passwordError = "", password2Error = ""
+        if (!this.state.name) {
+            nameError = 'name cannot be blank';
+        }
+        if (!this.state.email.includes('@') || !this.state.email.includes('.')) {
+            emailError = 'please enter a valid email address';
+        }
+        if (this.state.password.length < 6 || this.state.password === this.state.name || this.state.password === this.state.email) {
+            passwordError = 'password must aleast 6 character';
+        }
+        else if (this.state.password2 !== this.state.password) {
+            password2Error = 'Passwords must match';
+        }
+
+
+        if (emailError || nameError || passwordError || password2Error) {
+            this.setState({ emailError, nameError, passwordError, password2Error });
+            return false;
+        }
+        return true;
+    }
+
     onChange = e => {
+
+        //alert(e.target.id);
+        switch (e.target.id) {
+            case 'name': this.setState({ nameError: '' });
+                break;
+            case 'email': this.setState({ emailError: '' });
+                break;
+            case 'password': this.setState({ passwordError: '' });
+                break;
+            case 'password2': this.setState({ password2Error: '' });
+                break;
+            default:
+                break;
+        }
         this.setState({ [e.target.id]: e.target.value });
     };
 
     onSubmit = e => {
         e.preventDefault();
-
-        const newUser = {
-            name: this.state.name,
-            email: this.state.email,
-            password: this.state.password,
-            password2: this.state.password2
-        };
-
-        this.props.RegisterUser(newUser, this.props.history);
+        const isValid = this.validate();
+        if (isValid) {
+            const newUser = {
+                name: this.state.name,
+                email: this.state.email,
+                password: this.state.password,
+                password2: this.state.password2
+            };
+            this.props.RegisterUser(newUser, this.props.history);
+            //reset form
+            this.setState({ initialState });
+        }
     };
     render() {
-        const { errors } = this.state;
+        const { emailError, passwordError } = this.state;
+        let isEnabledCheck = emailError || passwordError;
+        let isEnabled= false;
+        if (isEnabledCheck.length > 0) {
+            isEnabled = true;
+        }else{
+            isEnabled = false;
+        }
         return (
             <>
                 <MDBEdgeHeader color='indigo darken-3' className='sectionPage' />
@@ -76,28 +129,22 @@ class RegistrationPage extends Component {
                                             <MDBInput
                                                 onChange={this.onChange}
                                                 value={this.state.name}
-                                                error={errors.name}
                                                 id="name"
                                                 type="text"
-                                                className={classnames("", {
-                                                    invalid: errors.name
-                                                })}
                                                 label='Your name'
                                                 icon='user'
                                                 group
                                                 validate
                                                 success='right'
                                                 required
+
                                             />
+                                            <div style={{ fontSize: 13, paddingLeft: 42, color: "red" }}>{this.state.nameError}</div>
                                             <MDBInput
                                                 onChange={this.onChange}
                                                 value={this.state.email}
-                                                error={errors.email}
                                                 id="email"
                                                 type="email"
-                                                className={classnames("", {
-                                                    invalid: errors.email
-                                                })}
                                                 label='Your email'
                                                 icon='envelope'
                                                 group
@@ -105,15 +152,12 @@ class RegistrationPage extends Component {
                                                 success='right'
                                                 required
                                             />
+                                            <div style={{ fontSize: 13, paddingLeft: 42, color: "red" }}>{this.state.emailError}</div>
                                             <MDBInput
                                                 onChange={this.onChange}
                                                 value={this.state.password}
-                                                error={errors.password}
                                                 id="password"
                                                 type="password"
-                                                className={classnames("", {
-                                                    invalid: errors.password
-                                                })}
                                                 label='Your password'
                                                 icon='lock'
                                                 group
@@ -121,15 +165,12 @@ class RegistrationPage extends Component {
                                                 success='right'
                                                 required
                                             />
+                                            <div style={{ fontSize: 13, paddingLeft: 42, color: "red" }}>{this.state.passwordError}</div>
                                             <MDBInput
                                                 onChange={this.onChange}
                                                 value={this.state.password2}
-                                                error={errors.password2}
                                                 id="password2"
                                                 type="password"
-                                                className={classnames("", {
-                                                    invalid: errors.password2
-                                                })}
                                                 label='Confirm your password'
                                                 icon='exclamation-triangle'
                                                 group
@@ -137,9 +178,10 @@ class RegistrationPage extends Component {
                                                 success='right'
                                                 required
                                             />
+                                            <div style={{ fontSize: 13, paddingLeft: 42, color: "red" }}>{this.state.password2Error}</div>
                                         </div>
                                         <div className='text-center'>
-                                            <MDBBtn color='primary' type="submit">Submit</MDBBtn>
+                                            <MDBBtn color='primary' type="submit" disabled={isEnabled}>Submit</MDBBtn>
                                         </div>
                                     </form>
                                 </MDBJumbotron>

@@ -10,19 +10,21 @@ import {
   MDBBtn,
   MDBAnimation
 } from 'mdbreact';
-import classnames from "classnames";
+//import classnames from "classnames";
 import { loginUser } from '../actions/authActions';
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
+const initialState = {
+  email: "",
+  password: "",
+  emailError: "",
+  passwordError: ""
+}
 class SigninPage extends Component {
   constructor() {
     super();
-    this.state = {
-      email: "",
-      password: "",
-      errors: {}
-    };
+    this.state = initialState;
   }
 
   componentDidMount() {
@@ -44,27 +46,60 @@ class SigninPage extends Component {
     }
   }
 
+  validate = () => {
+    //debugger;
+    let emailError = "", passwordError = ""
+
+    if (!this.state.email.includes('@') || !this.state.email.includes('.')) {
+      emailError = 'please enter a valid email address';
+    }
+    if (!this.state.password) {
+      passwordError = 'password cannot be empty';
+    }
+
+    if (emailError || passwordError) {
+      this.setState({ emailError, passwordError });
+      return false;
+    }
+    return true;
+  }
+
   onChange = e => {
+    switch (e.target.id) {
+      case 'email': this.setState({ emailError: '' });
+        break;
+      case 'password': this.setState({ passwordError: '' });
+        break;
+      default:
+        break;
+    }
     this.setState({ [e.target.id]: e.target.value });
   };
 
   onSubmit = e => {
     e.preventDefault();
-
-    const userData = {
-      email: this.state.email,
-      password: this.state.password
-    };
-    this.props.loginUser(userData);
+    const isValid = this.validate();
+    if (isValid) {
+      const userData = {
+        email: this.state.email,
+        password: this.state.password
+      };
+      this.props.loginUser(userData);
+    }
   };
 
-
   render() {
-    const { errors } = this.state;
-
+    const { emailError, passwordError } = this.state;
+    let isEnabledCheck = emailError || passwordError;
+    let isEnabled = false;
+    if (isEnabledCheck.length > 0) {
+      isEnabled = true;
+    } else {
+      isEnabled = false;
+    }
     return (
       <>
-      <MDBEdgeHeader color='indigo darken-3' className='sectionPage' />
+        <MDBEdgeHeader color='indigo darken-3' className='sectionPage' />
         <MDBAnimation type='zoomIn' duration='500ms'>
           <MDBContainer>
             <MDBRow>
@@ -79,43 +114,34 @@ class SigninPage extends Component {
                       <MDBInput
                         onChange={this.onChange}
                         value={this.state.email}
-                        error={errors.email}
                         id="email"
                         type="email"
-                        className={classnames("", {
-                          invalid: errors.email || errors.emailnotfound
-                        })}
                         label='Type your email'
                         icon='envelope'
                         group
                         validate
                         success='right'
                         required
-                      /><span className="red-text">
-                        {errors.email}
-                        {/* {errors.emailnotfound} */}
-                      </span>
+                      />
+                      <div style={{ fontSize: 13, paddingLeft: 42, color: "red" }}>{this.state.emailError}</div>
                       <MDBInput
                         onChange={this.onChange}
                         value={this.state.password}
-                        error={errors.password}
                         id="password"
                         type="password"
-                        className={classnames("", {
-                          invalid: errors.password || errors.passwordincorrect
-                        })}
                         label='Type your password'
                         icon='lock'
                         group
                         validate
                         required
-                      /><span className="red-text">
-                        {errors.password}
-                        {/* {errors.passwordincorrect} */}
-                      </span>
+                      />
+                      <div style={{ fontSize: 13, paddingLeft: 42, color: "red" }}>{this.state.passwordError}</div>
                     </div>
                     <div className='text-center'>
-                      <MDBBtn type="submit" >Login</MDBBtn>
+
+                      <MDBBtn type="submit" disabled={isEnabled}>
+                        Login
+                        </MDBBtn>
                     </div>
                   </form>
                 </MDBJumbotron>

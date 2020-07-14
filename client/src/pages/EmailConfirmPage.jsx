@@ -21,50 +21,99 @@ class EmailConfirmPage extends Component {
         email: '',
         company: '',
         msg: '',
+        nameError: '',
+        emailError: '',
+        companyError: '',
         status: 0
     }
+
+    validate = () => {
+        //debugger;
+        let nameError = "", emailError = "", companyError = ""
+        if (!this.state.name) {
+            nameError = 'name cannot be empty';
+        }
+
+        if (!this.state.email.includes('@') || !this.state.email.includes('.')) {
+            emailError = 'please enter a valid email address';
+        }
+        if (!this.state.company) {
+            companyError = 'company cannot be empty';
+        }
+
+        if (nameError || emailError || companyError) {
+            this.setState({ nameError, emailError, companyError });
+            return false;
+        }
+        return true;
+    }
+
 
     onSubmit = event => {
         // this.form.reset();
         event.preventDefault()
-        //this.form.reset();
-        fetch(`${API_URL}/api/users/confirm`, {
-            method: 'post',
-            headers: {
-                accept: 'application/json',
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(
-                {
-                    email: event.target.email.value,
-                    name: event.target.name.value,
-                    company: event.target.company.value
-                })
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data.status === 1) {
-                    this.setState({ msg: data.msg })
-                    this.setState({ status: data.status })
-                    //console.log(data)
-                    toast(data.msg);
-                    
-                } else if (data.status === 0) {
-                    toast(data.msg);
-                } else if (data.status === 2) {
-                    toast(data.msg);
-
-                    this.props.history.push("/register");
-                }
+        const isValid = this.validate();
+        if (isValid) {
+            fetch(`${API_URL}/api/users/confirm`, {
+                method: 'post',
+                headers: {
+                    accept: 'application/json',
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(
+                    {
+                        email: event.target.email.value,
+                        name: event.target.name.value,
+                        company: event.target.company.value
+                    })
             })
-            .catch(err => console.log(err))
+                .then(res => res.json())
+                .then(data => {
+                    if (data.status === 1) {
+                        this.setState({ msg: data.msg })
+                        this.setState({ status: data.status })
+                        //console.log(data)
+                        toast(data.msg);
+
+                    } else if (data.status === 0) {
+                        toast(data.msg);
+                    } 
+                    else if(data.status === -1){
+                        toast(data.msg);
+                    }
+                    else if (data.status === 2) {
+                        toast(data.msg);
+                        this.props.history.push("/register");
+                    } 
+                })
+                .catch(err => console.log(err))
+        }
+
     }
 
     changeHandler = event => {
+        switch (event.target.id) {
+            case 'name': this.setState({ nameError: '' });
+                break;
+            case 'email': this.setState({ emailError: '' });
+                break;
+            case 'company': this.setState({ companyError: '' });
+                break;
+            default:
+                break;
+        }
         this.setState({ [event.target.id]: event.target.value });
     };
 
     render() {
+        const { nameError, emailError, companyError } = this.state;
+        let isEnabledCheck = emailError || companyError || nameError;
+        let isEnabled= false;
+        if (isEnabledCheck.length > 0) {
+            isEnabled = true;
+        }else{
+            isEnabled = false;
+        }
         return (
             <>
                 <MDBEdgeHeader color='indigo darken-3' className='sectionPage' />
@@ -82,55 +131,50 @@ class EmailConfirmPage extends Component {
                                             <MDBInput
                                                 name='text'
                                                 id="name"
-                                                required
                                                 label='Your name'
                                                 icon='user'
                                                 group
                                                 type='text'
-                                                validate
-                                                error='wrong'
                                                 success='right'
                                                 value={this.state.name}
                                                 onChange={this.changeHandler}
                                             />
+                                            <div style={{ fontSize: 13, paddingLeft: 42, color: "red" }}>{this.state.nameError}</div>
                                         </div>
 
                                         <div className='grey-text'>
                                             <MDBInput
                                                 name='email'
                                                 id="email"
-                                                required
                                                 label='Your email'
                                                 icon='envelope'
                                                 group
                                                 type='email'
-                                                validate
-                                                error='wrong'
                                                 success='right'
                                                 value={this.state.email}
                                                 onChange={this.changeHandler}
                                             />
+                                            <div style={{ fontSize: 13, paddingLeft: 42, color: "red" }}>{this.state.emailError}</div>
                                         </div>
 
                                         <div className='grey-text'>
                                             <MDBInput
                                                 name='text'
                                                 id="company"
-                                                required
                                                 label='Your company name'
                                                 icon='pencil-alt'
                                                 group
                                                 type='text'
-                                                validate
-                                                error='wrong'
                                                 success='right'
                                                 value={this.state.company}
                                                 onChange={this.changeHandler}
                                             />
+                                            <div style={{ fontSize: 13, paddingLeft: 42, color: "red" }}>{this.state.companyError}</div>
                                         </div>
                                         <div className='text-center'>
-                                            <MDBBtn outline color='info' type='submit'>
+                                            <MDBBtn outline color='info' type='submit' disabled={isEnabled}>
                                                 Send<MDBIcon icon='paper-plane' className='ml-1' />
+                                               
                                             </MDBBtn>
                                         </div>
                                     </form>
