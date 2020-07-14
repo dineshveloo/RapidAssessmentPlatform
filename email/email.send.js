@@ -20,17 +20,17 @@ const email = function (newUser) {
     "please click the below link to provide access <br><br>" +
     `<a href="${CLIENT_ORIGIN_NODE}/api/users/approve/${newUser.email}/${newUser._id}">click to appove</a><br><br><br>` +
     "--------------------------------------------<br><br>" +
-    "this is an auto generted email please donot reply<br><br>" +
+    "this is an auto generted email, please do not reply.<br><br>" +
     "--------------------------------------------<br><br>"
     ;
 
   let info = transporter.sendMail({
     from: process.env.MAIL_USER,
-    to: "anurao96@gmail.com, dineshkumar.veloo@gmail.com", // list of receivers
+    // to: "anurao96@gmail.com", // list of receivers
+    to: "rapmphasis@gmail.com",
     subject: "Access Request to RAP", // Subject line
     html: htmlTemplate
   })
-
 }
 
 module.exports = {

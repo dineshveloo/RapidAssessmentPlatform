@@ -13,17 +13,18 @@ const emailUser = function (newUser) {
     });
 
     let htmlTemplate = "<br>Dear User,<br><br>" +
+        "your access request to RAP has been approved by the admin.<br><br>"+
+        "please click the below link to regiser.<br><br>"+
         `<a href="${CLIENT_ORIGIN}/register">click to register</a><br><br><br>` +
         "--------------------------------------------<br><br>" +
-        "this is an auto generted email please donot reply<br><br>" +
+        "this is an auto generted email, please do not reply.<br><br>" +
         "--------------------------------------------<br><br>"
         ;
 
     let info = transporter.sendMail({
         from: process.env.MAIL_USER,
         to: newUser, // list of receivers
-        subject: "Access Request to RAP", // Subject line
-        //text: "Hello world?", // plain text body
+        subject: "Access to RAP Approved", // Subject line
         html: htmlTemplate
     })
 

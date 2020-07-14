@@ -1,14 +1,28 @@
 import axios from "axios";
 import setAuthToken from "../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
-
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING } from "./types";
 
 // Register User
 export const RegisterUser = (userData, history) => dispatch => {
   axios
     .post("/api/users/register", userData)
-    .then(res => history.push("/signin"))
+    .then(res => {
+      // alert(JSON.stringify(res.data));
+      if (res.data.status === 1) {
+        history.push("/signin")
+      } else if (res.data.status === 0) {
+        toast(res.data.msg);
+      } 
+      else if (res.data.status === -1){
+        toast(res.data.msg);
+      }
+      else {
+        toast(res.data.msg);
+      }
+    })
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
@@ -22,17 +36,26 @@ export const loginUser = userData => dispatch => {
   axios
     .post("/api/users/signin", userData)
     .then(res => {
+      //console.log(res);
       // Save to localStorage
+      if (res.data.status === 0) {
+        toast(res.data.msg);
+      }
+      else if (res.data.status === -1) {
+        toast(res.data.msg);
+      }
 
-      // Set token to localStorage
-      const { token } = res.data;
-      localStorage.setItem("jwtToken", token);
-      // Set token to Auth header
-      setAuthToken(token);
-      // Decode token to get user data
-      const decoded = jwt_decode(token);
-      // Set current user
-      dispatch(setCurrentUser(decoded));
+      else {
+        // Set token to localStorage
+       const { token } = res.data;
+        localStorage.setItem("jwtToken", token);
+        // Set token to Auth header
+        setAuthToken(token);
+        // Decode token to get user data
+        const decoded = jwt_decode(token);
+        // Set current user
+        dispatch(setCurrentUser(decoded));
+      }
     })
     .catch(err =>
       dispatch({
@@ -54,7 +77,7 @@ export const setCurrentUser = decoded => {
 export const setUserLoading = () => {
   return {
     type: USER_LOADING
-  };
+         };
 };
 
 // Log user out
