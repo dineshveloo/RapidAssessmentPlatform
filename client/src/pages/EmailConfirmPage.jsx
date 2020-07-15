@@ -56,9 +56,12 @@ class EmailConfirmPage extends Component {
         if (isValid) {
             fetch(`${API_URL}/api/users/confirm`, {
                 method: 'post',
-                headers: {
+                headers: { 
                     accept: 'application/json',
-                    'content-type': 'application/json'
+                    'content-type': 'application/json',
+                    "Access-Control-Allow-Headers" : "Content-Type",
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
                 },
                 body: JSON.stringify(
                     {
