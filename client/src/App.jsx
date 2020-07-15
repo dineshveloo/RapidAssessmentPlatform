@@ -219,7 +219,7 @@ class App extends Component {
                   </MDBNavItem>
                   {/* {isLogin === 0 ? null:  */}
                   <MDBNavItem >
-                    <MDBLink onClick={this.logoutHandler}>Logout</MDBLink>
+                    <MDBLink to="" onClick={this.logoutHandler}>Logout</MDBLink>
                   </MDBNavItem>
                   {/* } */}
                   <MDBNavItem>
