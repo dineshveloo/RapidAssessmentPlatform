@@ -11,7 +11,9 @@ export const RegisterUser = (userData, history) => dispatch => {
 
   const headers = {
     "Content-Type": "application/json",
-    "Access-Control-Allow-Origin": "*"
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers" : "Content-Type",
+    "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
   }
   axios
     .post("/api/users/register", userData, { headers: headers })
@@ -41,7 +43,9 @@ export const RegisterUser = (userData, history) => dispatch => {
 export const loginUser = userData => dispatch => {
   const headers = {
     "Content-Type": "application/json",
-    "Access-Control-Allow-Origin": "*"
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers" : "Content-Type",
+    "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
   }
   axios
     .post("/api/users/signin", userData, { headers: headers })
