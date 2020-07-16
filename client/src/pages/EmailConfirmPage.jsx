@@ -60,7 +60,7 @@ class EmailConfirmPage extends Component {
                     accept: 'application/json',
                     'content-type': 'application/json',
                     "Access-Control-Allow-Headers" : "Content-Type",
-                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Origin": *,
                     "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
                 },
                 body: JSON.stringify(
