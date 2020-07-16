@@ -9,6 +9,7 @@ const sendEmail = require('../../email/email.send');
 const userEmail = require('../../email/email.user');
 const userAck = require('../../email/email.ack');
 const userRegister = require('../../email/email.register');
+const userForgetPassword = require('../../email/email.forget');
 
 // Load input validation
 const validateRegisterInput = require("../../validation/register");
@@ -179,6 +180,16 @@ router.get('/approve/:email/:id', (req, res) => {
     console.log(e);
   }
 
+});
+
+router.get('/forgetpassword/:email', (req, res) => {
+  try {
+    userForgetPassword.forgetpass(req.params.email)
+    res.json({ msg: " please check your email to reset password.", status: 1 });
+  } catch (e) {
+    res.json({ msg: "server error. ", status: -1 });
+    console.log(e);
+  }
 });
 
 module.exports = router;
