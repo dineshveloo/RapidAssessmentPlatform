@@ -106,10 +106,10 @@ class RegistrationPage extends Component {
     render() {
         const { emailError, passwordError } = this.state;
         let isEnabledCheck = emailError || passwordError;
-        let isEnabled= false;
+        let isEnabled = false;
         if (isEnabledCheck.length > 0) {
             isEnabled = true;
-        }else{
+        } else {
             isEnabled = false;
         }
         return (

@@ -48,7 +48,6 @@ class EmailConfirmPage extends Component {
         return true;
     }
 
-
     onSubmit = event => {
         // this.form.reset();
         event.preventDefault()
