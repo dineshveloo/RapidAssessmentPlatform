@@ -7,6 +7,8 @@ const passport = require("passport");
 const msgs = require('../../email/email.msgs');
 const sendEmail = require('../../email/email.send');
 const userEmail = require('../../email/email.user');
+const userAck = require('../../email/email.ack');
+const userRegister = require('../../email/email.register');
 
 // Load input validation
 const validateRegisterInput = require("../../validation/register");
@@ -115,6 +117,7 @@ router.post("/signin", (req, res) => {
             }
           );
         } else {
+          //console.log(res)
           return res
             .status(400)
             .json({ passwordincorrect: "Password incorrect" });
@@ -150,10 +153,12 @@ router.post("/confirm", (req, res) => {
           email: req.body.email,
           company: req.body.company
         });
+        console.log(newUser);
 
         newUser
           .save()
           .then(sendEmail.email(newUser))
+        //  .then(userEmail.emailAck(newUser.email))
           // res.json({msg: "here"})
           .then(() => res.json({ msg: msgs.EmailSent, status: 1 }))
           .catch(err => console.log(err));

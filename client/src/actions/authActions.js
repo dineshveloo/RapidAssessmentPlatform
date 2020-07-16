@@ -5,33 +5,29 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING } from "./types";
 
-// var config = {
-//   headers: {
-//   'content-type': 'application/json',
-//   "Access-Control-Allow-Headers" : "Content-Type",
-//   "Access-Control-Allow-Origin": "*",
-//   "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
-//   }
-// }
+
 // Register User
 export const RegisterUser = (userData, history) => dispatch => {
 
-  axios.defaults.headers = {
-    'Content-Type': 'application/json',
-    "Access-Control-Allow-Headers" : "Content-Type",
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
-}
-
+  // axios.defaults.headers.common= {
+  //   'Content-Type': 'application/json',
+  //   "Access-Control-Allow-Headers": "Content-Type",
+  //   "Access-Control-Allow-Origin": "*",
+  //   "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+  // }
+  const headers = {
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*"
+  }
   axios
-    .post("/api/users/register", userData)
+    .post("/api/users/register", userData, {headers:headers})
     .then(res => {
       // alert(JSON.stringify(res.data));
       if (res.data.status === 1) {
         history.push("/signin")
       } else if (res.data.status === 0) {
         toast(res.data.msg);
-      } 
+      }
       else if (res.data.status === -1) {
         toast(res.data.msg);
       }
@@ -49,16 +45,20 @@ export const RegisterUser = (userData, history) => dispatch => {
 
 // Login - get user token
 export const loginUser = userData => dispatch => {
-  axios.defaults.headers = {
-    'Content-Type': 'application/json',
-    "Access-Control-Allow-Headers" : "Content-Type",
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
-}
+  // axios.defaults.headers = {
+  //   'Content-Type': 'application/json',
+  //   "Access-Control-Allow-Headers": "Content-Type",
+  //   "Access-Control-Allow-Origin": "*",
+  //   "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+  // }
+  const headers = {
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*"
+  }
   axios
-    .post("/api/users/signin", userData)
+    .post("/api/users/signin", userData,{headers:headers})
     .then(res => {
-      //console.log(res);
+      
       // Save to localStorage
       if (res.data.status === 0) {
         toast(res.data.msg);
@@ -69,13 +69,15 @@ export const loginUser = userData => dispatch => {
 
       else {
         // Set token to localStorage
-       const { token } = res.data;
+        
+        const { token } = res.data;
         localStorage.setItem("jwtToken", token);
         // Set token to Auth header
         setAuthToken(token);
         // Decode token to get user data
         const decoded = jwt_decode(token);
         // Set current user
+        //console.log(decoded);
         dispatch(setCurrentUser(decoded));
       }
     })
@@ -87,7 +89,50 @@ export const loginUser = userData => dispatch => {
     );
 };
 
+
+// export const resetpassword = userData => dispatch => {
+//   axios.defaults.headers = {
+//     'Content-Type': 'application/json',
+//     "Access-Control-Allow-Headers": "Content-Type",
+//     "Access-Control-Allow-Origin": "*",
+//     "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+//   }
+//   axios
+//     .post("/api/users/reset", userData)
+//     .then(res => {
+//       //console.log(res);
+//       // Save to localStorage
+//       if (res.data.status === 0) {
+//         toast(res.data.msg);
+//       }
+//       else if (res.data.status === -1) {
+//         toast(res.data.msg);
+//       }
+
+//       else {
+//         // Set token to localStorage
+//         const { token } = res.data;
+//         localStorage.setItem("jwtToken", token);
+//         // Set token to Auth header
+//         setAuthToken(token);
+//         // Decode token to get user data
+//         const decoded = jwt_decode(token);
+//         // Set current user
+//         dispatch(setCurrentUser(decoded));
+//       }
+//     })
+//     .catch(err =>
+//       dispatch({
+//         type: GET_ERRORS,
+//         payload: err.response.data
+//       })
+//     );
+// };
+
+
 // Set logged in user
+
+
 export const setCurrentUser = decoded => {
   return {
     type: SET_CURRENT_USER,
@@ -99,7 +144,7 @@ export const setCurrentUser = decoded => {
 export const setUserLoading = () => {
   return {
     type: USER_LOADING
-         };
+  };
 };
 
 // Log user out

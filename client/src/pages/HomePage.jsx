@@ -151,8 +151,8 @@ class HomePage extends React.Component {
                             <strong>Rapid Process Assessment</strong>
                           </MDBCardTitle>
                           <MDBCardText>
-                            <p> Process assessment questionnaire can be captured online during discovery workshops</p>
-                            <p>This can be performed remotely as well.</p>
+                           <p>Process assessment questionnaire can be captured online during discovery workshops</p>
+                           <p>This can be performed remotely as well.</p>
                           </MDBCardText>
                         </MDBCardBody>
                       </MDBCard>
@@ -171,8 +171,9 @@ class HomePage extends React.Component {
                             <strong>Process Documentation</strong>
                           </MDBCardTitle>
                           <MDBCardText>
-                            <p>Processes flows can be documented along with process related metrics viz. Automation Potential, Cycle Time etc.</p>
-                            <p>We also leverage Optimize.ai,the cognitive tool for process mining.</p>
+                          <p>Processes flows can be documented along with process related metrics viz. Automation Potential, Cycle Time etc.</p>
+                          <p> We also leverage Optimize.ai,the cognitive tool for process mining.</p>
+                       
                           </MDBCardText>
                         </MDBCardBody>
                       </MDBCard>
