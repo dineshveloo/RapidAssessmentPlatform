@@ -13,7 +13,7 @@ const emailAck = function (newUser) {
     });
 
     let htmlTemplate = "<br>Dear User,<br><br>" +
-        "Your access request to RAP has been forwarded to the admin. Please wait unill you recieve approved email with link provided.<br><br>" +
+        "Your access request to Rapid Assessment Platform has been forwarded to the RAP admin. Please check your inbox for approval notification with a registration link.<br><br>" +
         // "Please click the below link to register.<br><br>" +
         // `<a href="${CLIENT_ORIGIN}/register">click to register</a><br><br><br>` +
         "--------------------------------------------<br><br>" +
@@ -24,7 +24,7 @@ const emailAck = function (newUser) {
     let info = transporter.sendMail({
         from: process.env.MAIL_USER,
         to: newUser.email, // list of receivers
-        subject: "Acknowledgement for Request to RAP", // Subject line
+        subject: "Acknowledgement for Access Request to RAP", // Subject line
         html: htmlTemplate
     })
 
