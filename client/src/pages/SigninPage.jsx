@@ -15,6 +15,7 @@ import { loginUser } from '../actions/authActions';
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
+
 const initialState = {
   email: "",
   password: "",
@@ -90,13 +91,16 @@ class SigninPage extends Component {
 
   render() {
     const { emailError, passwordError } = this.state;
+
     let isEnabledCheck = emailError || passwordError;
     let isEnabled = false;
+
     if (isEnabledCheck.length > 0) {
       isEnabled = true;
     } else {
       isEnabled = false;
     }
+
     return (
       <>
         <MDBEdgeHeader color='indigo darken-3' className='sectionPage' />
@@ -142,9 +146,9 @@ class SigninPage extends Component {
                       <MDBBtn type="submit" disabled={isEnabled}>
                         Login
                         </MDBBtn>
-                    <div className='text-center'>
-                          <a href='/resetpassword'>Forgot Password?</a>
-                    </div>
+                      <div className='text-center'>
+                        <a href='/signin'>Forgot Password?</a>
+                      </div>
                     </div>
                   </form>
                 </MDBJumbotron>

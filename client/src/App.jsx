@@ -53,7 +53,6 @@ class App extends Component {
       collapseID: '',
       loading: true
     };
-    //toast('hi');
   }
 
 

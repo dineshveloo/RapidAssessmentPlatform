@@ -99,7 +99,6 @@ class HomePage extends React.Component {
                           />
                           <MDBCardBody className='text-center'>
                             <MDBCardTitle>
-                              {/* <MDBIcon icon='code' className='green-text pr-2' /> */}
                               <strong>Business Case & Road Map</strong>
                             </MDBCardTitle>
                             <MDBNavLink
