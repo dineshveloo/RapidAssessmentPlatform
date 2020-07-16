@@ -45,10 +45,10 @@ require("./config/passport")(passport);
 // Routes
 app.use("/api/users", users);
 
-app.get('/wake-up', (req, res) => res.json('wakeup'))
+app.get('/wake-up', (req, res) => res.json('wakeup'));
 
 app.use('*', (req, res) => {
-  res.status(404).json({ msg: 'Not Found' })
+  res.status(404).json({ msg: 'Not Found' });
 })
 
 const port = process.env.PORT || 5000;

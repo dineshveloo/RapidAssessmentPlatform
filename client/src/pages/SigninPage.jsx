@@ -142,6 +142,9 @@ class SigninPage extends Component {
                       <MDBBtn type="submit" disabled={isEnabled}>
                         Login
                         </MDBBtn>
+                    <div className='text-center'>
+                          <a href='/resetpassword'>Forgot/Change Password?</a>
+                    </div>
                     </div>
                   </form>
                 </MDBJumbotron>

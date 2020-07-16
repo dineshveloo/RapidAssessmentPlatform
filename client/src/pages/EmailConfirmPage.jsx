@@ -48,21 +48,18 @@ class EmailConfirmPage extends Component {
         return true;
     }
 
-
     onSubmit = event => {
         // this.form.reset();
         event.preventDefault()
         const isValid = this.validate();
+        const headers = {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*"
+          }
         if (isValid) {
             fetch(`${API_URL}/api/users/confirm`, {
                 method: 'post',
-                headers: { 
-                    accept: 'application/json',
-                    'content-type': 'application/json',
-                    "Access-Control-Allow-Headers" : "Content-Type",
-                    "Access-Control-Allow-Origin": "*",
-                    "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
-                },
+                headers:headers,      
                 body: JSON.stringify(
                     {
                         email: event.target.email.value,
@@ -80,14 +77,14 @@ class EmailConfirmPage extends Component {
 
                     } else if (data.status === 0) {
                         toast(data.msg);
-                    } 
-                    else if(data.status === -1){
+                    }
+                    else if (data.status === -1) {
                         toast(data.msg);
                     }
                     else if (data.status === 2) {
                         toast(data.msg);
                         this.props.history.push("/register");
-                    } 
+                    }
                 })
                 .catch(err => console.log(err))
         }
@@ -111,10 +108,10 @@ class EmailConfirmPage extends Component {
     render() {
         const { nameError, emailError, companyError } = this.state;
         let isEnabledCheck = emailError || companyError || nameError;
-        let isEnabled= false;
+        let isEnabled = false;
         if (isEnabledCheck.length > 0) {
             isEnabled = true;
-        }else{
+        } else {
             isEnabled = false;
         }
         return (
@@ -177,8 +174,11 @@ class EmailConfirmPage extends Component {
                                         <div className='text-center'>
                                             <MDBBtn outline color='info' type='submit' disabled={isEnabled}>
                                                 Send<MDBIcon icon='paper-plane' className='ml-1' />
-                                               
+
                                             </MDBBtn>
+                                        </div>
+                                        <div className='text-center'>
+                                            <a href='/register'>if your email is already confirmed by admin? please click to register.</a>
                                         </div>
                                     </form>
                                 </MDBJumbotron>

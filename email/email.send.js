@@ -13,14 +13,14 @@ const email = function (newUser) {
   });
 
   let htmlTemplate = "<br>Dear Admin,<br><br>" +
-    "user with below details has requested to access RAP<br> <br>" +
+    "User with below details has requested access to RAP<br> <br>" +
     "userName: " + newUser.name + "<br>" +
-    "email: <span>" + newUser.email + "</span><br>" +
-    "company: " + newUser.company + "<br><br>" +
-    "please click the below link to provide access <br><br>" +
+    "Email: <span>" + newUser.email + "</span><br>" +
+    "Company: " + newUser.company + "<br><br>" +
+    "Please click the below link to provide access <br><br>" +
     `<a href="${CLIENT_ORIGIN_NODE}/api/users/approve/${newUser.email}/${newUser._id}">click to appove</a><br><br><br>` +
     "--------------------------------------------<br><br>" +
-    "this is an auto generted email, please do not reply.<br><br>" +
+    "This is an auto generted email, please do not reply.<br><br>" +
     "--------------------------------------------<br><br>"
     ;
 

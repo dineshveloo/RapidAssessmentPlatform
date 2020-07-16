@@ -17,6 +17,7 @@ import Dashboard from "./dashboard/Dashboard";
 // import AnimationPage from './pages/AnimationPage';
 // import AlertPage from './pages/AlertPage';
 import HomePage from './pages/HomePage';
+import ResetPasswordPage from './pages/ResetPasswordPage';
 // import ButtonPage from './pages/ButtonPage';
 // import CSSNavPage from './pages/CSSNavPage';
 // import TablePage from './pages/TablePage';
@@ -78,6 +79,7 @@ class Routes extends React.Component {
         <Route exact path='/signin' component={SigninPage} />
         <Route exact path='/emailConfirm' component={EmailConfirmPage} />
         <Route exact path='/register' component={RegistrationPage} />
+        <Route exact path='/resetpassword' component={ResetPasswordPage} />
         {/* <Route exact path='/advanced' component={AdvancedNavPage} />
         <Route exact path='/components' component={ComponentsNavPage} /> */}
         {/* <Route exact path='/css' component={CSSNavPage} /> */}
