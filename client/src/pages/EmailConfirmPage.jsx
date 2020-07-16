@@ -127,7 +127,7 @@ class EmailConfirmPage extends Component {
                                 <MDBJumbotron>
                                     <h1 className='text-center'>
                                         <MDBIcon icon='edit' className='indigo-text mr-2' />
-                                        Request access to Rapid Assesment Platform
+                                        Request Access to Rapid Assesment Platform
                                     </h1>
                                     <form onSubmit={this.onSubmit} className="emailForm" >
                                         <div className='grey-text'>
@@ -181,7 +181,7 @@ class EmailConfirmPage extends Component {
                                             </MDBBtn>
                                         </div>
                                         <div className='text-center'>
-                                            <a href='/register'>if your email is already confirmed by admin? please click to register.</a>
+                                        if your email has been confirmed by the admin? please click  <a href='/register'> here</a>to register.
                                         </div>
                                     </form>
                                 </MDBJumbotron>

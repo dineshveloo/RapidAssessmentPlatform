@@ -43,18 +43,18 @@ router.post("/register", (req, res) => {
                 .catch(err => console.log(err))
             }
             else {
-              res.json({ msg: "your already have account wih RAP. please sign-in to your account using your registered email", status: 4 })
+              res.json({ msg: "You are an already registered user. Please sign-into RAP using registered Email ID.", status: 4 })
             }
           });
         });
         // email is true but confirm is false
       }
       else if (user && !user.confirmed) {
-        res.json({ msg: "your email ID is not confirmed yet. please wait till admin approves your request or contact RAP admin.", status: 2 })
+        res.json({ msg: "Your access request is not yet confirmed by the RAP Admin. Please contact <xyz@mphasis.com> for approval.", status: 2 })
       }
       // email and confirm both are false
       else {
-        res.json({ msg: "please send request to get register.", status: 3 })
+        res.json({ msg: "Please use the approved email ID for your registration. Else, please raise a new access request with this email ID.", status: 3 })
       }
     });
   } catch (e) {
