@@ -81,6 +81,9 @@ class EmailConfirmPage extends Component {
                     else if (data.status === -1) {
                         toast(data.msg);
                     }
+                    else if(data.status === 3){
+                        toast(data.msg);
+                    }
                     else if (data.status === 2) {
                         toast(data.msg);
                         this.props.history.push("/register");

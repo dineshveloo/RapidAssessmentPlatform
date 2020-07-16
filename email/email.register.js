@@ -23,7 +23,7 @@ const emailRegister = function (newUser) {
 
     let info = transporter.sendMail({
         from: process.env.MAIL_USER,
-        to: newUser, // list of receivers
+        to: newUser.email, // list of receivers
         subject: "Acknowledgement for Register to RAP", // Subject line
         html: htmlTemplate
     })
