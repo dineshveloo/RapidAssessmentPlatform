@@ -9,11 +9,10 @@ const { PORT, CLIENT_ORIGIN, CLIENT_ORIGIN_NODE } = require('./config/info')
 
 const app = express();
 
-//app.use(cors({
-  //origin: CLIENT_ORIGIN, CLIENT_ORIGIN_NODE
-//}))
+app.use(cors({
+  origin: CLIENT_ORIGIN, CLIENT_ORIGIN_NODE, PORT
+}))
 
-app.use(cors());
 
 // Bodyparser middleware
 app.use(
