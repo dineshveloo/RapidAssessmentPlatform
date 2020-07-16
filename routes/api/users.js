@@ -23,39 +23,32 @@ const User = require("../../models/User");
 router.post("/register", (req, res) => {
   // Form validation
   try {
-    const { errors, isValid } = validateRegisterInput(req.body);
-    ///console.log(req.body);
-
-    // Check validation
-    if (!isValid) {
-      return res.status(400).json(errors);
-    }
 
     User.findOne({ email: req.body.email }).then(user => {
       if (user && user.confirmed) {
-        const newUser = new User({
-          password: req.body.password
-        });
+        let pass = req.body.password;
+        //console.log(user);
 
         bcrypt.genSalt(10, (err, salt) => {
-          bcrypt.hash(newUser.password, salt, (err, hash) => {
+          bcrypt.hash(pass, salt, (err, hash) => {
             if (err) throw err;
             //res.json(res);
             if (!user.password) {
-              newUser.password = hash;
-              User.findByIdAndUpdate(user.id, { password: newUser.password })
+              //pass = hash;
+              User.findByIdAndUpdate(user.id, { password: hash })
+
+                .then(userRegister.emailRegister(user))
                 .then(() => res.json({ msg: 'success', status: 1 }))
                 .catch(err => console.log(err))
             }
-
             else {
               res.json({ msg: "your already have account wih RAP. please sign-in to your account using your registered email", status: 4 })
             }
-
           });
         });
         // email is true but confirm is false
-      } else if (user && !user.confirmed) {
+      }
+      else if (user && !user.confirmed) {
         res.json({ msg: "your email ID is not confirmed yet. please wait till admin approves your request or contact RAP admin.", status: 2 })
       }
       // email and confirm both are false
@@ -75,13 +68,6 @@ router.post("/register", (req, res) => {
 router.post("/signin", (req, res) => {
   // Form validation
   try {
-    const { errors, isValid } = validateLoginInput(req.body);
-
-    // Check validation
-    if (!isValid) {
-      return res.status(400).json(errors);
-    }
-
     const email = req.body.email;
     const password = req.body.password;
 
@@ -117,10 +103,8 @@ router.post("/signin", (req, res) => {
             }
           );
         } else {
-          //console.log(res)
           return res
-            .status(400)
-            .json({ passwordincorrect: "Password incorrect" });
+            .json({ msg: "Password incorrect", status: 3 });
         }
       });
     });
@@ -141,9 +125,16 @@ router.post("/confirm", (req, res) => {
           //res.json({ msg: "here" })
           res.json({ msg: msgs.resend, status: 0 })
         }
+
         else if (user && user.confirmed) {
           //res.json({ msg: "here" })
-          res.json({ msg: "your access request has been approved by the RAP admin. please register with your confirmed email ID.", status: 2 })
+          if (user.password) {
+            res.json({ msg: "you have already registered with us.", status: 3 })
+
+          } else {
+            res.json({ msg: "your access request has been approved by the RAP admin. please register with your confirmed email ID.", status: 2 })
+
+          }
         }
       }
       else {
@@ -153,12 +144,12 @@ router.post("/confirm", (req, res) => {
           email: req.body.email,
           company: req.body.company
         });
-        console.log(newUser);
+        //console.log(newUser);
 
         newUser
           .save()
           .then(sendEmail.email(newUser))
-        //  .then(userEmail.emailAck(newUser.email))
+          .then(userAck.emailAck(newUser))
           // res.json({msg: "here"})
           .then(() => res.json({ msg: msgs.EmailSent, status: 1 }))
           .catch(err => console.log(err));

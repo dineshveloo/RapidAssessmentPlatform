@@ -9,18 +9,12 @@ import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING } from "./types";
 // Register User
 export const RegisterUser = (userData, history) => dispatch => {
 
-  // axios.defaults.headers.common= {
-  //   'Content-Type': 'application/json',
-  //   "Access-Control-Allow-Headers": "Content-Type",
-  //   "Access-Control-Allow-Origin": "*",
-  //   "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
-  // }
   const headers = {
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*"
   }
   axios
-    .post("/api/users/register", userData, {headers:headers})
+    .post("/api/users/register", userData, { headers: headers })
     .then(res => {
       // alert(JSON.stringify(res.data));
       if (res.data.status === 1) {
@@ -45,20 +39,14 @@ export const RegisterUser = (userData, history) => dispatch => {
 
 // Login - get user token
 export const loginUser = userData => dispatch => {
-  // axios.defaults.headers = {
-  //   'Content-Type': 'application/json',
-  //   "Access-Control-Allow-Headers": "Content-Type",
-  //   "Access-Control-Allow-Origin": "*",
-  //   "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
-  // }
   const headers = {
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*"
   }
   axios
-    .post("/api/users/signin", userData,{headers:headers})
+    .post("/api/users/signin", userData, { headers: headers })
     .then(res => {
-      
+
       // Save to localStorage
       if (res.data.status === 0) {
         toast(res.data.msg);
@@ -66,10 +54,12 @@ export const loginUser = userData => dispatch => {
       else if (res.data.status === -1) {
         toast(res.data.msg);
       }
-
+      else if (res.data.status === 3) {
+        toast(res.data.msg);
+      }
       else {
         // Set token to localStorage
-        
+
         const { token } = res.data;
         localStorage.setItem("jwtToken", token);
         // Set token to Auth header
@@ -79,6 +69,7 @@ export const loginUser = userData => dispatch => {
         // Set current user
         //console.log(decoded);
         dispatch(setCurrentUser(decoded));
+
       }
     })
     .catch(err =>

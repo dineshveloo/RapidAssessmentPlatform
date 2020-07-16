@@ -143,7 +143,7 @@ class SigninPage extends Component {
                         Login
                         </MDBBtn>
                     <div className='text-center'>
-                          <a href='/resetpassword'>Forgot/Change Password?</a>
+                          <a href='/resetpassword'>Forgot Password?</a>
                     </div>
                     </div>
                   </form>
