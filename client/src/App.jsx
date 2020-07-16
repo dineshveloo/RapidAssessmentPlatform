@@ -116,7 +116,7 @@ class App extends Component {
           <div className='flyout'>
             <MDBNavbar color='indigo' dark expand='md' fixed='top' scrolling>
               <MDBNavbarBrand href='/' className='py-0 font-weight-bold'>
-                <strong className='align-middle'>Mphasis</strong>
+                <strong className='align-middle'>RAPID ASSESSMENT PLATFORM</strong>
               </MDBNavbarBrand>
               <MDBNavbarToggler
                 onClick={this.toggleCollapse('mainNavbarCollapse')}
@@ -136,7 +136,7 @@ class App extends Component {
                         <MDBDropdownItem href='#!'>
                           View Process
                       </MDBDropdownItem>
-                        <MDBDropdownItem href='#!'>
+                        {/* <MDBDropdownItem href='#!'>
                           Approve Process
                       </MDBDropdownItem>
                         <MDBDropdownItem href='#!'>
@@ -144,11 +144,11 @@ class App extends Component {
                       </MDBDropdownItem>
                         <MDBDropdownItem href='#!'>
                           Upload/Download Process
-                      </MDBDropdownItem>
+                      </MDBDropdownItem> */}
                       </MDBDropdownMenu>
                     </MDBDropdown>
                   </MDBNavItem>
-                  <MDBNavItem>
+                  {/* <MDBNavItem>
                     <MDBDropdown>
                       <MDBDropdownToggle nav caret>
                         <div className='d-none d-md-inline'>Process Flow</div>
@@ -160,8 +160,8 @@ class App extends Component {
                       </MDBDropdownItem>
                       </MDBDropdownMenu>
                     </MDBDropdown>
-                  </MDBNavItem>
-                  <MDBNavItem>
+                  </MDBNavItem> */}
+                  {/* <MDBNavItem> 
                     <MDBDropdown>
                       <MDBDropdownToggle nav caret>
                         <div className='d-none d-md-inline'>Business Case & Roadmap</div>
@@ -173,8 +173,8 @@ class App extends Component {
                       </MDBDropdownItem>
                       </MDBDropdownMenu>
                     </MDBDropdown>
-                  </MDBNavItem>
-                  <MDBNavItem>
+                  </MDBNavItem> */}
+                  {/* <MDBNavItem>
                     <MDBDropdown>
                       <MDBDropdownToggle nav caret>
                         <div className='d-none d-md-inline'>User Management</div>
@@ -208,7 +208,7 @@ class App extends Component {
                       </MDBDropdownItem>
                       </MDBDropdownMenu>
                     </MDBDropdown>
-                  </MDBNavItem>
+                  </MDBNavItem> */}
                   <MDBNavItem>
                     <MDBLink to='/'>About</MDBLink>
                   </MDBNavItem>
@@ -240,7 +240,7 @@ class App extends Component {
                           SignIn
                       </MDBDropdownItem>
                         <MDBDropdownItem href='/emailConfirm'>
-                          Register
+                          Request / Register
                       </MDBDropdownItem>
                       </MDBDropdownMenu>
                     </MDBDropdown>
