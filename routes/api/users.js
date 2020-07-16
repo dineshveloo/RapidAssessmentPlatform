@@ -54,7 +54,7 @@ router.post("/register", (req, res) => {
         });
         // email is true but confirm is false
       } else if (user && !user.confirmed) {
-        res.json({ msg: "you're email id is no confirmed yet.", status: 2 })
+        res.json({ msg: "your email ID is not confirmed yet. please wait till admin approves your request or contact RAP admin.", status: 2 })
       }
       // email and confirm both are false
       else {
@@ -87,7 +87,7 @@ router.post("/signin", (req, res) => {
     User.findOne({ email }).then(user => {
       // Check if user exists
       if (!user) {
-        return res.json({ msg: "your email id is not regisered to RAP. please register. ", status: 0 });
+        return res.json({ msg: "your email id is not registered to RAP. please raise a request to register or sign-in with the registered email ID. ", status: 0 });
       }
 
       // Check password
@@ -123,7 +123,7 @@ router.post("/signin", (req, res) => {
     });
 
   } catch (e) {
-    res.json({ msg: "server error. ", status: -1 });
+    res.json({ msg: "server error.", status: -1 });
     console.log(e);
   }
 
@@ -140,8 +140,7 @@ router.post("/confirm", (req, res) => {
         }
         else if (user && user.confirmed) {
           //res.json({ msg: "here" })
-          res.json({ msg: "your access request has been approved by he RAP admin. please regiser with your confirmed email id.", status: 2 })
-
+          res.json({ msg: "your access request has been approved by the RAP admin. please register with your confirmed email ID.", status: 2 })
         }
       }
       else {
