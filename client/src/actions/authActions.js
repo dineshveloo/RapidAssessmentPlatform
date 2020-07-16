@@ -8,14 +8,7 @@ import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING } from "./types";
 
 // Register User
 export const RegisterUser = (userData, history) => dispatch => {
-
-  // axios.defaults.headers.common= {
-  //   'Content-Type': 'application/json',
-  //   "Access-Control-Allow-Headers": "Content-Type",
-  //   "Access-Control-Allow-Origin": "*",
-  //   "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
-  // }
-  const headers = {
+const headers = {
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*"
   }
@@ -45,12 +38,6 @@ export const RegisterUser = (userData, history) => dispatch => {
 
 // Login - get user token
 export const loginUser = userData => dispatch => {
-  // axios.defaults.headers = {
-  //   'Content-Type': 'application/json',
-  //   "Access-Control-Allow-Headers": "Content-Type",
-  //   "Access-Control-Allow-Origin": "*",
-  //   "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
-  // }
   const headers = {
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*"
