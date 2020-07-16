@@ -59,8 +59,7 @@ class EmailConfirmPage extends Component {
         if (isValid) {
             fetch(`${API_URL}/api/users/confirm`, {
                 method: 'post',
-                headers:headers,
-                
+                headers:headers,      
                 body: JSON.stringify(
                     {
                         email: event.target.email.value,
