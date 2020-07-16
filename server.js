@@ -10,7 +10,7 @@ const { PORT, CLIENT_ORIGIN } = require('./config/info')
 const app = express();
 
 app.use(cors({
-  origin: CLIENT_ORIGIN
+  origin: CLIENT_ORIGIN,PORT,CLIENT_ORIGIN_NODE
 }))
 
 // Bodyparser middleware
@@ -44,10 +44,10 @@ require("./config/passport")(passport);
 // Routes
 app.use("/api/users", users);
 
-app.get('/wake-up', (req, res) => res.json('wakeup'))
+app.get('/wake-up', (req, res) => res.json('wakeup'));
 
 app.use('*', (req, res) => {
-  res.status(404).json({ msg: 'Not Found' })
+  res.status(404).json({ msg: 'Not Found' });
 })
 
 const port = process.env.PORT || 5000;

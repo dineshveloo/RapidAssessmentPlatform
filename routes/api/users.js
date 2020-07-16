@@ -47,7 +47,7 @@ router.post("/register", (req, res) => {
             }
 
             else {
-              res.json({ msg: "you're already a registered user", status: 4 })
+              res.json({ msg: "your already have account wih RAP. please sign-in to your account using your registered email", status: 4 })
             }
 
           });
@@ -140,12 +140,12 @@ router.post("/confirm", (req, res) => {
         }
         else if (user && user.confirmed) {
           //res.json({ msg: "here" })
-          res.json({ msg: "you're email'id got confirmed to RAP. please regiser with your confirmed email'id.", status: 2 })
+          res.json({ msg: "your access request has been approved by he RAP admin. please regiser with your confirmed email id.", status: 2 })
 
         }
       }
       else {
-      //res.json({msg: "here"})
+        //res.json({msg: "here"})
         const newUser = new User({
           name: req.body.name,
           email: req.body.email,
@@ -155,11 +155,10 @@ router.post("/confirm", (req, res) => {
         newUser
           .save()
           .then(sendEmail.email(newUser))
-         // res.json({msg: "here"})
+          // res.json({msg: "here"})
           .then(() => res.json({ msg: msgs.EmailSent, status: 1 }))
           .catch(err => console.log(err));
       }
-
     });
 
   } catch (e) {
@@ -170,17 +169,17 @@ router.post("/confirm", (req, res) => {
 
 
 router.get('/approve/:email/:id', (req, res) => {
-  try{
+  try {
     let { email, id } = req.params;
     //res.json({ msg: email})
     //first update confirm in db, trigger email to user  
     userEmail.emailUser(email)
-  
+
     User.findByIdAndUpdate(id, { confirmed: true })
       .then(() => res.json({ msg: "your have approved the user successfully" }))
       .catch(err => console.log(err))
-  
-  }catch(e){
+
+  } catch (e) {
     res.json({ msg: "server error. ", status: -1 });
     console.log(e);
   }

@@ -58,7 +58,10 @@ class EmailConfirmPage extends Component {
                 method: 'post',
                 headers: {
                     accept: 'application/json',
-                    'content-type': 'application/json'
+                    'content-type': 'application/json',
+                    "Access-Control-Allow-Headers" : "Content-Type",
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
                 },
                 body: JSON.stringify(
                     {

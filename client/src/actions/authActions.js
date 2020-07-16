@@ -5,8 +5,24 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING } from "./types";
 
+// var config = {
+//   headers: {
+//   'content-type': 'application/json',
+//   "Access-Control-Allow-Headers" : "Content-Type",
+//   "Access-Control-Allow-Origin": "*",
+//   "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+//   }
+// }
 // Register User
 export const RegisterUser = (userData, history) => dispatch => {
+
+  axios.defaults.headers = {
+    'Content-Type': 'application/json',
+    "Access-Control-Allow-Headers" : "Content-Type",
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+}
+
   axios
     .post("/api/users/register", userData)
     .then(res => {
@@ -16,7 +32,7 @@ export const RegisterUser = (userData, history) => dispatch => {
       } else if (res.data.status === 0) {
         toast(res.data.msg);
       } 
-      else if (res.data.status === -1){
+      else if (res.data.status === -1) {
         toast(res.data.msg);
       }
       else {
@@ -33,6 +49,12 @@ export const RegisterUser = (userData, history) => dispatch => {
 
 // Login - get user token
 export const loginUser = userData => dispatch => {
+  axios.defaults.headers = {
+    'Content-Type': 'application/json',
+    "Access-Control-Allow-Headers" : "Content-Type",
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+}
   axios
     .post("/api/users/signin", userData)
     .then(res => {
