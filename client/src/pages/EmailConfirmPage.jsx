@@ -53,6 +53,7 @@ class EmailConfirmPage extends Component {
         event.preventDefault()
         const isValid = this.validate();
         const headers = {
+
             // "Content-Type": "application/json",
             "Access-Control-Allow-Origin": "*",
             // "Access-Control-Allow-Headers" : "Content-Type",
@@ -183,7 +184,9 @@ class EmailConfirmPage extends Component {
                                             </MDBBtn>
                                         </div>
                                         <div className='text-center'>
+
                                         if your email has been confirmed by the admin? please click  <a href='/register'> here </a> to register.
+
                                         </div>
                                     </form>
                                 </MDBJumbotron>
