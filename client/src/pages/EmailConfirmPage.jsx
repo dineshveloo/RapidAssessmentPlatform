@@ -184,7 +184,7 @@ class EmailConfirmPage extends Component {
                                             </MDBBtn>
                                         </div>
                                         <div className='text-center'>
-                                        if your email has been confirmed by the admin? please click  <a href='/register'> here</a>to register.
+                                        if your email has been confirmed by the admin? please click <a href='/register'> here</a> to register.
                                         </div>
                                     </form>
                                 </MDBJumbotron>
