@@ -8,8 +8,7 @@ import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING } from "./types";
 
 // Register User
 export const RegisterUser = (userData, history) => dispatch => {
-
-  const headers = {
+ const headers = {
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Headers" : "Content-Type",
