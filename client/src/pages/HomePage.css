@@ -17,6 +17,11 @@ a.border.nav-link.border-light.rounded.mr-1:hover {
 .nav-link.active{
   background-color: rgba(255, 255, 255, 0.1);
 }
+.btn-outline-mdb-color-new{
+  background-color: transparent !important;
+  border-color: #f8f9fa !important;
+  /* box-shadow: none;  */
+}
 
 #categories > .col-md-4.mb-5{
   margin-bottom: 8rem !important;
