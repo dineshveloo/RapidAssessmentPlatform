@@ -53,11 +53,11 @@ class EmailConfirmPage extends Component {
         event.preventDefault()
         const isValid = this.validate();
         const headers = {
-           // "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-           // "Access-Control-Allow-Headers" : "Content-Type",
-           // "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
 
+            // "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            // "Access-Control-Allow-Headers" : "Content-Type",
+            // "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
           }
         if (isValid) {
             fetch(`${API_URL}/api/users/confirm`, {
