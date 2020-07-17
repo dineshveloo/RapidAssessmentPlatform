@@ -5,12 +5,12 @@ const bodyParser = require("body-parser");
 const passport = require("passport");
 const cors = require('cors');
 const users = require("./routes/api/users");
-const { PORT, CLIENT_ORIGIN, CLIENT_ORIGIN_NODE } = require('./config/info')
+const { PORT, CLIENT_ORIGIN } = require('./config/info')
 
 const app = express();
 
 app.use(cors({
-  origin: CLIENT_ORIGIN, CLIENT_ORIGIN_NODE, PORT
+  origin: CLIENT_ORIGIN
 }))
 
 
