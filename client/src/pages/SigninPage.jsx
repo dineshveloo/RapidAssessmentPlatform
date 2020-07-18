@@ -14,6 +14,7 @@ import {
 import { loginUser } from '../actions/authActions';
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+//import SigninConext from '../context/SigninConext';
 
 
 const initialState = {
@@ -21,11 +22,13 @@ const initialState = {
   password: "",
   emailError: "",
   passwordError: ""
+  //authenticated: false
 }
 class SigninPage extends Component {
   constructor() {
     super();
     this.state = initialState;
+    
   }
 
   componentDidMount() {
@@ -86,6 +89,9 @@ class SigninPage extends Component {
         password: this.state.password
       };
       this.props.loginUser(userData);
+
+      //this.setState({ authenticated: true}, ()=>(console.log(authenticated)))
+
     }
   };
 
@@ -142,10 +148,16 @@ class SigninPage extends Component {
                       <div style={{ fontSize: 13, paddingLeft: 42, color: "red" }}>{this.state.passwordError}</div>
                     </div>
                     <div className='text-center'>
-
-                      <MDBBtn type="submit" disabled={isEnabled}>
-                        Login
+                      {/* <SigninConext.Provider
+                        value={{
+                          authenticated: this.state.authenticated,
+                          login: this.onSubmit
+                        }}
+                      > */}
+                        <MDBBtn type="submit" disabled={isEnabled}>
+                          Login
                         </MDBBtn>
+                      {/* </SigninConext.Provider> */}
                       <div className='text-center'>
                         <a href='/signin'>Forgot Password?</a>
                       </div>
