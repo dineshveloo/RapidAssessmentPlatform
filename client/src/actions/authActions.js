@@ -84,7 +84,6 @@ export const loginUser = userData => dispatch => {
 };
 
 // Set logged in user
-
 export const setCurrentUser = decoded => {
   return {
     type: SET_CURRENT_USER,
@@ -108,3 +107,48 @@ export const logoutUser = () => dispatch => {
   // Set current user to empty object {} which will set isAuthenticated to false
   dispatch(setCurrentUser({}));
 };
+
+
+export const confirmUser = (userData, history) => dispatch  =>{
+
+  const headers = {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Headers" : "Content-Type",
+      "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+    }
+    
+    axios   
+      .post('api/users/confirm', userData, {headers: headers})
+          .then(res => {
+            //console.log(res.data);
+              if (res.data.status === 1) {
+                 
+                  
+                  toast(res.data.msg);
+
+              } else if (res.data.status === 0) {
+                  toast(res.data.msg);
+              }
+              else if (res.data.status === -1) {
+                  toast(res.data.msg);
+              }
+              else if(res.data.status === 3){
+                  toast(res.data.msg);
+              }
+              else {
+                toast(res.data.msg);
+                history.push("/register")
+            }
+              // else if (res.data.status === 2) {
+              //     toast(res.data.msg);
+              //     //history.push("/register");
+              // }
+          })
+          .catch(err => 
+            dispatch({
+              type: GET_ERRORS,
+              payload: err.response.data
+            })
+          )
+          }

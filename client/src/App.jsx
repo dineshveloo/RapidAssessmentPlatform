@@ -21,9 +21,10 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import Routes from './Routes';
 import store from "./store";
 import { Provider } from "react-redux";
-import { API_URL } from './config';
+// import { API_URL } from './config';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+// import SigninConext from '../src/context/SigninConext';
 
 
 // Check for token to keep user logged in
@@ -51,19 +52,21 @@ class App extends Component {
     super();
     this.state = {
       collapseID: '',
-      loading: true
+      loading: true,
     };
+
   }
 
+ //static contextType = SigninConext;
 
-  componentDidMount = () => {
-    fetch(`${API_URL}/wake-up`)
-      .then(res => res.json())
-      .then(() => {
-        this.setState({ loading: false })
-      })
-      .catch(err => console.log(err))
-  }
+  // componentDidMount = () => {
+  //   fetch(`${API_URL}/wake-up`)
+  //     .then(res => res.json())
+  //     .then(() => {
+  //       this.setState({ loading: false })
+  //     })
+  //     .catch(err => console.log(err))
+  // }
 
   // onLogoutClick = e => {
   //   e.preventDefault();
@@ -102,6 +105,8 @@ class App extends Component {
     );
     const { collapseID } = this.state;
 
+   
+
     //let isLogin = localStorage.getItem('jwtToken');
     // if(isLogin === null){
     //   isLogin = 0;
@@ -130,7 +135,9 @@ class App extends Component {
                   </MDBNavItem>
                   {/* {isLogin === 0 ? null:  */}
                   <MDBNavItem >
-                    <MDBLink to="" onClick={this.logoutHandler}>Logout</MDBLink>
+                    {/* {this.context.authenticated ? */}
+                     <MDBLink to=""  onClick={this.logoutHandler}>Logout</MDBLink>
+                     {/* : null} */}
                   </MDBNavItem>
                   {/* } */}
                   <MDBNavItem>
@@ -149,9 +156,11 @@ class App extends Component {
                         <MDBIcon icon='user' />
                       </MDBDropdownToggle>
                       <MDBDropdownMenu right>
-                        <MDBDropdownItem href='/signin'>
-                          SignIn
+                       
+                          <MDBDropdownItem href='/signin'>
+                            SignIn
                       </MDBDropdownItem>
+                        
                         <MDBDropdownItem href='/emailConfirm'>
                           Request / Register
                       </MDBDropdownItem>

@@ -10,10 +10,11 @@ import {
     MDBBtn,
     MDBAnimation
 } from 'mdbreact';
-import { API_URL } from '../config';
-import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { confirmUser } from '../actions/authActions';
+import { connect } from 'react-redux';
+import { withRouter } from "react-router-dom";
+import PropTypes from "prop-types";
 
 class EmailConfirmPage extends Component {
     state = {
@@ -48,53 +49,20 @@ class EmailConfirmPage extends Component {
         return true;
     }
 
-    onSubmit = event => {
-        // this.form.reset();
-        event.preventDefault()
+    onSubmit = e => {
+        e.preventDefault();
         const isValid = this.validate();
-        const headers = {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Headers" : "Content-Type",
-            "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
-          }
         if (isValid) {
-            fetch(`${API_URL}/api/users/confirm`, {
-                method: 'post',
-                headers:headers,      
-                body: JSON.stringify(
-                    {
-                        email: event.target.email.value,
-                        name: event.target.name.value,
-                        company: event.target.company.value
-                    })
-            })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.status === 1) {
-                        this.setState({ msg: data.msg })
-                        this.setState({ status: data.status })
-                        //console.log(data)
-                        toast(data.msg);
-
-                    } else if (data.status === 0) {
-                        toast(data.msg);
-                    }
-                    else if (data.status === -1) {
-                        toast(data.msg);
-                    }
-                    else if(data.status === 3){
-                        toast(data.msg);
-                    }
-                    else if (data.status === 2) {
-                        toast(data.msg);
-                        this.props.history.push("/register");
-                    }
-                })
-                .catch(err => console.log(err))
+            const newUser = {
+                email: e.target.email.value,
+                name: e.target.name.value,
+                company: e.target.company.value
+            };
+            this.props.confirmUser(newUser, this.props.history);
+            //reset form
+            // this.setState({ initialState });
         }
-
-    }
+    };
 
     changeHandler = event => {
         switch (event.target.id) {
@@ -179,12 +147,11 @@ class EmailConfirmPage extends Component {
                                         <div className='text-center'>
                                             <MDBBtn outline color='info' type='submit' disabled={isEnabled}>
                                                 Send<MDBIcon icon='paper-plane' className='ml-1' />
-
                                             </MDBBtn>
                                         </div>
                                         <div className='text-center'>
 
-                                        if your email has been confirmed by the admin? please click  <a href='/register'> here </a> to register.
+                                            if your email has been confirmed by the admin? please click  <a href='/register'> here </a> to register.
 
                                         </div>
                                     </form>
@@ -198,4 +165,19 @@ class EmailConfirmPage extends Component {
     }
 }
 
-export default EmailConfirmPage;
+EmailConfirmPage.propTypes = {
+    confirmUser: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired,
+    errors: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+    auth: state.auth,
+    errors: state.errors
+});
+
+
+export default connect(
+    mapStateToProps,
+    { confirmUser }
+)(withRouter(EmailConfirmPage));
