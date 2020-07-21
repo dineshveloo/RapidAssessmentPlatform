@@ -14,7 +14,8 @@ import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from 'react-redux';
 import { RegisterUser } from '../actions/authActions';
-//import classnames from "classnames";
+
+
 const initialState = {
     name: "",
     email: "",
@@ -106,10 +107,10 @@ class RegistrationPage extends Component {
     render() {
         const { emailError, passwordError } = this.state;
         let isEnabledCheck = emailError || passwordError;
-        let isEnabled= false;
+        let isEnabled = false;
         if (isEnabledCheck.length > 0) {
             isEnabled = true;
-        }else{
+        } else {
             isEnabled = false;
         }
         return (

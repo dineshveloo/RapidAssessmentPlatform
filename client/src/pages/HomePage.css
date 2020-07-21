@@ -17,6 +17,11 @@ a.border.nav-link.border-light.rounded.mr-1:hover {
 .nav-link.active{
   background-color: rgba(255, 255, 255, 0.1);
 }
+.btn-outline-mdb-color-new{
+  background-color: transparent !important;
+  border-color: #f8f9fa !important;
+  /* box-shadow: none;  */
+}
 
 #categories > .col-md-4.mb-5{
   margin-bottom: 8rem !important;
@@ -27,24 +32,6 @@ a.border.nav-link.border-light.rounded.mr-1:hover {
   margin-bottom: -125px;
 }
 
-#oprsta{
-  margin-bottom: 2rem;
-
-}
-#freqbus{
-  margin-bottom: 2rem;
-
-}
-#docpro{
-  margin-bottom: 2rem;
-
-}
-#rulbas{
-  margin-bottom: 2rem;
-
-}
-
-
 .sectionPage::after {
   content: '';
   height: 100%;
@@ -54,4 +41,7 @@ a.border.nav-link.border-light.rounded.mr-1:hover {
   background-position: 50%;
   background-size: cover;
   filter: opacity(.1);
+}
+#UM{
+  padding-top: 2rem;
 }

@@ -14,17 +14,23 @@ import {
 import { loginUser } from '../actions/authActions';
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { Link } from 'react-router-dom'
+//import SigninConext from '../context/SigninConext';
+//import './global.css';
+import { toast } from 'react-toastify';
 
 const initialState = {
   email: "",
   password: "",
   emailError: "",
   passwordError: ""
+  //authenticated: false
 }
 class SigninPage extends Component {
   constructor() {
     super();
     this.state = initialState;
+
   }
 
   componentDidMount() {
@@ -74,7 +80,16 @@ class SigninPage extends Component {
         break;
     }
     this.setState({ [e.target.id]: e.target.value });
+    console.log(this.state.email)
   };
+
+  forgetHandler = () => {
+    if (this.state.email.length <= 0) {
+      toast('please enter approved email id to proceed');
+    } else {
+      this.props.history.push('/resetpassword')
+    }
+  }
 
   onSubmit = e => {
     e.preventDefault();
@@ -85,18 +100,22 @@ class SigninPage extends Component {
         password: this.state.password
       };
       this.props.loginUser(userData);
+      //this.setState({ authenticated: true}, ()=>(console.log(authenticated)))
     }
   };
 
   render() {
     const { emailError, passwordError } = this.state;
+
     let isEnabledCheck = emailError || passwordError;
     let isEnabled = false;
+
     if (isEnabledCheck.length > 0) {
       isEnabled = true;
     } else {
       isEnabled = false;
     }
+
     return (
       <>
         <MDBEdgeHeader color='indigo darken-3' className='sectionPage' />
@@ -138,14 +157,19 @@ class SigninPage extends Component {
                       <div style={{ fontSize: 13, paddingLeft: 42, color: "red" }}>{this.state.passwordError}</div>
                     </div>
                     <div className='text-center'>
-
+                      {/* <SigninConext.Provider
+                          value={{
+                          authenticated: this.state.authenticated,
+                          login: this.onSubmit
+                        }}
+                      > */}
                       <MDBBtn type="submit" disabled={isEnabled}>
                         Login
                         </MDBBtn>
-                        
-                    </div>
-                    <div className='text-center'>
-                    <a href='/resetpassword'>Forgot/Change Password?</a>
+                      {/* </SigninConext.Provider> */}
+                      <div className='text-center' disabled={isEnabled}>
+                        <Link to="#" onClick={this.forgetHandler}>Forgot Password ?</Link>
+                      </div>
                     </div>
                   </form>
                 </MDBJumbotron>
