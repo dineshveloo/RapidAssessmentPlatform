@@ -132,7 +132,7 @@ class App extends Component {
                     <MDBLink to='/'>Contact</MDBLink>
                   </MDBNavItem>
                   <MDBNavItem >
-                    <MDBLink to='/'>User Management</MDBLink>
+                    <MDBLink to='/usermanagement'>User Management</MDBLink>
                   </MDBNavItem>
                   {/* {isLogin === 0 ? null:  */}
                   <MDBNavItem >
