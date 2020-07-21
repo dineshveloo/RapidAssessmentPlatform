@@ -13,9 +13,8 @@ const emailAck = function (newUser) {
     });
 
     let htmlTemplate = "<br>Dear User,<br><br>" +
-        "Your access request to Rapid Assessment Platform has been forwarded to the RAP admin. Please check your inbox for approval notification with a registration link.<br><br>" +
-        // "Please click the below link to register.<br><br>" +
-        // `<a href="${CLIENT_ORIGIN}/register">click to register</a><br><br><br>` +
+        "Your access request to Rapid Assessment Platform has been forwarded to the RAP admin. Please check your inbox for approval notification with a registration link.<br><br><br><br><br>" +
+
         "--------------------------------------------<br><br>" +
         "This is an auto generted email, please do not reply.<br><br>" +
         "--------------------------------------------<br><br>"

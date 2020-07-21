@@ -13,7 +13,9 @@ import {
 import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from 'react-redux';
-import { RegisterUser } from '../actions/authActions';
+import { ResetPassword } from '../actions/authActions';
+
+
 const initialState = {
     email: "",
     password: "",
@@ -32,7 +34,7 @@ class ResetPasswordPage extends Component {
     componentDidMount() {
         // If logged in and user navigates to Register page, should redirect them to dashboard
         if (this.props.auth.isAuthenticated) {
-            this.props.history.push("/");
+            this.props.history.push("/signin");
         }
     }
 
@@ -43,71 +45,67 @@ class ResetPasswordPage extends Component {
             });
         }
     }
-    // validate = () => {
-    //     //debugger;
-    //     let nameError = "", emailError = "", passwordError = "", password2Error = ""
-    //     if (!this.state.name) {
-    //         nameError = 'name cannot be blank';
-    //     }
-    //     if (!this.state.email.includes('@') || !this.state.email.includes('.')) {
-    //         emailError = 'please enter a valid email address';
-    //     }
-    //     if (this.state.password.length < 6 || this.state.password === this.state.name || this.state.password === this.state.email) {
-    //         passwordError = 'password must aleast 6 character';
-    //     }
-    //     else if (this.state.password2 !== this.state.password) {
-    //         password2Error = 'Passwords must match';
-    //     }
 
-
-    //     if (emailError || nameError || passwordError || password2Error) {
-    //         this.setState({ emailError, nameError, passwordError, password2Error });
-    //         return false;
-    //     }
-    //     return true;
-    // }
+    validate = () => {
+        //debugger;
+        let  emailError = "", passwordError = "", password2Error = ""
+      
+        if (!this.state.email.includes('@') || !this.state.email.includes('.')) {
+            emailError = 'please enter a valid email address';
+        }
+        if (this.state.password.length < 6 || this.state.password === this.state.name || this.state.password === this.state.email) {
+            passwordError = 'password must aleast 6 character';
+        }
+        else if (this.state.password2 !== this.state.password) {
+            password2Error = 'Passwords must match';
+        }
+        if (emailError ||  passwordError || password2Error) {
+            this.setState({ emailError, passwordError, password2Error });
+            return false;
+        }
+        return true;
+    }
 
     onChange = e => {
 
-        //alert(e.target.id);
-        // switch (e.target.id) {
-        //     case 'name': this.setState({ nameError: '' });
-        //         break;
-        //     case 'email': this.setState({ emailError: '' });
-        //         break;
-        //     case 'password': this.setState({ passwordError: '' });
-        //         break;
-        //     case 'password2': this.setState({ password2Error: '' });
-        //         break;
-        //     default:
-        //         break;
-        // }
+       // alert(e.target.id);
+        switch (e.target.id) {
+            case 'email': this.setState({ emailError: '' });
+                break;
+            case 'password': this.setState({ passwordError: '' });
+                break;
+            case 'password2': this.setState({ password2Error: '' });
+                break;
+            default:
+                break;
+        }
         this.setState({ [e.target.id]: e.target.value });
     };
 
     onSubmit = e => {
         e.preventDefault();
-       // const isValid = this.validate();
-        // if (isValid) {
-        //     const newUser = {
-        //         email: this.state.email,
-        //         password: this.state.password,
-        //         password2: this.state.password2
-        //     };
-        //     this.props.RegisterUser(newUser, this.props.history);
-        //     //reset form
-        //     this.setState({ initialState });
-        // }
+       const isValid = this.validate();
+        if (isValid) {
+            const newUser = {
+                email: this.state.email,
+                password: this.state.password,
+                password2: this.state.password2
+            };
+            this.props.ResetPassword(newUser, this.props.history);
+            //reset form
+            this.setState({ initialState });
+        }
     };
+
     render() {
-       // const { emailError, passwordError } = this.state;
-        // let isEnabledCheck = emailError || passwordError;
-        // let isEnabled = false;
-        // if (isEnabledCheck.length > 0) {
-        //     isEnabled = true;
-        // } else {
-        //     isEnabled = false;
-        // }
+       const { emailError, passwordError } = this.state;
+        let isEnabledCheck = emailError || passwordError;
+        let isEnabled = false;
+        if (isEnabledCheck.length > 0) {
+            isEnabled = true;
+        } else {
+            isEnabled = false;
+        }
         return (
             <>
                 <MDBEdgeHeader color='indigo darken-3' className='sectionPage' />
@@ -162,7 +160,7 @@ class ResetPasswordPage extends Component {
                                             <div style={{ fontSize: 13, paddingLeft: 42, color: "red" }}>{this.state.password2Error}</div>
                                         </div>
                                         <div className='text-center'>
-                                            <MDBBtn color='primary' type="submit">Reset</MDBBtn>
+                                            <MDBBtn color='primary' disabled={isEnabled} type="submit">Reset</MDBBtn>
                                         </div>
                                     </form>
                                 </MDBJumbotron>
@@ -175,7 +173,7 @@ class ResetPasswordPage extends Component {
     }
 }
 ResetPasswordPage.propTypes = {
-    RegisterUser: PropTypes.func.isRequired,
+    ResetPassword: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired
 };
@@ -187,6 +185,6 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    { RegisterUser }
+    { ResetPassword }
 )(withRouter(ResetPasswordPage));
 

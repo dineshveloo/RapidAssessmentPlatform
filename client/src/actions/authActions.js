@@ -12,7 +12,7 @@ export const RegisterUser = (userData, history) => dispatch => {
   const headers = {
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Headers" : "Content-Type",
+    "Access-Control-Allow-Headers": "Content-Type",
     "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
   }
   axios
@@ -44,7 +44,7 @@ export const loginUser = userData => dispatch => {
   const headers = {
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Headers" : "Content-Type",
+    "Access-Control-Allow-Headers": "Content-Type",
     "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
   }
   axios
@@ -83,6 +83,74 @@ export const loginUser = userData => dispatch => {
     );
 };
 
+//confirm user
+export const confirmUser = (userData, history) => dispatch => {
+
+  const headers = {
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers": "Content-Type",
+    "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+  }
+
+  axios
+    .post('api/users/confirm', userData, { headers: headers })
+    .then(res => {
+      //console.log(res.data);
+      if (res.data.status === 1) {
+        toast(res.data.msg);
+
+      } else if (res.data.status === 0) {
+        toast(res.data.msg);
+      }
+      else if (res.data.status === -1) {
+        toast(res.data.msg);
+      }
+      else if (res.data.status === 3) {
+        toast(res.data.msg);
+      }
+      else {
+        toast(res.data.msg);
+        history.push("/register")
+      }
+    })
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    )
+}
+
+//reset password
+export const ResetPassword = (userData, history) => dispatch => {
+  const headers = {
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers": "Content-Type",
+    "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+  }
+
+  axios
+  .post('api/users/resetpass', userData, { headers: headers })
+  .then(res => {
+    //console.log(res.data);
+    if (res.data.status === 0) {
+      toast(res.data.msg);
+      history.push("/signin")
+
+    } else if (res.data.status === -1) {
+      toast(res.data.msg);
+    }
+  })
+  .catch(err =>
+    dispatch({
+      type: GET_ERRORS,
+      payload: err.response.data
+    })
+  )
+}
+
 // Set logged in user
 export const setCurrentUser = decoded => {
   return {
@@ -91,64 +159,21 @@ export const setCurrentUser = decoded => {
   };
 };
 
-// User loading
-export const setUserLoading = () => {
-  return {
-    type: USER_LOADING
+  // User loading
+  export const setUserLoading = () => {
+    return {
+      type: USER_LOADING
+    };
   };
-};
 
-// Log user out
-export const logoutUser = () => dispatch => {
-  // Remove token from local storage
-  localStorage.removeItem("jwtToken");
-  // Remove auth header for future requests
-  setAuthToken(false);
-  // Set current user to empty object {} which will set isAuthenticated to false
-  dispatch(setCurrentUser({}));
-};
+  // Log user out
+  export const logoutUser = () => dispatch => {
+    // Remove token from local storage
+    localStorage.removeItem("jwtToken");
+    // Remove auth header for future requests
+    setAuthToken(false);
+    // Set current user to empty object {} which will set isAuthenticated to false
+    dispatch(setCurrentUser({}));
+  };
 
 
-export const confirmUser = (userData, history) => dispatch  =>{
-
-  const headers = {
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Headers" : "Content-Type",
-      "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
-    }
-    
-    axios   
-      .post('api/users/confirm', userData, {headers: headers})
-          .then(res => {
-            //console.log(res.data);
-              if (res.data.status === 1) {
-                 
-                  
-                  toast(res.data.msg);
-
-              } else if (res.data.status === 0) {
-                  toast(res.data.msg);
-              }
-              else if (res.data.status === -1) {
-                  toast(res.data.msg);
-              }
-              else if(res.data.status === 3){
-                  toast(res.data.msg);
-              }
-              else {
-                toast(res.data.msg);
-                history.push("/register")
-            }
-              // else if (res.data.status === 2) {
-              //     toast(res.data.msg);
-              //     //history.push("/register");
-              // }
-          })
-          .catch(err => 
-            dispatch({
-              type: GET_ERRORS,
-              payload: err.response.data
-            })
-          )
-          }
