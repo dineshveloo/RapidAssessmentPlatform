@@ -16,7 +16,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Link } from 'react-router-dom'
 //import SigninConext from '../context/SigninConext';
-import './global.css';
+//import './global.css';
 import { toast } from 'react-toastify';
 
 const initialState = {
@@ -158,7 +158,7 @@ class SigninPage extends Component {
                     </div>
                     <div className='text-center'>
                       {/* <SigninConext.Provider
-                        value={{
+                          value={{
                           authenticated: this.state.authenticated,
                           login: this.onSubmit
                         }}

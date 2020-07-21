@@ -12,13 +12,14 @@ import ResetPasswordPage from './pages/ResetPasswordPage';
 class Routes extends React.Component {
   render() {
     return (
-      
+
       <Switch>
         <Route exact path='/' component={HomePage} />
         <Route exact path='/signin' component={SigninPage} />
         <Route exact path='/emailConfirm' component={EmailConfirmPage} />
         <Route exact path='/register' component={RegistrationPage} />
         <Route exact path='/resetpassword' component={ResetPasswordPage} />
+        <Route exact path='/usermanagement' component={UserManagement} />
         <PrivateRoute exact path='/' component={Dashboard} />
         <Route
           render={function () {
@@ -26,7 +27,7 @@ class Routes extends React.Component {
           }}
         />
       </Switch>
-    
+
     );
   }
 }

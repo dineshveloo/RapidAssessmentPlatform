@@ -57,7 +57,7 @@ class App extends Component {
 
   }
 
- //static contextType = SigninConext;
+  //static contextType = SigninConext;
 
   // componentDidMount = () => {
   //   fetch(`${API_URL}/wake-up`)
@@ -105,8 +105,6 @@ class App extends Component {
     );
     const { collapseID } = this.state;
 
-   
-
     //let isLogin = localStorage.getItem('jwtToken');
     // if(isLogin === null){
     //   isLogin = 0;
@@ -133,11 +131,14 @@ class App extends Component {
                   <MDBNavItem >
                     <MDBLink to='/'>Contact</MDBLink>
                   </MDBNavItem>
+                  <MDBNavItem >
+                    <MDBLink to='/'>User Management</MDBLink>
+                  </MDBNavItem>
                   {/* {isLogin === 0 ? null:  */}
                   <MDBNavItem >
                     {/* {this.context.authenticated ? */}
-                     <MDBLink to=""  onClick={this.logoutHandler}>Logout</MDBLink>
-                     {/* : null} */}
+                    <MDBLink to="" onClick={this.logoutHandler}>Logout</MDBLink>
+                    {/* : null} */}
                   </MDBNavItem>
                   {/* } */}
                   <MDBNavItem>
@@ -156,11 +157,9 @@ class App extends Component {
                         <MDBIcon icon='user' />
                       </MDBDropdownToggle>
                       <MDBDropdownMenu right>
-                       
-                          <MDBDropdownItem href='/signin'>
-                            SignIn
+                        <MDBDropdownItem href='/signin'>
+                          SignIn
                       </MDBDropdownItem>
-                        
                         <MDBDropdownItem href='/emailConfirm'>
                           Request / Register
                       </MDBDropdownItem>
