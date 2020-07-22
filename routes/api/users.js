@@ -117,6 +117,7 @@ router.post("/signin", (req, res) => {
 
 });
 
+// @route POST api/users/confirm
 router.post("/confirm", (req, res) => {
   try {
     User.findOne({ email: req.body.email }).then(user => {
@@ -182,15 +183,43 @@ router.get('/approve/:email/:id', (req, res) => {
 
 });
 
-router.get('/forgetpassword/:email', (req, res) => {
+// @route POST api/users/resetpass
+router.post("/resetpass", (req, res) => {
+  // Form validation
   try {
-    userForgetPassword.forgetpass(req.params.email)
-    res.json({ msg: " please check your email to reset password.", status: 1 });
+
+    User.findOne({ email: req.body.email }).then(user => {
+      if (user && user.confirmed) {
+        let pass = req.body.password;
+        //console.log(user);
+
+        bcrypt.genSalt(10, (err, salt) => {
+          bcrypt.hash(pass, salt, (err, hash) => {
+            if (err) throw err;
+            //res.json(res);
+            User.findByIdAndUpdate(user.id, { password: hash })
+              .then(userForgetPassword.forgetpass(user))
+              .then(() => res.json({ msg: 'successfully updated password', status: 0 }))
+              .catch(err => console.log(err))
+          });
+        });
+      }
+    });
   } catch (e) {
     res.json({ msg: "server error. ", status: -1 });
     console.log(e);
   }
 });
 
-module.exports = router;
 
+// router.get('/resetpassword/:email', (req, res) => {
+//   try {
+//     userForgetPassword.forgetpass(req.params.email)
+//     res.json({ msg: " please check your email to reset password.", status: 1 });
+//   } catch (e) {
+//     res.json({ msg: "server error. ", status: -1 });
+//     console.log(e);
+//   }
+// });
+
+module.exports = router;

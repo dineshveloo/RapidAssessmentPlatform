@@ -14,8 +14,10 @@ import {
 import { loginUser } from '../actions/authActions';
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { Link } from 'react-router-dom'
 //import SigninConext from '../context/SigninConext';
-
+//import './global.css';
+import { toast } from 'react-toastify';
 
 const initialState = {
   email: "",
@@ -28,7 +30,7 @@ class SigninPage extends Component {
   constructor() {
     super();
     this.state = initialState;
-    
+
   }
 
   componentDidMount() {
@@ -78,7 +80,16 @@ class SigninPage extends Component {
         break;
     }
     this.setState({ [e.target.id]: e.target.value });
+    console.log(this.state.email)
   };
+
+  forgetHandler = () => {
+    if (this.state.email.length <= 0) {
+      toast('please enter approved email id to proceed');
+    } else {
+      this.props.history.push('/resetpassword')
+    }
+  }
 
   onSubmit = e => {
     e.preventDefault();
@@ -89,9 +100,7 @@ class SigninPage extends Component {
         password: this.state.password
       };
       this.props.loginUser(userData);
-
       //this.setState({ authenticated: true}, ()=>(console.log(authenticated)))
-
     }
   };
 
@@ -149,17 +158,17 @@ class SigninPage extends Component {
                     </div>
                     <div className='text-center'>
                       {/* <SigninConext.Provider
-                        value={{
+                          value={{
                           authenticated: this.state.authenticated,
                           login: this.onSubmit
                         }}
                       > */}
-                        <MDBBtn type="submit" disabled={isEnabled}>
-                          Login
+                      <MDBBtn type="submit" disabled={isEnabled}>
+                        Login
                         </MDBBtn>
                       {/* </SigninConext.Provider> */}
-                      <div className='text-center'>
-                        <a href='/signin'>Forgot Password?</a>
+                      <div className='text-center' disabled={isEnabled}>
+                        <Link to="#" onClick={this.forgetHandler}>Forgot Password ?</Link>
                       </div>
                     </div>
                   </form>
@@ -172,19 +181,15 @@ class SigninPage extends Component {
     );
   }
 }
-
 SigninPage.propTypes = {
   loginUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
 };
-
 const mapStateToProps = state => ({
   auth: state.auth,
   errors: state.errors
 });
-
-
 export default connect(
   mapStateToProps,
   { loginUser }

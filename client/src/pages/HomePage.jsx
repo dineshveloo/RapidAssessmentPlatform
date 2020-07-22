@@ -21,7 +21,9 @@ class HomePage extends React.Component {
   render() {
     return (
       <>
+      <div id="home">
         <MDBEdgeHeader color='indigo darken-3' className='sectionPage' />
+        </div>
         <div className='mt-3 mb-5'>
           <MDBFreeBird>
             <MDBRow>
@@ -119,6 +121,8 @@ class HomePage extends React.Component {
               </MDBCol>
             </MDBRow>
           </MDBFreeBird>
+
+          <div id="about">
           <MDBContainer>
             <MDBRow>
               <MDBCol md='12' className='mt-4'>
@@ -221,6 +225,10 @@ class HomePage extends React.Component {
               </MDBCol>
             </MDBRow>
           </MDBContainer>
+
+          </div>
+          <div id="contact">
+
           <MDBContainer>
             <MDBRow>
               <MDBCol md='12' className='mt-4'>
@@ -269,6 +277,9 @@ class HomePage extends React.Component {
               </MDBCol>
             </MDBRow>
           </MDBContainer>
+
+          </div>
+
         </div>
       </>
     );
