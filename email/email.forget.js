@@ -1,8 +1,7 @@
-
 const nodemailer = require('nodemailer');
-const { CLIENT_ORIGIN } = require('../config/info');
+//const { CLIENT_ORIGIN } = require('../config/info');
 
-const forgetpass = function (userEmail) {
+const forgetpass = function (user) {
 
     let transporter = nodemailer.createTransport({
         host: "smtp.gmail.com",
@@ -15,8 +14,8 @@ const forgetpass = function (userEmail) {
     });
 
     let htmlTemplate = "<br>Dear User,<br><br>" +
-        "Please reset the password with the below link provided.<br><br>" +
-        `<a href="${CLIENT_ORIGIN}/resetpassword/${userEmail}">click to register</a><br><br><br>` +
+        "You have been successfully updated the password to our Rapid Assessment Platform. Please use the same credentials for sign-in.<br><br><br><br><br>" +
+
         "--------------------------------------------<br><br>" +
         "This is an auto generted email, please do not reply.<br><br>" +
         "--------------------------------------------<br><br>"
@@ -24,8 +23,8 @@ const forgetpass = function (userEmail) {
 
     let info = transporter.sendMail({
         from: process.env.MAIL_USER,
-        to: userEmail, // list of receivers
-        subject: "Acknowledgement for Request to RAP", // Subject line
+        to: user.email, // list of receivers
+        subject: "Successfully reset password to RAP", // Subject line
         html: htmlTemplate
     })
 
@@ -34,5 +33,4 @@ const forgetpass = function (userEmail) {
 module.exports = {
     forgetpass
 }
-
 

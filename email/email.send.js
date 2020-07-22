@@ -18,7 +18,7 @@ const email = function (newUser) {
     "Email: <span>" + newUser.email + "</span><br>" +
     "Company: " + newUser.company + "<br><br>" +
     "Please click the below link to provide access <br><br>" +
-    `<a href="${CLIENT_ORIGIN_NODE}/api/users/approve/${newUser.email}/${newUser._id}">click to appove</a><br><br><br>` +
+    `<a href="${CLIENT_ORIGIN_NODE}/api/users/approve/${newUser.email}/${newUser._id}">click to appove</a><br><br><br><br><br>` +
     "--------------------------------------------<br><br>" +
     "This is an auto generted email, please do not reply.<br><br>" +
     "--------------------------------------------<br><br>"
@@ -35,4 +35,3 @@ const email = function (newUser) {
 module.exports = {
   email
 }
-
