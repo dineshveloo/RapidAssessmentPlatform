@@ -184,4 +184,6 @@ const mapStateToProps = state => ({
 export default connect(
     mapStateToProps,
     { ResetPassword }
+
 )(withRouter(ResetPasswordPage));
+

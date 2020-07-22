@@ -10,7 +10,6 @@ import ResetPasswordPage from './pages/ResetPasswordPage';
 import UserManagementPage from './pages/UserManagement';
 
 
-
 class Routes extends React.Component {
   render() {
     return (
@@ -29,10 +28,12 @@ class Routes extends React.Component {
           }}
         />
       </Switch>
+
    );
   }
 }
 
 
 export default Routes;
+
 

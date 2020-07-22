@@ -14,7 +14,7 @@ import {
   MDBDropdownItem,
   MDBIcon
 } from 'mdbreact';
-import './App.css'
+import './App.css';
 import jwt_decode from 'jwt-decode';
 import setAuthToken from './utils/setAuthToken';
 import { setCurrentUser, logoutUser } from './actions/authActions';
@@ -57,7 +57,28 @@ class App extends Component {
     };
 
   }
- 
+
+  //static contextType = SigninConext;
+
+  // componentDidMount = () => {
+  //   fetch(`${API_URL}/wake-up`)
+  //     .then(res => res.json())
+  //     .then(() => {
+  //       this.setState({ loading: false })
+  //     })
+  //     .catch(err => console.log(err))
+  // }
+
+  // onLogoutClick = e => {
+  //   e.preventDefault();
+  //   this.props.logoutUser();
+  // };
+
+  // onChangeLogoutHandler = e => {
+  //   e.preventDefault();
+  //   store.dispatch(logoutUser());
+  // }
+
   logoutHandler = (e) => {
     e.preventDefault();
     localStorage.removeItem('jwtToken');
@@ -85,7 +106,12 @@ class App extends Component {
     );
     const { collapseID } = this.state;
 
-
+    //let isLogin = localStorage.getItem('jwtToken');
+    // if(isLogin === null){
+    //   isLogin = 0;
+    // }else{
+    //   isLogin = localStorage.getItem('jwtToken');
+    // }
 
     return (
       <Provider store={store}>
@@ -100,10 +126,10 @@ class App extends Component {
               />
               <MDBCollapse id='mainNavbarCollapse' isOpen={collapseID} navbar>
                 <MDBNavbarNav right>
-                 <MDBNavItem id="h">
-                  <a  offset="100" href="/" style={{color:"white"}} className="pl-3">Home</a>
+                  {/*<MDBNavItem id="h"> */}
+                  {/*<a  offset="100" href="/" style={{color:"white"}} className="pl-3">Home</a>*/} 
 
-                  </MDBNavItem>
+                  {/*</MDBNavItem>*/} 
                   <MDBNavItem id="a">
                   
                     <a offset="100" href="#about" style={{color:"white"}} className="pl-3">About</a>
@@ -113,21 +139,15 @@ class App extends Component {
                     {/* <MDBLink to='#contact'>Contact</MDBLink> */}
                     <a offset="100" href="#contact" style={{color:"white"}} className="pl-3">Contact</a>
                   </MDBNavItem>
+                 
                   <MDBNavItem >
                     <MDBLink to='/usermanagement'>User Management</MDBLink>
-                  <MDBNavItem>
-                    <MDBLink to='/'>About</MDBLink>
-                  </MDBNavItem>
-                  <MDBNavItem >
-                    <MDBLink to='/'>Contact</MDBLink>
                   </MDBNavItem>
                   {/* {isLogin === 0 ? null:  */}
                   <MDBNavItem >
                     {/* {this.context.authenticated ? */}
                     <MDBLink to="" onClick={this.logoutHandler}>Logout</MDBLink>
                     {/* : null} */}
-                     <MDBLink to=""  onClick={this.logoutHandler}>Logout</MDBLink>
-                     {/* : null} */}
                   </MDBNavItem>
                   {/* } */}
                   <MDBNavItem>
@@ -148,9 +168,6 @@ class App extends Component {
                       <MDBDropdownMenu right>
                         <MDBDropdownItem href='/signin'>
                           SignIn
-                      </MDBDropdownItem>
-                      <MDBDropdownItem href='/signin'>
-                            SignIn
                       </MDBDropdownItem>
                         <MDBDropdownItem href='/emailConfirm'>
                           Request / Register
