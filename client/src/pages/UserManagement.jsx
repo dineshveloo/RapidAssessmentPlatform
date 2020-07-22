@@ -16,14 +16,14 @@ class UserManagementPage extends React.Component {
   render() {
     return (
       <>
-        <div id="UM" className='mt-3 mb-5'>
+        <div className='mt-3 mb-5'>
         <MDBContainer className='mt-3'>
        
        
         <MDBRow className='py-3'>
           <MDBCol md='12'>
             <SectionContainer
-              header='User Management'
+              header=''
               noBorder
             >
               <MDBCard>
@@ -51,5 +51,4 @@ class UserManagementPage extends React.Component {
     );
   }
 }
-
 export default UserManagementPage;

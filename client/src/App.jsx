@@ -141,6 +141,9 @@ class App extends Component {
                   <MDBNavItem >
                     <MDBLink to='/usermanagement'>User Management</MDBLink>
                   </MDBNavItem>
+                  <MDBNavItem >
+                    <MDBLink to='/usermanagement'>User Management</MDBLink>
+                  </MDBNavItem>
                   {/* {isLogin === 0 ? null:  */}
                   <MDBNavItem >
                     {/* {this.context.authenticated ? */}
