@@ -1,4 +1,3 @@
-
 const nodemailer = require('nodemailer');
 //const { CLIENT_ORIGIN } = require('../config/info');
 
@@ -34,5 +33,4 @@ const forgetpass = function (user) {
 module.exports = {
     forgetpass
 }
-
 

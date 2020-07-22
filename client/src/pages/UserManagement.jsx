@@ -51,5 +51,4 @@ class UserManagementPage extends React.Component {
     );
   }
 }
-
 export default UserManagementPage;

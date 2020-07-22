@@ -212,6 +212,7 @@ router.post("/resetpass", (req, res) => {
 });
 
 
+
 // router.get('/resetpassword/:email', (req, res) => {
 //   try {
 //     userForgetPassword.forgetpass(req.params.email)
@@ -223,4 +224,5 @@ router.post("/resetpass", (req, res) => {
 // });
 
 module.exports = router;
+
 

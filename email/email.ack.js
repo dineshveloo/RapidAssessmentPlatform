@@ -32,5 +32,3 @@ const emailAck = function (newUser) {
 module.exports = {
     emailAck
 }
-
-

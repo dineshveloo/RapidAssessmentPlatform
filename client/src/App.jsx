@@ -125,11 +125,21 @@ class App extends Component {
               />
               <MDBCollapse id='mainNavbarCollapse' isOpen={collapseID} navbar>
                 <MDBNavbarNav right>
-                  <MDBNavItem>
-                    <MDBLink to='/'>About</MDBLink>
+                  <MDBNavItem id="h">
+                  <a  offset="100" href="/" style={{color:"white"}} className="pl-3">Home</a>
+
+                  </MDBNavItem>
+                  <MDBNavItem id="a">
+                  
+                    <a offset="100" href="#about" style={{color:"white"}} className="pl-3">About</a>
+                    
+                  </MDBNavItem>
+                  <MDBNavItem id="c" >
+                    {/* <MDBLink to='#contact'>Contact</MDBLink> */}
+                    <a offset="100" href="#contact" style={{color:"white"}} className="pl-3">Contact</a>
                   </MDBNavItem>
                   <MDBNavItem >
-                    <MDBLink to='/'>Contact</MDBLink>
+                    <MDBLink to='/usermanagement'>User Management</MDBLink>
                   </MDBNavItem>
                   <MDBNavItem >
                     <MDBLink to='/usermanagement'>User Management</MDBLink>

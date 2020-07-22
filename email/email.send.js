@@ -35,4 +35,3 @@ const email = function (newUser) {
 module.exports = {
   email
 }
-
