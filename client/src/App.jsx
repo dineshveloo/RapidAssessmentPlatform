@@ -14,6 +14,7 @@ import {
   MDBDropdownItem,
   MDBIcon
 } from 'mdbreact';
+import './App.css';
 import jwt_decode from 'jwt-decode';
 import setAuthToken from './utils/setAuthToken';
 import { setCurrentUser, logoutUser } from './actions/authActions';
@@ -125,10 +126,10 @@ class App extends Component {
               />
               <MDBCollapse id='mainNavbarCollapse' isOpen={collapseID} navbar>
                 <MDBNavbarNav right>
-                  <MDBNavItem id="h">
-                  <a  offset="100" href="/" style={{color:"white"}} className="pl-3">Home</a>
+                   {/*<MDBNavItem id="h"> */}
+                 {/* <a  offset="100" href="/" style={{color:"white"}} className="pl-3">Home</a> */}
 
-                  </MDBNavItem>
+                  {/*</MDBNavItem> */}
                   <MDBNavItem id="a">
                   
                     <a offset="100" href="#about" style={{color:"white"}} className="pl-3">About</a>
@@ -138,9 +139,7 @@ class App extends Component {
                     {/* <MDBLink to='#contact'>Contact</MDBLink> */}
                     <a offset="100" href="#contact" style={{color:"white"}} className="pl-3">Contact</a>
                   </MDBNavItem>
-                  <MDBNavItem >
-                    <MDBLink to='/usermanagement'>User Management</MDBLink>
-                  </MDBNavItem>
+                 
                   <MDBNavItem >
                     <MDBLink to='/usermanagement'>User Management</MDBLink>
                   </MDBNavItem>
