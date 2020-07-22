@@ -223,4 +223,3 @@ router.post("/resetpass", (req, res) => {
 // });
 
 module.exports = router;
-

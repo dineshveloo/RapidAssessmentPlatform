@@ -1,8 +1,9 @@
 import React from 'react';
 
-const SigninContext = React.createContext({
-    authenticated: 'true',
+const SigninConext = React.createContext({
+    authenticated: false,
     login: () => { }
 });
 
-export default SigninContext;
+export default SigninConext;
+

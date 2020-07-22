@@ -121,6 +121,7 @@ class HomePage extends React.Component {
               </MDBCol>
             </MDBRow>
           </MDBFreeBird>
+
           <div id="about">
           <MDBContainer>
             <MDBRow>
@@ -224,8 +225,10 @@ class HomePage extends React.Component {
               </MDBCol>
             </MDBRow>
           </MDBContainer>
+
           </div>
           <div id="contact">
+
           <MDBContainer>
             <MDBRow>
               <MDBCol md='12' className='mt-4'>
@@ -274,7 +277,9 @@ class HomePage extends React.Component {
               </MDBCol>
             </MDBRow>
           </MDBContainer>
+
           </div>
+
         </div>
       </>
     );

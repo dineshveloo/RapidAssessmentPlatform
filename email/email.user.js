@@ -34,5 +34,3 @@ const emailUser = function (newUser) {
 module.exports = {
     emailUser
 }
-
-
