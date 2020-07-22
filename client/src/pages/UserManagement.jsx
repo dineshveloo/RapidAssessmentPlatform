@@ -23,7 +23,7 @@ class UserManagementPage extends React.Component {
         <MDBRow className='py-3'>
           <MDBCol md='12'>
             <SectionContainer
-              header=''
+              header='User Management'
               noBorder
             >
               <MDBCard>
