@@ -42,8 +42,6 @@ class UserManagementPage extends React.Component {
             </SectionContainer>
           </MDBCol>
         </MDBRow>
-
-       
       </MDBContainer>
        
         </div>

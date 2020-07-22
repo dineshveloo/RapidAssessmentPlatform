@@ -19,6 +19,7 @@ const UserSchema = new Schema({
     type: Date,
     default: Date.now
   },
+  //flag for user email to set true/ flase
   confirmed: {
     type: Boolean,
     default: false
