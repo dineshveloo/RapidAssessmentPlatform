@@ -1,25 +1,62 @@
 import React from 'react';
 import {
+  MDBDataTable,
   MDBContainer,
-  MDBCol,
   MDBRow,
-  MDBCardBody,
+  MDBCol,
   MDBCard,
-  MDBDataTable
+  MDBCardBody,
+  MDBBadge
 } from 'mdbreact';
-import './HomePage.css';
+
 import SectionContainer from '../components/sectionContainer';
 
-class UserManagementPage extends React.Component {
-  scrollToTop = () => window.scrollTo(0, 0);
+class UserManagement extends React.Component {
+  state = {
+    data: {}
+  };
+
+  componentDidMount() {
+    fetch('https://my-json-server.typicode.com/Rotarepmi/exjson/db')
+      .then(res => res.json())
+      .then(json => {
+        let data = json;
+        let { columns, rows } = json;
+
+        columns.push({
+          label: 'Own Data',
+          field: 'id',
+          sort: 'asc',
+          width: 150
+        });
+
+        rows = rows.map((row, key) => ({
+          ...row,
+          id: (
+            <MDBBadge
+              color='info'
+              className='w-100'
+              searchvalue={key}
+              key={key}
+            >
+              {key}
+            </MDBBadge>
+          )
+        }));
+
+        data = {
+          columns,
+          rows
+        };
+        this.setState({ data });
+      });
+  }
 
   render() {
+    
     return (
-      <>
-        <div id="UM" className='mt-3 mb-5'>
-        <MDBContainer className='mt-3'>
-       
-       
+      <MDBContainer className='mt-3'>
+        
         <MDBRow className='py-3'>
           <MDBCol md='12'>
             <SectionContainer
@@ -34,7 +71,7 @@ class UserManagementPage extends React.Component {
                     hover
                     scrollX
                     scrollY
-                    maxHeight='300xp'
+                    maxHeight='50vh'
                     data='https://my-json-server.typicode.com/Rotarepmi/exjson/db'
                   />
                 </MDBCardBody>
@@ -43,12 +80,9 @@ class UserManagementPage extends React.Component {
           </MDBCol>
         </MDBRow>
 
-       
+        
       </MDBContainer>
-       
-        </div>
-      </>
     );
   }
 }
-export default UserManagementPage;
+export default UserManagement;
