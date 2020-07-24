@@ -111,6 +111,45 @@ export const confirmUser = (userData, history) => dispatch => {
       }
       else {
         toast(res.data.msg);
+        history.push("/captureprocesspage1")
+      }
+    })
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    )
+}
+
+//capture process
+export const captureP1 = (captureData, history) => dispatch => {
+
+  const headers = {
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers": "Content-Type",
+    "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+  }
+
+  axios
+    .post('api/users/capture1', captureData, { headers: headers })
+    .then(res => {
+      //console.log(res.data);
+      if (res.data.status === 1) {
+        toast(res.data.msg);
+
+      } else if (res.data.status === 0) {
+        toast(res.data.msg);
+      }
+      else if (res.data.status === -1) {
+        toast(res.data.msg);
+      }
+      else if (res.data.status === 3) {
+        toast(res.data.msg);
+      }
+      else {
+        toast(res.data.msg);
         history.push("/register")
       }
     })
@@ -121,6 +160,13 @@ export const confirmUser = (userData, history) => dispatch => {
       })
     )
 }
+
+
+
+
+
+
+
 
 //reset password
 export const ResetPassword = (userData, history) => dispatch => {

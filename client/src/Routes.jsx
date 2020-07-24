@@ -8,7 +8,7 @@ import Dashboard from "./dashboard/Dashboard";
 import HomePage from './pages/HomePage';
 import ResetPasswordPage from './pages/ResetPasswordPage';
 import UserManagementPage from './pages/UserManagement';
-
+import CaptureProcessPage1 from './pages/CaptureProcessPage1';
 
 class Routes extends React.Component {
   render() {
@@ -21,6 +21,7 @@ class Routes extends React.Component {
         <Route exact path='/register' component={RegistrationPage} />
         <Route exact path='/resetpassword' component={ResetPasswordPage} />
         <Route exact path='/usermanagement' component={UserManagementPage} />
+        <Route exact path='/captureprocesspage1' component={CaptureProcessPage1}/>
         <PrivateRoute exact path='/' component={Dashboard} />
         <Route
           render={function () {

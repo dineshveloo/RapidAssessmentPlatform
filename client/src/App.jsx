@@ -135,13 +135,13 @@ class App extends Component {
 
                   {/*</MDBNavItem>*/} 
                   <MDBNavItem id="a">
-                  {/* <Link to="/home#about">About</Link> */}
+                  
                   
                     <a offset="100" href="/#about" style={{color:"white"}} className="pl-3">About</a>
                     
                   </MDBNavItem>
                   <MDBNavItem id="c" >
-                    {/* <MDBLink to='#contact'>Contact</MDBLink> */}
+                    
                     <a offset="100" href="/#contact" style={{color:"white"}} className="pl-3">Contact</a>
                   </MDBNavItem>
                  

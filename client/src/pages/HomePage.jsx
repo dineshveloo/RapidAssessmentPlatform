@@ -55,7 +55,7 @@ class HomePage extends React.Component {
                             </MDBCardTitle>
                             <MDBNavLink
                               tag='button'
-                              to='/'
+                              to='/captureprocesspage1'
                               color='mdb-color'
                               className='btn btn-outline-mdb-color-new btn-sm btn-rounded d-inline'
                               onClick={this.scrollToTop}
