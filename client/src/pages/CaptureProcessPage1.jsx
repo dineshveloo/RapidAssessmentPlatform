@@ -62,43 +62,53 @@ class CaptureProcessPage1 extends Component {
                                 <MDBJumbotron>
                                     <h1 className='text-center'>
                                         <MDBIcon icon='edit' className='indigo-text mr-2' />
-                                       Capture Process
+                                        
+                                       <b>Capture Process/</b><MDBIcon icon='eye' className='indigo-text mr-2' /><b>View Process</b>
                                     </h1>
                                     <form onSubmit={this.onSubmit} className="emailForm" >
-                                        <div className='grey-text'>
+                                        {/* <div className='grey-text'> */}
+                                        <div className='form-row'>
+                                        <div className='form-group col-md-6'>
                                             <MDBInput
                                                 name='text'
                                                 id="clientname"
                                                 label='Client Name'
                                                 group
+                                                icon='user'
                                                 type='text'
                                                 success='right'
                                                 value={this.state.clientname}
                                                 required
                                             />
+                                            </div>
                                            
-                                        </div>
+                                       
 
-                                        <div className='grey-text'>
+                                        {/* <div className='grey-text'> */}
+                                        <div className='form-group col-md-6'>
                                             <MDBInput
                                                 name='text'
                                                 id="ind"
                                                 label='Industry'
                                                 group
+                                                icon='industry'
                                                 type='text'
                                                 success='right'
                                                 value={this.state.ind}
                                                 required
                                             />
+                                            </div>
                                            
                                         </div>
 
-                                        <div className='grey-text'>
+                                        <div className='form-row'>
+                                        <div className='form-group col-md-6'>
                                             <MDBInput
                                                 name='text'
                                                 id="BU"
                                                 label='Business Unit'
                                                 group
+                                                icon='users'
                                                 type='text'
                                                 success='right'
                                                 value={this.state.BU}
@@ -107,12 +117,13 @@ class CaptureProcessPage1 extends Component {
                                            
                                         </div>
 
-                                        <div className='grey-text'>
+                                        <div className='form-group col-md-6'>
                                             <MDBInput
                                                 name='text'
                                                 id="SBU"
                                                 label='Sub Business Unit'
                                                 group
+                                                icon='users'
                                                 type='text'
                                                 success='right'
                                                 value={this.state.SBU}
@@ -120,13 +131,16 @@ class CaptureProcessPage1 extends Component {
                                             />
                                            
                                         </div>
+                                        </div>
 
-                                        <div className='grey-text'>
+                                        <div className='form-row'>
+                                        <div className='form-group col-md-6'>
                                             <MDBInput
                                                 name='text'
                                                 id="processname"
                                                 label='Process Name'
                                                 group
+                                                icon='cogs'
                                                 type='text'
                                                 success='right'
                                                 value={this.state.processname}
@@ -135,12 +149,13 @@ class CaptureProcessPage1 extends Component {
                                            
                                         </div>
 
-                                        <div className='grey-text'>
+                                        <div className='form-group col-md-6'>
                                             <MDBInput
                                                 name='text'
                                                 id="PID"
                                                 label='Process Id'
                                                 group
+                                                icon="fingerprint"
                                                 type='text'
                                                 success='right'
                                                 value={this.state.PID}
@@ -148,14 +163,17 @@ class CaptureProcessPage1 extends Component {
                                             />
                                             
                                         </div>
+                                        </div>
 
-                                        <div className='grey-text'>
+                                        <div className='form-group'>
                                             <MDBInput
                                                 name='text'
                                                 id="PD"
                                                 label='Process Description'
                                                 group
-                                                type='text'
+                                                type='textarea'
+                                                rows='3'
+                                                icon='align-center'
                                                 success='right'
                                                 value={this.state.PD}
                                                 required
@@ -166,6 +184,11 @@ class CaptureProcessPage1 extends Component {
                                             <MDBBtn outline color='info' type='submit' disabled={isEnabled}>
                                                 Start Assessment<MDBIcon icon='paper-plane' className='ml-1' />
                                             </MDBBtn>
+                                        </div>
+                                        <div className='text-center'>
+
+                                             Have you already captured the process? please click  <a href='/viewprocess'> <MDBIcon icon='eye' className='indigo-text mr-2' /> </a> to View.
+
                                         </div>
                                         
                                     </form>
