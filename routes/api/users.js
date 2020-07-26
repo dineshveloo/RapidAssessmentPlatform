@@ -208,7 +208,21 @@ router.post("/capture1", (req, res) => {
   }
 });
 
+//@route POST api/users/viewprocess
+router.get('/viewprocessdata',(req,res)=>{
+  CaptureProcessP1Model.find({}).then(vdata=>{
+    if(vdata){
+      res.json(vdata)
+    }else{
+      res.send('Process not found!')
+    }
+   
+  })
+  .catch(err =>{
+    res.send('error: ' +err)
+  })
 
+});
 
 
 

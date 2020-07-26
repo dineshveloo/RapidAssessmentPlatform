@@ -187,7 +187,7 @@ class CaptureProcessPage1 extends Component {
                                         </div>
                                         <div className='text-center'>
 
-                                             Have you already captured the process? please click  <a href='/viewprocess'> <MDBIcon icon='eye' className='indigo-text mr-2' /> </a> to View.
+                                             <b>Have you already captured the process? please click<a href='/viewprocess'> <MDBIcon icon='eye' className='indigo-text'/> </a> to View.</b>
 
                                         </div>
                                         

@@ -161,6 +161,32 @@ export const captureP1 = (captureData, history) => dispatch => {
     )
 }
 
+//view process
+export const getProcess = (vdata, history) => dispatch => {
+  const headers = {
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers": "Content-Type",
+    "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+  }
+  axios
+  .get('api/users/viewprocessdata', vdata, { headers: headers })
+    .then(response => {
+      //console.log(response)
+      return response.data
+        //console.log(err)
+      })
+
+   
+  
+      .catch(err =>
+        dispatch({
+          type: GET_ERRORS,
+          payload: err.response.data
+        })
+      )
+  
+}
 
 
 
