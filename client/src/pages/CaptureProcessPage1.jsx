@@ -123,7 +123,7 @@ class CaptureProcessPage1 extends Component {
                                                 id="SBU"
                                                 label='Sub Business Unit'
                                                 group
-                                                icon='users'
+                                                icon='user-friends'
                                                 type='text'
                                                 success='right'
                                                 value={this.state.SBU}
