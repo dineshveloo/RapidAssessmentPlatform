@@ -10,6 +10,7 @@ import ResetPasswordPage from './pages/ResetPasswordPage';
 import UserManagementPage from './pages/UserManagement';
 import CaptureProcessPage1 from './pages/CaptureProcessPage1';
 import ViewProcessPage from './pages/ViewProcessPage';
+import ProcessDiscoveryPage from './pages/ProcessDiscoveryPage';
 
 class Routes extends React.Component {
   render() {
@@ -24,6 +25,7 @@ class Routes extends React.Component {
         <Route exact path='/usermanagement' component={UserManagementPage} />
         <Route exact path='/captureprocesspage1' component={CaptureProcessPage1}/>
         <Route exact path='/viewprocess' component={ViewProcessPage}/>
+        <Route exact path='/rapidprocessdiscovery' component={ProcessDiscoveryPage}/>
         <PrivateRoute exact path='/' component={Dashboard} />
         <Route
           render={function () {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-    MDBEdgeHeader,
+   
     MDBContainer,
     MDBRow,
     MDBCol,
@@ -15,6 +15,7 @@ import { captureP1 } from '../actions/authActions';
 import { connect } from 'react-redux';
 import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
+import './HomePage.css';
 
 class CaptureProcessPage1 extends Component {
     state = {
@@ -54,7 +55,7 @@ class CaptureProcessPage1 extends Component {
        
         return (
             <>
-                <MDBEdgeHeader color='indigo darken-3' className='sectionPage' />
+                
                 <MDBAnimation type='zoomIn' duration='500ms'>
                     <MDBContainer>
                         <MDBRow>
@@ -63,7 +64,7 @@ class CaptureProcessPage1 extends Component {
                                     <h1 className='text-center'>
                                         <MDBIcon icon='edit' className='indigo-text mr-2' />
                                         
-                                       <b>Capture Process/</b><MDBIcon icon='eye' className='indigo-text mr-2' /><b>View Process</b>
+                                       <b>Capture Process</b>
                                     </h1>
                                     <form onSubmit={this.onSubmit} className="emailForm" >
                                         {/* <div className='grey-text'> */}
@@ -182,12 +183,17 @@ class CaptureProcessPage1 extends Component {
                                         </div>
                                         <div className='text-center'>
                                             <MDBBtn outline color='info' type='submit' disabled={isEnabled}>
-                                                Start Assessment<MDBIcon icon='paper-plane' className='ml-1' />
+                                                Submit Assessment<MDBIcon icon='paper-plane' className='ml-1' />
                                             </MDBBtn>
                                         </div>
-                                        <div className='text-center'>
+                                        <div id="capturelink" className='text-center'>
 
-                                             <b>Have you already captured the process? please click<a href='/viewprocess'> <MDBIcon icon='eye' className='indigo-text'/> </a> to View.</b>
+                                             <b>Do you want to Capture another process?! Please click<a href='/captureprocesspage1'> <MDBIcon icon='edit' className='indigo-text'/> </a>to Capture.</b>
+
+                                        </div>
+                                        <div id="viewlink" className='text-center'>
+
+                                             <b>Please click<a href='/viewprocess'> <MDBIcon icon='eye' className='indigo-text'/> </a>to View the Captured Process.</b>
 
                                         </div>
                                         

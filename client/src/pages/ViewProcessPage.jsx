@@ -1,89 +1,188 @@
 import React from 'react';
 
-import { getProcess } from '../actions/authActions';
-import {MDBIcon} from 'mdbreact';
+import { MDBDataTable, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBIcon, MDBContainer} from 'mdbreact';
 
+import axios from 'axios';
+import './HomePage.css';
+
+const url = 'http://localhost:5000/api/users/viewprocessdata';
 
 class ViewProcessPage extends React.Component {
- constructor(){
-   super()
-   this.state={
-    clientName: '',
-    industry: '',
-    businessUnit: '',
-    subBusinessUnit: '',
-    processName: '',
-    processId: '',
-    processDescription: '',
-    errors:{}
-   }
- }
+  constructor(props) {
 
-  componentDidMount() {
-    this.setState({
-      clientName: getProcess.clientName,
-      industry: getProcess.industry,
-      businessUnit: getProcess.businessUnit,
-      subBusinessUnit: getProcess.subBusinessUnit,
-      processName: getProcess.processName,
-      processId: getProcess.processId,
-      processDescription: getProcess.processDescription
+    super(props);
 
-    })
+    this.state= {
 
-    
+      posts: [],
+
+      isLoading:true,
+
+      tableRows: [],
+
+    };
+
   }
+
+
+
+
+  componentDidMount=async() => {
+
+    await axios.get(url)
+
+      .then(response => response.data)
+
+      .then(data => {
+
+         this.setState({ posts: data })
+
+      })
+
+      .then(async() => {
+
+         this.setState({ tableRows:this.assemblePosts(), isLoading:false })
+
+         console.log(this.state.tableRows);
+
+      });
+
+  }
+
+
+
+
+  assemblePosts= () => {
+
+    let posts =this.state.posts.map((post) => {
+
+      return (
+
+        {
+          clientName: post.clientName,
+          industry: post.industry,
+          businessUnit: post.businessUnit,
+          subBusinessUnit: post.subBusinessUnit,
+          processName: post.processName,
+          processId: post.processId,
+         
+
+        }
+
+      )
+
+    });
+
+    return posts;
+
+  }
+
+
+
+
 
   render() {
-    // const { data } = this.state;
+
+    const data = {
+
+      columns: [
+         {
+
+          label:'Client Name',
+
+          field:'clientName',
+
+        },
+
+        {
+
+          label:'Industry',
+
+          field:'industry',
+
+        },
+
+        {
+
+          label:'Business Unit',
+
+          field:'businessUnit',
+
+        },
+        {
+
+          label:'Sub Business Unit',
+
+          field:'subBusinessUnit',
+
+        },
+        {
+
+          label:'Process Name',
+
+          field:'processName',
+
+        },
+        {
+
+          label:'Process Id',
+
+          field:'processId',
+
+        },
+       
+
+      ],
+
+      rows:this.state.tableRows,
+
+    }
+
+
+
+
     return (
-      <div className="container">
-        <div className="jumbotron mt-5">
-          <div className="col-sm-8 mx-auto">
-            <h2 className="text-center"><MDBIcon icon='eye' className='indigo-text mr-2'/><b>View Process</b></h2>
-          </div>
-          <table className="table col-md-6 mx-auto">
-            <tbody>
-              <tr>
-                <td>Client Name</td>
-                <td>{this.state.clientName}</td>
-              </tr>
-              <tr>
-                <td>Industry</td>
-                <td>{this.state.industry}</td>
-              </tr>
-              <tr>
-                <td>Business Unit</td>
-                <td>{this.state.businessUnit}</td>
-              </tr>
-              <tr>
-                <td>Sub Business Unit</td>
-                <td>{this.state.subBusinessUnit}</td>
-              </tr>
-              <tr>
-                <td>Process Name</td>
-                <td>{this.state.processName}</td>
-              </tr>
-              <tr>
-                <td>Process Id</td>
-                <td>{this.state.processId}</td>
-              </tr>
-              <tr>
-                <td>Process Description</td>
-                <td>{this.state.processDescription}</td>
-              </tr>
-            </tbody>
-          </table>
-          <div className='text-center'>
 
-           <b>Process not found?! please click <a href='/captureprocesspage1'>  <MDBIcon icon='edit' className='indigo-text'/>  </a>to Capture.</b>
-
-        </div>
-        </div>
+    <MDBContainer id="UM" className='mt-3'>
+        <h1 className='text-center'>
+           <MDBIcon icon='eye' className='indigo-text mr-2' />
+           <b>View Captured Process</b>
+        </h1>
+     
+        <MDBRow id="VP" className="mb-4">
         
-      </div>
-      
+           <MDBCol  md="12">
+       
+              <MDBCard >
+
+                  <MDBCardBody>
+
+                        <MDBDataTable 
+                               striped
+                               bordered
+                               hover
+                               data={data}/>
+
+                  </MDBCardBody>
+
+              </MDBCard>
+              <div id="viewlink" className='text-center'>
+
+             <b>Process not found?! Please click<a href='/captureprocesspage1'> <MDBIcon icon='edit' className='indigo-text'/> </a>to Capture.</b>
+
+           </div>
+
+           </MDBCol>
+           
+
+        </MDBRow>
+        
+     
+    </MDBContainer>
+
     );
+
   }
+
 }
 export default ViewProcessPage;

@@ -208,7 +208,7 @@ router.post("/capture1", (req, res) => {
   }
 });
 
-//@route POST api/users/viewprocess
+//@route GET api/users/viewprocessdata
 router.get('/viewprocessdata',(req,res)=>{
   CaptureProcessP1Model.find({}).then(vdata=>{
     if(vdata){
