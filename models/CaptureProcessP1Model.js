@@ -30,6 +30,7 @@ const CaptureProcessPage1Schema = new Schema({
   processDescription: {
     type: String,
   }
+  
 
 });
 
