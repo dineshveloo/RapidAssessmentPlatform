@@ -172,7 +172,7 @@ router.post("/capture1", (req, res) => {
   try {
     CaptureProcessP1Model.findOne({ processId: req.body.processId }).then(capture => {
       if (capture){
-        res.json({ msg: "you have already Captured this process.", status: 3 })
+        res.json({ msg: "you have already Captured a process with this Process ID.", status: 3 })
     
       
         }
