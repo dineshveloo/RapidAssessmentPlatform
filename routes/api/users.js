@@ -24,14 +24,23 @@ const RoleAssign = require("../../models/RolesAssigned");
 // @access Public
 router.post("/register", (req, res) => {
   // Form validation
-  console.log("we are in regiser api");
+  //console.log("we are in regiser api");
   try {
+
+    // const newRole = new RoleAssign({
+    //   emailid: req.body.email,
+    //   roleid: req.body.roleid
+    // });
+    // console.log(newRole);
+    // newRole
+    //   .save()
+    //   .then(() => res.json({ msg: "roles are assigned successfully", status: 0 }))
+    //   .catch(err => console.log(err));
 
     User.findOne({ email: req.body.email }).then(user => {
       if (user && user.confirmed) {
         let pass = req.body.password;
         //console.log(user);
-
         bcrypt.genSalt(10, (err, salt) => {
           bcrypt.hash(pass, salt, (err, hash) => {
             if (err) throw err;
@@ -41,7 +50,21 @@ router.post("/register", (req, res) => {
               User.findByIdAndUpdate(user.id, { password: hash })
 
                 .then(userRegister.emailRegister(user))
-                .then(() => res.json({ msg: 'success', status: 1 }))
+                .then(() => {
+                              const newRole = new RoleAssign({
+                                emailid: req.body.email,
+                                roleid: "001"
+                              });
+                              // .then(())
+                              newRole
+                                .save()
+                                .then(() => res.json({ msg: "default roles are assigned", status: 5 }))
+                                res.json({ msg: 'success', status: 1 })
+                             }                
+                      
+                      )
+               
+             
                 .catch(err => console.log(err))
             }
             else {
@@ -49,6 +72,7 @@ router.post("/register", (req, res) => {
             }
           });
         });
+
         // email is true but confirm is false
       }
       else if (user && !user.confirmed) {
@@ -64,7 +88,6 @@ router.post("/register", (req, res) => {
     console.log(e);
   }
 });
-
 // @route POST api/users/signin
 // @desc Login user and return JWT token
 // @access Public
@@ -76,7 +99,6 @@ router.post("/signin", (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
     //console.log(email,password,ADMIN ,ADMIN_PASS)
-
     if (email === ADMIN && password === ADMIN_PASS) {
       // User matched
       // Create JWT Payload
@@ -150,11 +172,10 @@ router.post("/signin", (req, res) => {
   }
 
 });
-
 // @route POST api/users/confirm
 router.post("/confirm", (req, res) => {
 
-  console.log("we are in confirm api");
+  //console.log("we are in confirm api");
   try {
     User.findOne({ email: req.body.email }).then(user => {
       if (user) {
@@ -222,7 +243,6 @@ router.post("/resetpass", (req, res) => {
   // Form validation
   // console.log("we are in rese pass");
   try {
-
     User.findOne({ email: req.body.email }).then(user => {
       if (user && user.confirmed) {
         let pass = req.body.password;
@@ -273,17 +293,18 @@ router.get('/getallroles', (req, res) => {
 
 router.post("/assignroles", (req, res) => {
   // Form validation
+  console.log('i m in assigned roles');
   try {
-      const newRole = new RoleAssign({
-        emailid: req.body.email,
-        rolecode: req.body.role
-      });
-      console.log(newRole);
-      newRole
-        .save()
-        .then(() => res.json({ msg: "roles are assigned successfully", status: 0 }))
-        .catch(err => console.log(err));
-   
+    const newRole = new RoleAssign({
+      emailid: req.body.email,
+      roleid: req.body.roleid
+    });
+    console.log(newRole);
+    newRole
+      .save()
+      .then(() => res.json({ msg: "roles are assigned successfully", status: 0 }))
+      .catch(err => console.log(err));
+
   } catch (e) {
     res.json({ msg: "server error. ", status: -1 });
     console.log(e);
@@ -292,4 +313,5 @@ router.post("/assignroles", (req, res) => {
 
 
 module.exports = router;
+
 

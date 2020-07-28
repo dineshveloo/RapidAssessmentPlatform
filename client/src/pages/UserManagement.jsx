@@ -119,7 +119,7 @@ class UserManagement extends Component {
       roleid: this.state.selectedRole
     };
     console.log(assignRole);
-    //this.props.RolesAssigned(assignRole);
+    this.props.RolesAssigned(assignRole);
   }
 
   render() {
@@ -134,6 +134,7 @@ class UserManagement extends Component {
                 changeValue={this.handleChange}
                 assignRole={this.assignHandler}
                 disabled={this.state.checkbox1.checked}
+                isRoleSelected = {this.state.selectedRole.length > 0 ? this.state.selectedRole :''}
               />
               <MDBCard>
                 <MDBCardBody>

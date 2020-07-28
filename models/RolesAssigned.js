@@ -7,7 +7,7 @@ const RolesAssignedSchema = new Schema({
     type: String,
     // required: true
   },
-  rolecode: {
+  roleid: {
     type: String,
     // required: true
   },

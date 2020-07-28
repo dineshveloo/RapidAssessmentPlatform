@@ -5,8 +5,9 @@ import  "./components.css";
 const SelectRoles = (props) => {
     return (
         <div>
-            <button className="alignButton" onClick={props.assignRole} disabled={!props.disabled}>Update Role</button>
-            <select className="alignRoles" onChange={props.changeValue} value={props.value}>
+            
+            <button className="alignButton" onClick={props.assignRole} disabled={!(props.disabled) || (props.isRoleSelected=== '') || (props.isRoleSelected=== '-1')}>Update Role</button>
+            <select className="alignRoles" onChange={props.changeValue} >
                 {
                     props.roles.map(data => (
                         <SelectOptions
@@ -19,7 +20,6 @@ const SelectRoles = (props) => {
                 }
             </select>
         </div>
-
     );
 }
 export default SelectRoles;
