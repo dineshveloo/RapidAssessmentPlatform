@@ -3,21 +3,22 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
-const passport = require("passport");
+//const passport = require("passport");
 const msgs = require('../../email/email.msgs');
 const sendEmail = require('../../email/email.send');
 const userEmail = require('../../email/email.user');
 const userAck = require('../../email/email.ack');
 const userRegister = require('../../email/email.register');
 const userForgetPassword = require('../../email/email.forget');
-
+const { ADMIN, ADMIN_PASS } = require('../../config/info');
 // Load input validation
 const validateRegisterInput = require("../../validation/register");
 const validateLoginInput = require("../../validation/login");
 
 // Load User model
 const User = require("../../models/User");
-
+const Role = require("../../models/Roles");
+const RoleAssign = require("../../models/RolesAssigned");
 // @route POST api/users/register
 // @desc Register user
 // @access Public
@@ -71,44 +72,72 @@ router.post("/signin", (req, res) => {
   try {
     const email = req.body.email;
     const password = req.body.password;
+    if (email === ADMIN && password === ADMIN_PASS) {
+      // User matched
+      // Create JWT Payload
+      const payload = {
+        id: '001001',
+        name: ADMIN
+      };
 
-    // Find user by email
-    User.findOne({ email }).then(user => {
-      // Check if user exists
-      if (!user) {
-        return res.json({ msg: "your email id is not registered to RAP. please raise a request to register or sign-in with the registered email ID. ", status: 0 });
-      }
-
-      // Check password
-      bcrypt.compare(password, user.password).then(isMatch => {
-        if (isMatch) {
-          // User matched
-          // Create JWT Payload
-          const payload = {
-            id: user.id,
-            name: user.name
-          };
-
-          // Sign token
-          jwt.sign(
-            payload,
-            keys.secretOrKey,
-            {
-              expiresIn: 31556926 // 1 year in seconds
-            },
-            (err, token) => {
-              res.json({
-                success: true,
-                token: "Bearer " + token
-              });
-            }
-          );
-        } else {
-          return res
-            .json({ msg: "Password incorrect", status: 3 });
+      // Sign token
+      jwt.sign(
+        payload,
+        keys.secretOrKey,
+        {
+          expiresIn: 31556926 // 1 year in seconds
+        },
+        (err, token) => {
+          res.json({
+            success: true,
+            role: 'admin',
+            token: "Bearer " + token
+          });
         }
+      );
+
+    } else {
+      // Find user by email
+      User.findOne({ email }).then(user => {
+        // Check if user exists
+        if (!user) {
+          return res.json({ msg: "your email id is not registered to RAP. please raise a request to register or sign-in with the registered email ID. ", status: 0 });
+        }
+
+        // Check password
+        bcrypt.compare(password, user.password).then(isMatch => {
+          if (isMatch) {
+            // User matched
+            // Create JWT Payload
+            const payload = {
+              id: user.id,
+              name: user.name
+            };
+
+            // Sign token
+            jwt.sign(
+              payload,
+              keys.secretOrKey,
+              {
+                expiresIn: 31556926 // 1 year in seconds
+              },
+              (err, token) => {
+                res.json({
+                  success: true,
+                  role: 'finance',
+                  token: "Bearer " + token
+                });
+              }
+            );
+          } else {
+            return res
+              .json({ msg: "Password incorrect", status: 3 });
+          }
+        });
       });
-    });
+    }
+
+
 
   } catch (e) {
     res.json({ msg: "server error.", status: -1 });
@@ -152,7 +181,6 @@ router.post("/confirm", (req, res) => {
           .save()
           .then(sendEmail.email(newUser))
           .then(userAck.emailAck(newUser))
-          // res.json({msg: "here"})
           .then(() => res.json({ msg: msgs.EmailSent, status: 1 }))
           .catch(err => console.log(err));
       }
@@ -164,7 +192,6 @@ router.post("/confirm", (req, res) => {
   }
 });
 
-
 router.get('/approve/:email/:id', (req, res) => {
   try {
     let { email, id } = req.params;
@@ -172,7 +199,7 @@ router.get('/approve/:email/:id', (req, res) => {
     //first update confirm in db, trigger email to user  
     userEmail.emailUser(email)
 
-    User.findByIdAndUpdate(id, { confirmed: true })
+    User.findByIdAndUpdate(id, { confirmed: 1 })
       .then(() => res.json({ msg: "your have approved the user successfully" }))
       .catch(err => console.log(err))
 
@@ -211,16 +238,49 @@ router.post("/resetpass", (req, res) => {
   }
 });
 
+router.get('/userlist', (req, res) => {
+  try {
+    const query = { confirmed: 1 }
+    User.find(query)
+      .then(user => { res.json({ msg: 'list of confimed users', status: 0, rows: user }) })
+      .catch(err => console.log(err))
 
-// router.get('/resetpassword/:email', (req, res) => {
-//   try {
-//     userForgetPassword.forgetpass(req.params.email)
-//     res.json({ msg: " please check your email to reset password.", status: 1 });
-//   } catch (e) {
-//     res.json({ msg: "server error. ", status: -1 });
-//     console.log(e);
-//   }
-// });
+  } catch (e) {
+    res.json({ msg: "server error. ", status: -1 });
+    console.log(e);
+  }
+});
+
+router.get('/getallroles', (req, res) => {
+  try {
+    Role.find()
+      .then(user => { res.json({ msg: 'list of roles', status: 0, role: user }) })
+      .catch(err => console.log(err))
+
+  } catch (e) {
+    res.json({ msg: "server error. ", status: -1 });
+    console.log(e);
+  }
+});
+
+router.post("/assignroles", (req, res) => {
+  // Form validation
+  try {
+      const newRole = new RoleAssign({
+        emailid: req.body.email,
+        rolecode: req.body.role
+      });
+      console.log(newRole);
+      newRole
+        .save()
+        .then(() => res.json({ msg: "roles are assigned successfully", status: 0 }))
+        .catch(err => console.log(err));
+   
+  } catch (e) {
+    res.json({ msg: "server error. ", status: -1 });
+    console.log(e);
+  }
+});
 
 module.exports = router;
 

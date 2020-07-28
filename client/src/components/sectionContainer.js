@@ -29,12 +29,12 @@ const SectionContainer = ({
 
   description = description ? <p>{description}</p> : '';
   title = title ? <h2 className='mb-3'>{title}</h2> : '';
-  header = header ? <h4 className='mb-2'>{header}</h4> : '';
+  // header = header ? <h4 className='mb-2'>{header}</h4> : '';
 
   return (
     <>
       {title}
-      {header}
+      {/* {header} */}
       <MDBContainer fluid className={classes} style={style}>
         {description}
         {children}

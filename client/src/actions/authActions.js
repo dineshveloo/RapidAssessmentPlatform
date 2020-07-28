@@ -39,8 +39,37 @@ export const RegisterUser = (userData, history) => dispatch => {
     );
 };
 
+
+export const RolesAssigned = (userData) => dispatch => {
+
+  const headers = {
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers": "Content-Type",
+    "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+  }
+  axios
+    .post("/api/users/assignroles", userData, { headers: headers })
+    .then(res => {
+     
+     if (res.data.status === -1) {
+        toast(res.data.msg);
+      }
+      else {
+        toast(res.data.msg);
+      }
+    })
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
+
 // Login - get user token
-export const loginUser = userData => dispatch => {
+export const loginUser = (userData, history)=> dispatch => {
   const headers = {
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
@@ -50,9 +79,7 @@ export const loginUser = userData => dispatch => {
   axios
     .post("/api/users/signin", userData, { headers: headers })
     .then(res => {
-
-      // Save to localStorage
-      if (res.data.status === 0) {
+       if (res.data.status === 0) {
         toast(res.data.msg);
       }
       else if (res.data.status === -1) {
@@ -63,7 +90,8 @@ export const loginUser = userData => dispatch => {
       }
       else {
         // Set token to localStorage
-        const { token } = res.data;
+        const { token,role } = res.data;
+        localStorage.setItem("role", role);
         localStorage.setItem("jwtToken", token);
         // Set token to Auth header
         setAuthToken(token);
@@ -72,7 +100,6 @@ export const loginUser = userData => dispatch => {
         // Set current user
         //console.log(decoded);
         dispatch(setCurrentUser(decoded));
-
       }
     })
     .catch(err =>
@@ -132,23 +159,23 @@ export const ResetPassword = (userData, history) => dispatch => {
   }
 
   axios
-  .post('api/users/resetpass', userData, { headers: headers })
-  .then(res => {
-    //console.log(res.data);
-    if (res.data.status === 0) {
-      toast(res.data.msg);
-      history.push("/signin")
+    .post('api/users/resetpass', userData, { headers: headers })
+    .then(res => {
+      //console.log(res.data);
+      if (res.data.status === 0) {
+        toast(res.data.msg);
+        history.push("/signin")
 
-    } else if (res.data.status === -1) {
-      toast(res.data.msg);
-    }
-  })
-  .catch(err =>
-    dispatch({
-      type: GET_ERRORS,
-      payload: err.response.data
+      } else if (res.data.status === -1) {
+        toast(res.data.msg);
+      }
     })
-  )
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    )
 }
 
 // Set logged in user
@@ -159,21 +186,23 @@ export const setCurrentUser = decoded => {
   };
 };
 
-  // User loading
-  export const setUserLoading = () => {
-    return {
-      type: USER_LOADING
-    };
+// User loading
+export const setUserLoading = () => {
+  return {
+    type: USER_LOADING
   };
+};
 
-  // Log user out
-  export const logoutUser = () => dispatch => {
-    // Remove token from local storage
-    localStorage.removeItem("jwtToken");
-    // Remove auth header for future requests
-    setAuthToken(false);
-    // Set current user to empty object {} which will set isAuthenticated to false
-    dispatch(setCurrentUser({}));
-  };
+// Log user out
+export const logoutUser = () => dispatch => {
+  // Remove token from local storage
+  localStorage.removeItem("jwtToken");
+  localStorage.removeItem('role');
+  // Remove auth header for future requests
+  setAuthToken(false);
+  window.location.href = "./signin";
+  // Set current user to empty object {} which will set isAuthenticated to false
+  dispatch(setCurrentUser({}));
+};
 
 

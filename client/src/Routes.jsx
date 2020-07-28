@@ -10,6 +10,7 @@ import ResetPasswordPage from './pages/ResetPasswordPage';
 import UserManagementPage from './pages/UserManagement';
 
 
+
 class Routes extends React.Component {
   render() {
     return (
@@ -21,6 +22,7 @@ class Routes extends React.Component {
         <Route exact path='/register' component={RegistrationPage} />
         <Route exact path='/resetpassword' component={ResetPasswordPage} />
         <Route exact path='/usermanagement' component={UserManagementPage} />
+       
         <PrivateRoute exact path='/' component={Dashboard} />
         <Route
           render={function () {
