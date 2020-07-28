@@ -14,6 +14,7 @@ import {
   MDBDropdownItem,
   MDBIcon
 } from 'mdbreact';
+import './App.css';
 import jwt_decode from 'jwt-decode';
 import setAuthToken from './utils/setAuthToken';
 import { setCurrentUser, logoutUser, loginUser } from './actions/authActions';

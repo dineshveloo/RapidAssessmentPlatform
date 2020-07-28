@@ -32,5 +32,3 @@ const emailRegister = function (newUser) {
 module.exports = {
     emailRegister
 }
-
-

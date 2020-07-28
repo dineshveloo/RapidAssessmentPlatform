@@ -205,4 +205,3 @@ export const logoutUser = () => dispatch => {
   dispatch(setCurrentUser({}));
 };
 
-
