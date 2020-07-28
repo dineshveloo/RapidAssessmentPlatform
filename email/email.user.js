@@ -2,7 +2,7 @@ const nodemailer = require('nodemailer');
 const { CLIENT_ORIGIN } = require('../config/info');
 
 const emailUser = function (newUser) {
-    console.log(newUser);
+    //console.log(newUser);
     let transporter = nodemailer.createTransport({
         host: "smtp.gmail.com",
         port: 465,

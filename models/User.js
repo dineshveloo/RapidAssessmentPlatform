@@ -19,14 +19,15 @@ const UserSchema = new Schema({
     type: Date,
     default: Date.now
   },
+  //flag for approving email set to 0/ 1
   confirmed: {
-    type: Boolean,
-    default: false
+    type: String,
+    default: 0
   },
   company: {
     type: String,
-  }
-
+  },
+  version: false
 });
 
 module.exports = User = mongoose.model("users", UserSchema);

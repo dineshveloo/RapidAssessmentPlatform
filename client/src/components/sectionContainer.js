@@ -34,7 +34,7 @@ const SectionContainer = ({
   return (
     <>
       {title}
-      {header}
+      {header} 
       <MDBContainer fluid className={classes} style={style}>
         {description}
         {children}

@@ -17,15 +17,15 @@ import {
 import './App.css';
 import jwt_decode from 'jwt-decode';
 import setAuthToken from './utils/setAuthToken';
-import { setCurrentUser, logoutUser } from './actions/authActions';
+import { setCurrentUser, logoutUser, loginUser } from './actions/authActions';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Routes from './Routes';
 import store from "./store";
 import { Provider } from "react-redux";
-// import { API_URL } from './config';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// import SigninConext from '../src/context/SigninConext';
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 
 // Check for token to keep user logged in
@@ -54,34 +54,20 @@ class App extends Component {
     this.state = {
       collapseID: '',
       loading: true,
+      role: ''
     };
-
   }
 
-  //static contextType = SigninConext;
-
-  // componentDidMount = () => {
-  //   fetch(`${API_URL}/wake-up`)
-  //     .then(res => res.json())
-  //     .then(() => {
-  //       this.setState({ loading: false })
-  //     })
-  //     .catch(err => console.log(err))
-  // }
-
-  // onLogoutClick = e => {
-  //   e.preventDefault();
-  //   this.props.logoutUser();
-  // };
-
-  // onChangeLogoutHandler = e => {
-  //   e.preventDefault();
-  //   store.dispatch(logoutUser());
-  // }
+  componentDidMount() {
+    if (this.props.auth.isAuthenticated) {
+      this.setState({ role: localStorage.role })
+    }
+  }
 
   logoutHandler = (e) => {
     e.preventDefault();
     localStorage.removeItem('jwtToken');
+    localStorage.removeItem('role');
     window.location.href = "./signin";
   }
 
@@ -104,14 +90,7 @@ class App extends Component {
         onClick={this.toggleCollapse('mainNavbarCollapse')}
       />
     );
-    const { collapseID } = this.state;
-
-    //let isLogin = localStorage.getItem('jwtToken');
-    // if(isLogin === null){
-    //   isLogin = 0;
-    // }else{
-    //   isLogin = localStorage.getItem('jwtToken');
-    // }
+    const { collapseID, role } = this.state;
 
     return (
       <Provider store={store}>
@@ -126,30 +105,25 @@ class App extends Component {
               />
               <MDBCollapse id='mainNavbarCollapse' isOpen={collapseID} navbar>
                 <MDBNavbarNav right>
-                  {/*<MDBNavItem id="h"> */}
-                  {/*<a  offset="100" href="/" style={{color:"white"}} className="pl-3">Home</a>*/} 
-
-                  {/*</MDBNavItem>*/} 
-                  <MDBNavItem id="a">
-                  
-                    <a offset="100" href="#about" style={{color:"white"}} className="pl-3">About</a>
-                    
+                  {role === 'admin' ? null :
+                    <MDBNavItem>
+                      <MDBLink to='/'>About</MDBLink>
+                    </MDBNavItem>
+                  }
+                  {role === 'admin' ? null :
+                    <MDBNavItem >
+                      <MDBLink to='/'>Contact</MDBLink>
+                    </MDBNavItem>
+                  }
+                  {role === 'admin' ? <MDBNavItem >
+                    <MDBLink to='/usermanagement'>Access Management</MDBLink>
                   </MDBNavItem>
-                  <MDBNavItem id="c" >
-                    {/* <MDBLink to='#contact'>Contact</MDBLink> */}
-                    <a offset="100" href="#contact" style={{color:"white"}} className="pl-3">Contact</a>
-                  </MDBNavItem>
-                 
-                  <MDBNavItem >
-                    <MDBLink to='/usermanagement'>User Management</MDBLink>
-                  </MDBNavItem>
-                  {/* {isLogin === 0 ? null:  */}
-                  <MDBNavItem >
-                    {/* {this.context.authenticated ? */}
-                    <MDBLink to="" onClick={this.logoutHandler}>Logout</MDBLink>
-                    {/* : null} */}
-                  </MDBNavItem>
-                  {/* } */}
+                    : null}
+                  {this.props.auth.isAuthenticated ?
+                    <MDBNavItem >
+                      <MDBLink to="" onClick={this.logoutHandler}>Logout</MDBLink>
+                    </MDBNavItem>
+                    : null}
                   <MDBNavItem>
                     <MDBLink className='waves-effect waves-light' to='#!'>
                       <MDBIcon brand icon='twitter' />
@@ -195,4 +169,16 @@ class App extends Component {
   }
 }
 
-export default App;
+App.propTypes = {
+  loginUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth,
+  errors: state.errors
+});
+
+export default connect(mapStateToProps, { loginUser })(App);
+

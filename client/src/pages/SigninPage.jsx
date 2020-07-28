@@ -10,27 +10,26 @@ import {
   MDBBtn,
   MDBAnimation
 } from 'mdbreact';
-//import classnames from "classnames";
 import { loginUser } from '../actions/authActions';
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Link } from 'react-router-dom'
-//import SigninConext from '../context/SigninConext';
-//import './global.css';
 import { toast } from 'react-toastify';
+//import ResetPass from '../context/ResetPass';
 
 const initialState = {
   email: "",
   password: "",
   emailError: "",
-  passwordError: ""
-  //authenticated: false
+  passwordError: "",
+  authenticated_: false
+  //email_: ''
 }
+
 class SigninPage extends Component {
   constructor() {
     super();
     this.state = initialState;
-
   }
 
   componentDidMount() {
@@ -38,12 +37,13 @@ class SigninPage extends Component {
     if (this.props.auth.isAuthenticated) {
       this.props.history.push("/");
     }
-    // console.log(this.props.auth.isAuthenticated);
+
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.auth.isAuthenticated) {
-      this.props.history.push("/");
+      //this.props.history.push("/");
+      window.location.href = '/'
     }
     if (nextProps.errors) {
       this.setState({
@@ -80,13 +80,15 @@ class SigninPage extends Component {
         break;
     }
     this.setState({ [e.target.id]: e.target.value });
-    console.log(this.state.email)
+    //console.log(this.state.email)
   };
 
   forgetHandler = () => {
     if (this.state.email.length <= 0) {
       toast('please enter approved email id to proceed');
     } else {
+      //console.log(value);
+     // this.setState({ email_: 'anu' })
       this.props.history.push('/resetpassword')
     }
   }
@@ -100,7 +102,6 @@ class SigninPage extends Component {
         password: this.state.password
       };
       this.props.loginUser(userData);
-      //this.setState({ authenticated: true}, ()=>(console.log(authenticated)))
     }
   };
 
@@ -115,6 +116,8 @@ class SigninPage extends Component {
     } else {
       isEnabled = false;
     }
+    // const { email, reset } = useContext(ResetPass);
+    //const resetpassword = useContext(ResetPass);
 
     return (
       <>
@@ -123,6 +126,11 @@ class SigninPage extends Component {
           <MDBContainer>
             <MDBRow>
               <MDBCol md='8' className='mt-3 mx-auto'>
+                {/* <ResetPass.Provider
+                          value={{
+                            email: 'nncnggggggggggggggggggggggggggggggggggggggggg'
+                          }}
+                        > */}
                 <MDBJumbotron>
                   <h1 className='text-center'>
                     <MDBIcon icon='edit' className='indigo-text mr-2' />
@@ -157,22 +165,21 @@ class SigninPage extends Component {
                       <div style={{ fontSize: 13, paddingLeft: 42, color: "red" }}>{this.state.passwordError}</div>
                     </div>
                     <div className='text-center'>
-                      {/* <SigninConext.Provider
-                          value={{
-                          authenticated: this.state.authenticated,
-                          login: this.onSubmit
-                        }}
-                      > */}
                       <MDBBtn type="submit" disabled={isEnabled}>
                         Login
                         </MDBBtn>
-                      {/* </SigninConext.Provider> */}
+
                       <div className='text-center' disabled={isEnabled}>
+                        {/* <button onClick={() => reset("jp")}>
+                              Switch Language (Current: {email})
+                            </button> */}
+
                         <Link to="#" onClick={this.forgetHandler}>Forgot Password ?</Link>
                       </div>
                     </div>
                   </form>
                 </MDBJumbotron>
+                {/* </ResetPass.Provider> */}
               </MDBCol>
             </MDBRow>
           </MDBContainer>
@@ -181,15 +188,19 @@ class SigninPage extends Component {
     );
   }
 }
+
 SigninPage.propTypes = {
   loginUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
 };
+
 const mapStateToProps = state => ({
   auth: state.auth,
   errors: state.errors
 });
+
+
 export default connect(
   mapStateToProps,
   { loginUser }

@@ -14,6 +14,7 @@ import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from 'react-redux';
 import { ResetPassword } from '../actions/authActions';
+//import ResetPass from '../context/ResetPass';
 
 
 const initialState = {
@@ -31,7 +32,12 @@ class ResetPasswordPage extends Component {
         this.state = initialState;
     }
 
+    //static contextType = ResetPass;
+
+    
+
     componentDidMount() {
+        console.log(this.context.email);
         // If logged in and user navigates to Register page, should redirect them to dashboard
         if (this.props.auth.isAuthenticated) {
             this.props.history.push("/signin");
@@ -48,8 +54,8 @@ class ResetPasswordPage extends Component {
 
     validate = () => {
         //debugger;
-        let  emailError = "", passwordError = "", password2Error = ""
-      
+        let emailError = "", passwordError = "", password2Error = ""
+
         if (!this.state.email.includes('@') || !this.state.email.includes('.')) {
             emailError = 'please enter a valid email address';
         }
@@ -59,7 +65,7 @@ class ResetPasswordPage extends Component {
         else if (this.state.password2 !== this.state.password) {
             password2Error = 'Passwords must match';
         }
-        if (emailError ||  passwordError || password2Error) {
+        if (emailError || passwordError || password2Error) {
             this.setState({ emailError, passwordError, password2Error });
             return false;
         }
@@ -68,7 +74,7 @@ class ResetPasswordPage extends Component {
 
     onChange = e => {
 
-       // alert(e.target.id);
+        // alert(e.target.id);
         switch (e.target.id) {
             case 'email': this.setState({ emailError: '' });
                 break;
@@ -84,7 +90,7 @@ class ResetPasswordPage extends Component {
 
     onSubmit = e => {
         e.preventDefault();
-       const isValid = this.validate();
+        const isValid = this.validate();
         if (isValid) {
             const newUser = {
                 email: this.state.email,
@@ -98,7 +104,7 @@ class ResetPasswordPage extends Component {
     };
 
     render() {
-       const { emailError, passwordError } = this.state;
+        const { emailError, passwordError } = this.state;
         let isEnabledCheck = emailError || passwordError;
         let isEnabled = false;
         if (isEnabledCheck.length > 0) {
@@ -120,18 +126,21 @@ class ResetPasswordPage extends Component {
                                     </h1>
                                     <form noValidate onSubmit={this.onSubmit}>
                                         <div className='grey-text'>
-                                            <MDBInput
-                                                onChange={this.onChange}
-                                                value={this.state.email}
-                                                id="email"
-                                                type="email"
-                                                label='Your email'
-                                                icon='envelope'
-                                                group
-                                                validate
-                                                success='right'
-                                                required
-                                            />
+                                            {/* <ResetPass.Consumer> */}
+                                               <MDBInput
+                                                        onChange={this.onChange}
+                                                        value={this.state.email}
+                                                        id="email"
+                                                        type="email"
+                                                        label='Your email'
+                                                        icon='envelope'
+                                                        group
+                                                        validate
+                                                        success='right'
+                                                        required
+                                                    /> 
+                                            {/* </ResetPass.Consumer> */}
+
                                             <MDBInput
                                                 onChange={this.onChange}
                                                 value={this.state.password}
