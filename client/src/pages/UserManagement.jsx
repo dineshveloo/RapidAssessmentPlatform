@@ -44,16 +44,11 @@ class UserManagement extends Component {
             width: 150,
             sort: ''
           },
-          {
-            label: 'Confirmed',
-            field: 'confirmed',
-            width: 150,
-            sort: ''
-          },
+
           {
             label: 'Email',
             field: 'email',
-            width: 150,
+            width: 250,
             sort: 'asc',
           },
           {
@@ -62,20 +57,20 @@ class UserManagement extends Component {
             width: 150,
             sort: ''
           },
-
           {
-            label: 'Date',
-            field: 'date',
+            label: 'Access Level',
+            field: 'accesslevel',
             width: 150,
-            sort: 'disabled'
-          }
+            sort: ''
+          },
+
         );
 
         let data = {
           columns: col,
           rows: row
         }
-        //console.log("columns"+ JSON.stringify(row));
+        //console.log("columns" + JSON.stringify(row));
         this.setState({ data });
 
       });
@@ -85,30 +80,32 @@ class UserManagement extends Component {
       .then(json => {
         //console.log(json.role);
         this.setState({ roles: json.role });
-        //console.log(this.state.roles);
+        console.log(this.state.roles);
       }
       )
   }
 
   showLogs1 = e => {
-    this.setState({ checkbox1: e });
+
+    this.setState({ checkbox1: e, selectedEmail: e.email }, () => console.log(this.state.checkbox1.checked));
+
   };
 
   showLogs2 = e => {
     this.setState({ checkbox2: e });
   };
 
-  multiPle = e => {
-    //console.log(this.state.selectedEmail);
-    // 
-    // const selectedEmailclone = {
-    //   ...this.state.selectedEmail
-    // }
-    // this.setState({ multiple: e, selectedEmail: e[0].email });
-    // console.log(this.state.selectedEmail);
-    console.log(e.email);
+  // multiPle = e => {
+  //   //console.log(this.state.selectedEmail);
+  //   // 
+  //   // const selectedEmailclone = {
+  //   //   ...this.state.selectedEmail
+  //   // }
+  //   this.setState({ multiple: e, selectedEmail: e[0].email });
+  //   console.log(this.state.selectedEmail);
+  //       console.log(e.email);
 
-  };
+  // };
 
   handleChange = (e) => {
     //console.log(e.target.value);
@@ -121,7 +118,8 @@ class UserManagement extends Component {
       email: this.state.selectedEmail,
       roleid: this.state.selectedRole
     };
-    this.props.RolesAssigned(assignRole);
+    console.log(assignRole);
+    //this.props.RolesAssigned(assignRole);
   }
 
   render() {
@@ -130,33 +128,34 @@ class UserManagement extends Component {
       <MDBContainer className='mt-3'>
         <MDBRow className='py-3'>
           <MDBCol md='12'>
-            <SectionContainer title='With checkboxes' noBorder>
-            <SelectRoles
+            <SectionContainer title='Access Management' noBorder>
+              <SelectRoles
                 roles={this.state.roles}
                 changeValue={this.handleChange}
                 assignRole={this.assignHandler}
-                disabled={this.state.selectedEmail.length >= 0}
+                disabled={this.state.checkbox1.checked}
               />
               <MDBCard>
                 <MDBCardBody>
-                {this.state.data['rows'].length > 0 ?
-                  <MDBDataTableV5
-                    hover
-                    scrollX
-                    scrollY
-                    maxHeight='50vh'
-                    entriesOptions={[5, 20, 25]}
-                    entries={5}
-                    pagesAmount={4}
-                    data={data}
-                    checkbox
-                    headCheckboxID='id2'
-                    bodyCheckboxID='checkboxes2'
-                    getValueCheckBox={e => {
-                      this.showLogs1(e);
-                    }}
-                  />
-                  : null}
+                  {this.state.data['rows'].length > 0 ?
+                    <MDBDataTableV5
+                      hover
+                      scrollX
+                      scrollY
+                      maxHeight='50vh'
+                      entriesOptions={[5, 20, 25]}
+                      entries={5}
+                      pagesAmount={4}
+                      data={data}
+                      checkbox="true"
+                      headCheckboxID='id2'
+                      bodyCheckboxID='checkboxes2'
+                      getValueCheckBox={e => {
+                        this.showLogs1(e);
+                      }}
+                      checkboxFirstColumn
+                    />
+                    : null}
                 </MDBCardBody>
               </MDBCard>
               {/* <Result> {checkbox1 && <p>{JSON.stringify(delete checkbox1.checkbox && checkbox1)}</p>}</Result> */}
@@ -166,7 +165,6 @@ class UserManagement extends Component {
 
       </MDBContainer>
     );
-
   }
 }
 

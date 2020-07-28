@@ -14,7 +14,7 @@ import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from 'react-redux';
 import { ResetPassword } from '../actions/authActions';
-import ResetPass from '../context/ResetPass';
+//import ResetPass from '../context/ResetPass';
 
 
 const initialState = {
@@ -32,7 +32,7 @@ class ResetPasswordPage extends Component {
         this.state = initialState;
     }
 
-    static contextType = ResetPass;
+    //static contextType = ResetPass;
 
     
 
@@ -126,11 +126,10 @@ class ResetPasswordPage extends Component {
                                     </h1>
                                     <form noValidate onSubmit={this.onSubmit}>
                                         <div className='grey-text'>
-                                            <ResetPass.Consumer>
-                                                {
-                                                    context => <MDBInput
+                                            {/* <ResetPass.Consumer> */}
+                                               <MDBInput
                                                         onChange={this.onChange}
-                                                        value={context.email}
+                                                        value={this.state.email}
                                                         id="email"
                                                         type="email"
                                                         label='Your email'
@@ -139,9 +138,8 @@ class ResetPasswordPage extends Component {
                                                         validate
                                                         success='right'
                                                         required
-                                                    />
-                                                }
-                                            </ResetPass.Consumer>
+                                                    /> 
+                                            {/* </ResetPass.Consumer> */}
 
                                             <MDBInput
                                                 onChange={this.onChange}

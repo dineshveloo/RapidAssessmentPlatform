@@ -116,7 +116,7 @@ class App extends Component {
                     </MDBNavItem>
                   }
                   {role === 'admin' ? <MDBNavItem >
-                    <MDBLink to='/usermanagement'>User Management</MDBLink>
+                    <MDBLink to='/usermanagement'>Access Management</MDBLink>
                   </MDBNavItem>
                     : null}
                   {this.props.auth.isAuthenticated ?

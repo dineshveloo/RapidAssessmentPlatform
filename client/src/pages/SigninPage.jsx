@@ -22,8 +22,8 @@ const initialState = {
   password: "",
   emailError: "",
   passwordError: "",
-  authenticated_: false,
-  email_: ''
+  authenticated_: false
+  //email_: ''
 }
 
 class SigninPage extends Component {
@@ -88,7 +88,7 @@ class SigninPage extends Component {
       toast('please enter approved email id to proceed');
     } else {
       //console.log(value);
-      this.setState({ email_: 'anu' })
+     // this.setState({ email_: 'anu' })
       this.props.history.push('/resetpassword')
     }
   }
@@ -168,7 +168,12 @@ class SigninPage extends Component {
                       <MDBBtn type="submit" disabled={isEnabled}>
                         Login
                         </MDBBtn>
+
                       <div className='text-center' disabled={isEnabled}>
+                        {/* <button onClick={() => reset("jp")}>
+                              Switch Language (Current: {email})
+                            </button> */}
+
                         <Link to="#" onClick={this.forgetHandler}>Forgot Password ?</Link>
                       </div>
                     </div>
@@ -183,15 +188,19 @@ class SigninPage extends Component {
     );
   }
 }
+
 SigninPage.propTypes = {
   loginUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
 };
+
 const mapStateToProps = state => ({
   auth: state.auth,
   errors: state.errors
 });
+
+
 export default connect(
   mapStateToProps,
   { loginUser }

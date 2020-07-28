@@ -24,6 +24,7 @@ const RoleAssign = require("../../models/RolesAssigned");
 // @access Public
 router.post("/register", (req, res) => {
   // Form validation
+  console.log("we are in regiser api");
   try {
 
     User.findOne({ email: req.body.email }).then(user => {
@@ -69,9 +70,13 @@ router.post("/register", (req, res) => {
 // @access Public
 router.post("/signin", (req, res) => {
   // Form validation
+  //console.log("we are in signin api");
+
   try {
     const email = req.body.email;
     const password = req.body.password;
+    //console.log(email,password,ADMIN ,ADMIN_PASS)
+
     if (email === ADMIN && password === ADMIN_PASS) {
       // User matched
       // Create JWT Payload
@@ -148,6 +153,8 @@ router.post("/signin", (req, res) => {
 
 // @route POST api/users/confirm
 router.post("/confirm", (req, res) => {
+
+  console.log("we are in confirm api");
   try {
     User.findOne({ email: req.body.email }).then(user => {
       if (user) {
@@ -213,12 +220,13 @@ router.get('/approve/:email/:id', (req, res) => {
 // @route POST api/users/resetpass
 router.post("/resetpass", (req, res) => {
   // Form validation
+  // console.log("we are in rese pass");
   try {
 
     User.findOne({ email: req.body.email }).then(user => {
       if (user && user.confirmed) {
         let pass = req.body.password;
-        //console.log(user);
+        //console.log("we are in rese pass");
 
         bcrypt.genSalt(10, (err, salt) => {
           bcrypt.hash(pass, salt, (err, hash) => {
@@ -282,6 +290,6 @@ router.post("/assignroles", (req, res) => {
   }
 });
 
-module.exports = router;
 
+module.exports = router;
 
