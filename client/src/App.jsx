@@ -107,12 +107,12 @@ class App extends Component {
                 <MDBNavbarNav right>
                   {role === 'admin' ? null :
                     <MDBNavItem>
-                      <MDBLink to='/'>About</MDBLink>
+                      <MDBLink to='/#about'>About</MDBLink>
                     </MDBNavItem>
                   }
                   {role === 'admin' ? null :
                     <MDBNavItem >
-                      <MDBLink to='/'>Contact</MDBLink>
+                      <MDBLink to='/#contact'>Contact</MDBLink>
                     </MDBNavItem>
                   }
                   {role === 'admin' ? <MDBNavItem >
