@@ -27,7 +27,7 @@ class UserManagement extends Component {
   }
 
   componentDidMount() {
-    fetch('http://18.191.23.96:5000/api/users/userlist')
+    fetch('http://localhost:5000/api/users/userlist')
       .then(res => res.json())
       .then(json => {
 
@@ -75,7 +75,8 @@ class UserManagement extends Component {
 
       });
 
-    fetch('http://18.191.23.96:5000/api/users/getallroles')
+    fetch('http://localhost:5000/api/users/getallroles')
+
       .then(res => res.json())
       .then(json => {
         //console.log(json.role);

@@ -243,5 +243,3 @@ export const captureP1 = (captureData, history) => dispatch => {
       })
     )
 }
-
-
