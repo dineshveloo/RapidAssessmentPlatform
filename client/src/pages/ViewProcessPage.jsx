@@ -5,7 +5,9 @@ import { MDBDataTable, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBIcon, MDBContain
 import axios from 'axios';
 import './HomePage.css';
 
-const url = 'http://localhost:5000/api/users/viewprocessdata';
+
+const url = 'http://18.191.23.96:5000/api/users/viewprocessdata';
+
 
 class ViewProcessPage extends React.Component {
   constructor(props) {

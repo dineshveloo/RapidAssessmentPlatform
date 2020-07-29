@@ -7,7 +7,9 @@ const cors = require('cors');
 const users = require("./routes/api/users");
 const { PORT, CLIENT_ORIGIN } = require('./config/info')
 const MongoClient = require('mongodb').MongoClient;
-const url = "mongodb://localhost/simple-email-confirmation";
+
+const url = "mongodb://18.191.23.96/simple-email-confirmation";
+
 
 const app = express();
 

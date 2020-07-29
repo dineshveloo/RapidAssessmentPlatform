@@ -20,6 +20,7 @@ const validateLoginInput = require("../../validation/login");
 const User = require("../../models/User");
 const Role = require("../../models/Roles");
 const RoleAssign = require("../../models/RolesAssigned");
+
 //Load CaptureProcessP1Model model
 const CaptureProcessP1Model = require("../../models/CaptureProcessP1Model");
 
@@ -92,7 +93,6 @@ router.post("/register", (req, res) => {
     console.log(e);
   }
 });
-
 // @route POST api/users/signin
 // @desc Login user and return JWT token
 // @access Public
@@ -177,7 +177,6 @@ router.post("/signin", (req, res) => {
   }
 
 });
-
 // @route POST api/users/confirm
 router.post("/confirm", (req, res) => {
 
@@ -284,8 +283,6 @@ router.get('/viewprocessdata',(req,res)=>{
 });
 
 
-
-
 router.get('/approve/:email/:id', (req, res) => {
   try {
     let { email, id } = req.params;
@@ -370,11 +367,14 @@ router.post("/assignroles", (req, res) => {
       .then(() => res.json({ msg: "roles are assigned successfully", status: 0 }))
       .catch(err => console.log(err));
 
+
   } catch (e) {
     res.json({ msg: "server error. ", status: -1 });
     console.log(e);
   }
 });
+
+
 
 module.exports = router;
 
