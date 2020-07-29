@@ -106,15 +106,15 @@ class App extends Component {
               <MDBCollapse id='mainNavbarCollapse' isOpen={collapseID} navbar>
                 <MDBNavbarNav right>
                   {role === 'admin' ? null :
-                    <MDBNavItem>
-                      <MDBLink to='/'>About</MDBLink>
+                    <MDBNavItem id="a">
+                     <a offset="100" href="/#about" style={{color:"white"}} className="pl-3">About</a>
                     </MDBNavItem>
                   }
                   {role === 'admin' ? null :
-                    <MDBNavItem >
-                      <MDBLink to='/'>Contact</MDBLink>
-                    </MDBNavItem>
+                    <MDBNavItem id="c">
+                    <a offset="100" href="/#contact" style={{color:"white"}} className="pl-3">Contact</a>
                   }
+
                   {role === 'admin' ? <MDBNavItem >
                     <MDBLink to='/usermanagement'>Access Management</MDBLink>
                   </MDBNavItem>

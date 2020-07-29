@@ -76,6 +76,7 @@ class UserManagement extends Component {
       });
 
     fetch('http://localhost:5000/api/users/getallroles')
+
       .then(res => res.json())
       .then(json => {
         //console.log(json.role);

@@ -4,6 +4,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
 //const passport = require("passport");
+const capturemsgs = require('../../captureProcess/capture.msgs');
 const msgs = require('../../email/email.msgs');
 const sendEmail = require('../../email/email.send');
 const userEmail = require('../../email/email.user');
@@ -19,6 +20,10 @@ const validateLoginInput = require("../../validation/login");
 const User = require("../../models/User");
 const Role = require("../../models/Roles");
 const RoleAssign = require("../../models/RolesAssigned");
+
+//Load CaptureProcessP1Model model
+const CaptureProcessP1Model = require("../../models/CaptureProcessP1Model");
+
 // @route POST api/users/register
 // @desc Register user
 // @access Public
@@ -220,6 +225,63 @@ router.post("/confirm", (req, res) => {
   }
 });
 
+// @route POST api/users/capture1
+router.post("/capture1", (req, res) => {
+  try {
+    CaptureProcessP1Model.findOne({ processId: req.body.processId }).then(capture => {
+      if (capture){
+        res.json({ msg: "you have already Captured a process with this Process ID.", status: 3 })
+    
+      
+        }
+        else{
+           //res.json({msg: "here"})
+        const newCaptureProcessP1 = new CaptureProcessP1Model({
+          clientName: req.body.clientName,
+          industry: req.body.industry,
+          businessUnit: req.body.businessUnit,
+          subBusinessUnit: req.body.subBusinessUnit,
+          processName: req.body.processName,
+          processId: req.body.processId,
+          processDescription: req.body.processDescription
+        });
+        //console.log(newUser);
+
+        newCaptureProcessP1
+          .save()
+          
+          // res.json({msg: "here"})
+          .then(() => res.json({ msg: capturemsgs.SuccessfulCapture, status: 1 }))
+          .catch(err => console.log(err));
+      
+   
+
+
+        }
+    });
+      
+  } catch (e) {
+    res.json({ msg: "server error. ", status: -1 });
+    console.log(e);
+  }
+});
+
+//@route GET api/users/viewprocessdata
+router.get('/viewprocessdata',(req,res)=>{
+  CaptureProcessP1Model.find({}).then(vdata=>{
+    if(vdata){
+      res.json(vdata)
+    }else{
+      res.send('Process not found!')
+    }
+   
+  })
+  .catch(err =>{
+    res.send('error: ' +err)
+  })
+
+});
+
 router.get('/approve/:email/:id', (req, res) => {
   try {
     let { email, id } = req.params;
@@ -237,7 +299,6 @@ router.get('/approve/:email/:id', (req, res) => {
   }
 
 });
-
 // @route POST api/users/resetpass
 router.post("/resetpass", (req, res) => {
   // Form validation
@@ -310,6 +371,7 @@ router.post("/assignroles", (req, res) => {
     console.log(e);
   }
 });
+
 
 
 module.exports = router;

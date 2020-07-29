@@ -55,7 +55,7 @@ class HomePage extends React.Component {
                             </MDBCardTitle>
                             <MDBNavLink
                               tag='button'
-                              to='/'
+                              to='/rapidprocessdiscovery'
                               color='mdb-color'
                               className='btn btn-outline-mdb-color-new btn-sm btn-rounded d-inline'
                               onClick={this.scrollToTop}
@@ -130,7 +130,7 @@ class HomePage extends React.Component {
                   About Rapid Assesment Platform
                 </h2>
                 <p className='text-center text-muted mb-1'>
-                  Rapid Assessment Platform” is a web-based toolkit that can be leveraged for remote Automation Assessments.
+                  "Rapid Assessment Platform” is a web-based toolkit that can be leveraged for remote Automation Assessments.
                 </p>
                 <p className='text-center text-muted mb-1'>
                   The tool generates recommendations based on response to the assessment questionnaire.
