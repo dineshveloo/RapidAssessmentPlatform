@@ -354,13 +354,13 @@ router.get('/getallroles', (req, res) => {
 
 router.post("/assignroles", (req, res) => {
   // Form validation
-  console.log('i m in assigned roles');
+  //console.log('i m in assigned roles');
   try {
     const newRole = new RoleAssign({
       emailid: req.body.email,
       roleid: req.body.roleid
     });
-    console.log(newRole);
+    //console.log(newRole);
     newRole
       .save()
       .then(() => res.json({ msg: "roles are assigned successfully", status: 0 }))
