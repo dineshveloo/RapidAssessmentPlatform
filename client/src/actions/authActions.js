@@ -206,7 +206,7 @@ export const logoutUser = () => dispatch => {
 };
 
 //capture process
-export const captureP1 = (captureData, history) => dispatch => {
+export const captureProcess = (captureData, history) => dispatch => {
 
   const headers = {
     "Content-Type": "application/json",
