@@ -11,10 +11,10 @@ const RolesAssignedSchema = new Schema({
     type: String,
     // required: true
   },
-  date: {
-    type: Date,
-    default: Date.now
-  },
+  // date: {
+  //   type: Date,
+  //   default: Date.now
+  // },
 });
 
 module.exports = RoleAssign = mongoose.model("rolesassign", RolesAssignedSchema);

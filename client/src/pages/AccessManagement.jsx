@@ -11,8 +11,7 @@ import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from 'react-redux';
 
-
-class UserManagement extends Component {
+class AccessManagementPage extends Component {
   state = {
     checkbox1: '',
     checkbox2: '',
@@ -170,7 +169,7 @@ class UserManagement extends Component {
   }
 }
 
-UserManagement.propTypes = {
+AccessManagementPage.propTypes = {
   RolesAssigned: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
@@ -184,5 +183,5 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { RolesAssigned }
-)(withRouter(UserManagement));
+)(withRouter(AccessManagementPage));
 

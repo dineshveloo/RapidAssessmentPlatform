@@ -14,11 +14,15 @@ import {
   MDBNavLink
 } from 'mdbreact';
 import './HomePage.css';
+import { loginUser } from '../actions/authActions';
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 class HomePage extends React.Component {
   scrollToTop = () => window.scrollTo(0, 0);
 
   render() {
+
     return (
       <>
       <div id="home">
@@ -55,7 +59,7 @@ class HomePage extends React.Component {
                             </MDBCardTitle>
                             <MDBNavLink
                               tag='button'
-                              to='/rapidprocessdiscovery'
+                              to={this.props.auth.isAuthenticated ? '/rapidprocessdiscovery': '/signin'}
                               color='mdb-color'
                               className='btn btn-outline-mdb-color-new btn-sm btn-rounded d-inline'
                               onClick={this.scrollToTop}
@@ -285,5 +289,25 @@ class HomePage extends React.Component {
     );
   }
 }
+const mapStateToProps = state => ({
+  auth: state.auth,
+  errors: state.errors
+});
 
-export default HomePage;
+HomePage.propTypes = {
+  loginUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
+};
+
+export default connect(
+  mapStateToProps,
+  { loginUser }
+)(HomePage);
+//export default HomePage;
+
+
+
+
+
+
