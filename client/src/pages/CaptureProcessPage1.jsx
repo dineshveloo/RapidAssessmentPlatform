@@ -11,7 +11,7 @@ import {
     MDBAnimation
 } from 'mdbreact';
 import 'react-toastify/dist/ReactToastify.css';
-import { captureP1 } from '../actions/authActions';
+import { captureProcess } from '../actions/authActions';
 import { connect } from 'react-redux';
 import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
@@ -43,7 +43,7 @@ class CaptureProcessPage1 extends Component {
                 processId: e.target.PID.value,
                 processDescription: e.target.PD.value
             };
-            this.props.captureP1(newCaptureProcessP1, this.props.history);
+            this.props.captureProcess(newCaptureProcessP1, this.props.history);
             
         
     };
@@ -209,7 +209,7 @@ class CaptureProcessPage1 extends Component {
 }
 
 CaptureProcessPage1.propTypes = {
-    captureP1: PropTypes.func.isRequired,
+    captureProcess: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired
 };
@@ -222,5 +222,5 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    { captureP1 }
+    { captureProcess }
 )(withRouter(CaptureProcessPage1));
