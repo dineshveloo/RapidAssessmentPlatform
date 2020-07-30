@@ -39,7 +39,6 @@ export const RegisterUser = (userData, history) => dispatch => {
     );
 };
 
-
 export const RolesAssigned = (userData) => dispatch => {
 
   const headers = {
@@ -51,8 +50,8 @@ export const RolesAssigned = (userData) => dispatch => {
   axios
     .post("/api/users/assignroles", userData, { headers: headers })
     .then(res => {
-     
-     if (res.data.status === -1) {
+
+      if (res.data.status === -1) {
         toast(res.data.msg);
       }
       else {
@@ -69,7 +68,7 @@ export const RolesAssigned = (userData) => dispatch => {
 
 
 // Login - get user token
-export const loginUser = (userData, history)=> dispatch => {
+export const loginUser = (userData, history) => dispatch => {
   const headers = {
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
@@ -79,7 +78,7 @@ export const loginUser = (userData, history)=> dispatch => {
   axios
     .post("/api/users/signin", userData, { headers: headers })
     .then(res => {
-       if (res.data.status === 0) {
+      if (res.data.status === 0) {
         toast(res.data.msg);
       }
       else if (res.data.status === -1) {
@@ -90,7 +89,7 @@ export const loginUser = (userData, history)=> dispatch => {
       }
       else {
         // Set token to localStorage
-        const { token,role } = res.data;
+        const { token, role } = res.data;
         localStorage.setItem("role", role);
         localStorage.setItem("jwtToken", token);
         // Set token to Auth header
@@ -206,7 +205,7 @@ export const logoutUser = () => dispatch => {
 };
 
 //capture process
-export const captureP1 = (captureData, history) => dispatch => {
+export const CaptureProcess = (captureData, history) => dispatch => {
 
   const headers = {
     "Content-Type": "application/json",
@@ -219,22 +218,43 @@ export const captureP1 = (captureData, history) => dispatch => {
     .post('api/users/capture1', captureData, { headers: headers })
     .then(res => {
       //console.log(res.data);
-      if (res.data.status === 1) {
-        toast(res.data.msg);
-
-      } else if (res.data.status === 0) {
-        toast(res.data.msg);
-      }
-      else if (res.data.status === -1) {
-        toast(res.data.msg);
-      }
-      else if (res.data.status === 3) {
+     if (res.data.status === -1) {
         toast(res.data.msg);
       }
       else {
         toast(res.data.msg);
-        history.push("/register")
       }
+    
+    })
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    )
+}
+
+
+export const CaptureUpdate = (captureData, history) => dispatch => {
+
+  const headers = {
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers": "Content-Type",
+    "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+  }
+
+  axios
+    .post('api/users/captureupdate', captureData, { headers: headers })
+    .then(res => {
+      //console.log(res.data);
+     if (res.data.status === -1) {
+        toast(res.data.msg);
+      }
+      else {
+        toast(res.data.msg);
+      }
+    
     })
     .catch(err =>
       dispatch({

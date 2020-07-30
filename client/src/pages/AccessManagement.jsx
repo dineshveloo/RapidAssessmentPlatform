@@ -118,7 +118,7 @@ class AccessManagementPage extends Component {
       email: this.state.selectedEmail,
       roleid: this.state.selectedRole
     };
-    console.log(assignRole);
+    //console.log(assignRole);
     this.props.RolesAssigned(assignRole);
   }
 

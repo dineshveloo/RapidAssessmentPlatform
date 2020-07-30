@@ -33,16 +33,6 @@ router.post("/register", (req, res) => {
   //console.log("we are in regiser api");
   try {
 
-    // const newRole = new RoleAssign({
-    //   emailid: req.body.email,
-    //   roleid: req.body.roleid
-    // });
-    // console.log(newRole);
-    // newRole
-    //   .save()
-    //   .then(() => res.json({ msg: "roles are assigned successfully", status: 0 }))
-    //   .catch(err => console.log(err));
-
     User.findOne({ email: req.body.email }).then(user => {
       if (user && user.confirmed) {
         let pass = req.body.password;
@@ -64,8 +54,8 @@ router.post("/register", (req, res) => {
                   // .then(())
                   newRole
                     .save()
-                    .then(() => res.json({ msg: "default roles are assigned", status: 5 }))
-                  res.json({ msg: 'success', status: 1 })
+                    .then(() => res.json({ msg: "success & default roles are assigned", status: 1 }))
+                  //res.json({ msg: 'success', status: 1 })
                 }
                 )
                 .catch(err => console.log(err))
@@ -166,9 +156,6 @@ router.post("/signin", (req, res) => {
         });
       });
     }
-
-
-
   } catch (e) {
     res.json({ msg: "server error.", status: -1 });
     console.log(e);
@@ -182,7 +169,7 @@ router.post("/confirm", (req, res) => {
   try {
     User.findOne({ email: req.body.email }).then(user => {
       if (user) {
-      ////res.json({ msg: user.confirmed })
+        ////res.json({ msg: user.confirmed })
 
         if (user && !user.confirmed) {
           //res.json({ msg: "here" })
@@ -207,7 +194,7 @@ router.post("/confirm", (req, res) => {
           email: req.body.email,
           company: req.body.company
         });
-        console.log(newUser);
+        //console.log(newUser);
 
         newUser
           .save()
@@ -239,43 +226,59 @@ router.post("/confirm", (req, res) => {
 // @route POST api/users/capture1
 router.post("/capture1", (req, res) => {
   try {
-    CaptureProcessP1Model.findOne({ processId: req.body.processId }).then(capture => {
-      if (capture) {
-        res.json({ msg: "you have already Captured a process with this Process ID.", status: 3 })
-
-
-      }
-      else {
-        //res.json({msg: "here"})
-        const newCaptureProcessP1 = new CaptureProcessP1Model({
-          clientName: req.body.clientName,
-          industry: req.body.industry,
-          businessUnit: req.body.businessUnit,
-          subBusinessUnit: req.body.subBusinessUnit,
-          processName: req.body.processName,
-          processId: req.body.processId,
-          processDescription: req.body.processDescription
-        });
-        //console.log(newUser);
-
-        newCaptureProcessP1
-          .save()
-
-          // res.json({msg: "here"})
-          .then(() => res.json({ msg: capturemsgs.SuccessfulCapture, status: 1 }))
-          .catch(err => console.log(err));
-
-
-
-
-      }
+    const captureProcess = new CaptureProcessP1Model({
+      clientName: req.body.clientName,
+      businessUnit: req.body.businessUnit,
+      subBusinessUnit: req.body.subBusinessUnit,
+      processName: req.body.processName,
+      processDescription: req.body.processDescription,
+      list: req.body.list
     });
+    //console.log(captureProcess);
+    captureProcess
+      .save()
+      .then(user => { res.json({ msg: capturemsgs.SuccessfulCapture, status: 0, names: user }) })
+      .catch(err => console.log(err))
 
   } catch (e) {
     res.json({ msg: "server error. ", status: -1 });
     console.log(e);
   }
+
+
+
 });
+//   User.findByIdAndUpdate(user.id, { password: hash })
+router.post("/captureupdate", (req, res) => {
+  try {
+    const captureUpdate = {
+      // id: req.body.id,
+      clientName: req.body.clientName,
+      businessUnit: req.body.businessUnit,
+      subBusinessUnit: req.body.subBusinessUnit,
+      processName: req.body.processName,
+      processDescription: req.body.processDescription,
+      list: req.body.list
+    };
+
+   
+    CaptureProcessP1Model.findByIdAndUpdate(req.body.processId, captureUpdate)
+      .then(user => { res.json({ msg: "successfully updaed", status: 1}) })
+    // console.log(captureProcess);
+    // captureUpdate
+    //   .save()
+    //   
+    //   .catch(err => console.log(err))
+
+  } catch (e) {
+    res.json({ msg: "server error. ", status: -1 });
+    console.log(e);
+  }
+
+
+
+});
+
 
 //@route GET api/users/viewprocessdata
 router.get('/viewprocessdata', (req, res) => {
@@ -403,6 +406,29 @@ router.get('/companynames', (req, res) => {
     console.log(e);
   }
 });
+
+router.get('/emailExist/:email', (req, res) => {
+  //console.log("i m heree in company api");
+  try {
+    let { email } = req.params;
+    User.findOne({ 'email': email })
+      .then(user => {
+        if (user) {
+
+          console.log("enering");
+          res.json({ msg: 'email exist', status: 1 })
+        } else {
+          res.json({ msg: 'not exist', status: 0 })
+        }
+      })
+      .catch(err => console.log(err))
+
+  } catch (e) {
+    res.json({ msg: "server error. ", status: -1 });
+    console.log(e);
+  }
+});
+
 
 module.exports = router;
 
