@@ -114,7 +114,7 @@ class CaptureProcessPage extends Component {
             <MDBContainer className='mt-5'>
 
                 <SectionContainer header='Capture Process'>
-                    <form noValidate onSubmit={this.onSubmit}>
+                    <form  onSubmit={this.onSubmit}>
                         <MDBRow>
                             <MDBCol md='6'>
                                 <MDBInput
