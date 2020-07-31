@@ -32,6 +32,14 @@
     /* padding-left: 5px; */
     margin: 5px;
   }
+  .alignCompany{
+    position: relative;
+    /* left: 10%; */
+    text-transform: capitalize; 
+    height: 37px;
+    /* padding-left: 5px; */
+    /* margin: 5px; */
+  }
 
   .alignButton {
     position: relative;

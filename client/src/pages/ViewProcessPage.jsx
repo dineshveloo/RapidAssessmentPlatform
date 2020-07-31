@@ -1,7 +1,8 @@
 import React from 'react';
 
-import { MDBDataTable, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBIcon, MDBContainer} from 'mdbreact';
-
+import { MDBDataTable, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBIcon, MDBContainer, MDBBtn } from 'mdbreact';
+import { Redirect } from "react-router-dom";
+//import Button from 'react-bootstrap/Button'
 import axios from 'axios';
 import './HomePage.css';
 
@@ -12,22 +13,19 @@ class ViewProcessPage extends React.Component {
 
     super(props);
 
-    this.state= {
+    this.state = {
 
       posts: [],
-
-      isLoading:true,
-
+      selectedrow: [],
+      isLoading: true,
+      redirect: false,
       tableRows: [],
 
     };
 
   }
 
-
-
-
-  componentDidMount=async() => {
+  componentDidMount = async () => {
 
     await axios.get(url)
 
@@ -35,44 +33,60 @@ class ViewProcessPage extends React.Component {
 
       .then(data => {
 
-         this.setState({ posts: data })
+        this.setState({ posts: data })
 
       })
 
-      .then(async() => {
+      .then(async () => {
 
-         this.setState({ tableRows:this.assemblePosts(), isLoading:false })
+        this.setState({ tableRows: this.assemblePosts(), isLoading: false })
 
-         console.log(this.state.tableRows);
+        // console.log(this.state.tableRows);
 
       });
 
   }
 
 
+  // renderRedirect = () => {
+  //   if (this.state.redirect) {
+  //     return <Redirect to='/target' />
+  //   }
+  // }
 
+  handleClick = (post) => {
 
-  assemblePosts= () => {
+    this.setState({ selectedrow: post, redirect: true }, () => console.log(this.state.selectedrow));
+  
+    
 
-    let posts =this.state.posts.map((post) => {
+  }
 
+ redirect=()=>{
+  if (this.state.redirect) {
+  return <Redirect
+  to={{
+    pathname: "/captureprocesspage",
+    state: { selectedrow: this.state.selectedrow}
+  }}
+/>
+  }
+ }
+
+  assemblePosts = () => {
+    let posts = this.state.posts.map((post) => {
       return (
-
         {
           clientName: post.clientName,
-          industry: post.industry,
           businessUnit: post.businessUnit,
           subBusinessUnit: post.subBusinessUnit,
           processName: post.processName,
-          processId: post.processId,
-         
-
+          
+          //clickEvent: () => this.handleClick(post),
+          action: <MDBBtn color="default" rounded size="sm" onClick={() => { this.handleClick(post) }}>View</MDBBtn>
         }
-
       )
-
     });
-
     return posts;
 
   }
@@ -83,59 +97,51 @@ class ViewProcessPage extends React.Component {
 
   render() {
 
+
+
     const data = {
-
       columns: [
-         {
+        {
 
-          label:'Client Name',
+          label: 'Client Name',
 
-          field:'clientName',
+          field: 'clientName',
 
         },
 
-        {
-
-          label:'Industry',
-
-          field:'industry',
-
-        },
+        
 
         {
 
-          label:'Business Unit',
+          label: 'Business Unit',
 
-          field:'businessUnit',
+          field: 'businessUnit',
 
         },
         {
 
-          label:'Sub Business Unit',
+          label: 'Sub Business Unit',
 
-          field:'subBusinessUnit',
-
-        },
-        {
-
-          label:'Process Name',
-
-          field:'processName',
+          field: 'subBusinessUnit',
 
         },
         {
 
-          label:'Process Id',
+          label: 'Process Name',
 
-          field:'processId',
+          field: 'processName',
 
         },
-       
+        
+        {
+
+          label: 'Action',
+
+          field: 'action',
+        },
 
       ],
-
-      rows:this.state.tableRows,
-
+      rows: this.state.tableRows,
     }
 
 
@@ -143,42 +149,42 @@ class ViewProcessPage extends React.Component {
 
     return (
 
-    <MDBContainer id="UM" className='mt-3'>
+      
+      < MDBContainer id="UM" className='mt-3' >
+
+        {this.redirect()}
         <h1 className='text-center'>
-           <MDBIcon icon='eye' className='indigo-text mr-2' />
-           <b>View Captured Process</b>
+          <MDBIcon icon='eye' className='indigo-text mr-2' />
+          <b>View Captured Process</b>
         </h1>
-     
+
         <MDBRow id="VP" className="mb-4">
-        
-           <MDBCol  md="12">
-       
-              <MDBCard >
 
-                  <MDBCardBody>
+          <MDBCol md="12">
 
-                        <MDBDataTable 
-                               striped
-                               bordered
-                               hover
-                               data={data}/>
+            <MDBCard >
 
-                  </MDBCardBody>
+              <MDBCardBody>
 
-              </MDBCard>
-              <div id="viewlink" className='text-center'>
+                <MDBDataTable
+                  striped
+                  bordered
+                  hover
+                  data={data} />
 
-             <b>Process not found?! Please click<a href='/captureprocesspage1'> <MDBIcon icon='edit' className='indigo-text'/> </a>to Capture.</b>
 
-           </div>
 
-           </MDBCol>
-           
+              </MDBCardBody>
 
+            </MDBCard>
+            <div id="viewlink" className='text-center'>
+
+              <b>Process not found?! Please click<a href='/captureprocesspage'> <MDBIcon icon='edit' className='indigo-text' /> </a>to Capture.</b>
+
+            </div>
+          </MDBCol>
         </MDBRow>
-        
-     
-    </MDBContainer>
+      </MDBContainer >
 
     );
 

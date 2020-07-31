@@ -97,8 +97,9 @@ class App extends Component {
         <Router>
           <div className='flyout'>
             <MDBNavbar color='indigo' dark expand='md' fixed='top' scrolling>
-              <MDBNavbarBrand href='/' className='py-0 font-weight-bold'>
-                <strong className='align-middle'>RAPID ASSESSMENT PLATFORM</strong>
+             <MDBNavbarBrand id="h" className='py-0 font-weight-bold'>
+              <a offset="100" href="/#home" style={{color:"white"}} className="pl-3">
+                <strong className='align-middle'>RAPID ASSESSMENT PLATFORM</strong></a>
               </MDBNavbarBrand>
               <MDBNavbarToggler
                 onClick={this.toggleCollapse('mainNavbarCollapse')}
@@ -106,22 +107,24 @@ class App extends Component {
               <MDBCollapse id='mainNavbarCollapse' isOpen={collapseID} navbar>
                 <MDBNavbarNav right>
                   {role === 'admin' ? null :
+
                     <MDBNavItem id="a">
                      <a offset="100" href="/#about" style={{color:"white"}} className="pl-3">About</a>
                     </MDBNavItem>
                   }
-                  {role === 'admin' ? null :
+                  { role === 'admin' ? null :
                     <MDBNavItem id="c">
                     <a offset="100" href="/#contact" style={{color:"white"}} className="pl-3">Contact</a>
+                    </MDBNavItem>
                   }
 
                   {role === 'admin' ? <MDBNavItem >
-                    <MDBLink to='/usermanagement'>Access Management</MDBLink>
+                    <MDBLink to='/accessmanagement'>Access Management</MDBLink>
                   </MDBNavItem>
                     : null}
                   {this.props.auth.isAuthenticated ?
                     <MDBNavItem >
-                      <MDBLink to="" onClick={this.logoutHandler}>Logout</MDBLink>
+                  <MDBLink to="" onClick={this.logoutHandler}>Logout</MDBLink>
                     </MDBNavItem>
                     : null}
                   <MDBNavItem>
@@ -181,4 +184,3 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, { loginUser })(App);
-

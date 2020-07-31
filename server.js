@@ -7,7 +7,7 @@ const cors = require('cors');
 const users = require("./routes/api/users");
 const { PORT, CLIENT_ORIGIN } = require('./config/info')
 const MongoClient = require('mongodb').MongoClient;
-const url = "mongodb://18.191.23.96/simple-email-confirmation";
+// const url = "mongodb://18.191.23.96/simple-email-confirmation";
 
 const app = express();
 
@@ -38,20 +38,20 @@ mongoose
     
   )
   .then(() => console.log("MongoDB successfully connected"))
-  .then(() => MongoClient.connect(url, function(err, db) {
-    if (err) throw err;
-    var dbo = db.db("simple-email-confirmation");
-    var myobj = [
-      { role_name: 'sales', role_code: '001'},
-      { role_name: 'finance', role_code: '002'}
+  // .then(() => MongoClient.connect(url, function(err, db) {
+  //   if (err) throw err;
+  //   var dbo = db.db("simple-email-confirmation");
+  //   var myobj = [
+  //     { role_name: 'sales', role_code: '001'},
+  //     { role_name: 'finance', role_code: '002'}
       
-    ];
-    dbo.collection("roles").insertMany(myobj, function(err, res) {
-      if (err) throw err;
-      console.log("Number of documents inserted: " + res.insertedCount);
-      db.close();
-    });
-  }))
+  //   ];
+  //   dbo.collection("roles").insertMany(myobj, function(err, res) {
+  //     if (err) throw err;
+  //     console.log("Number of documents inserted: " + res.insertedCount);
+  //     db.close();
+  //   });
+  // }))
   .catch(err => console.log(err));
 
 // Passport middleware
@@ -62,7 +62,6 @@ require("./config/passport")(passport);
 
 // Routes
 app.use("/api/users", users);
-
 
 // app.get('/wake-up', (req, res) => res.json('wakeup'));
 
