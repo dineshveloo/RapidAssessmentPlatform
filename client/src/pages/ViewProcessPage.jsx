@@ -110,13 +110,7 @@ class ViewProcessPage extends React.Component {
 
         },
 
-        {
-
-          label: 'Industry',
-
-          field: 'industry',
-
-        },
+        
 
         {
 
@@ -139,13 +133,7 @@ class ViewProcessPage extends React.Component {
           field: 'processName',
 
         },
-        {
-
-          label: 'Process Id',
-
-          field: 'processId',
-
-        },
+        
         {
 
           label: 'Action',
