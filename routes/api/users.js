@@ -263,7 +263,7 @@ router.post("/captureupdate", (req, res) => {
 
    
     CaptureProcessP1Model.findByIdAndUpdate(req.body.processId, captureUpdate)
-      .then(user => { res.json({ msg: "successfully updaed", status: 1}) })
+      .then(user => { res.json({ msg: "successfully updated", status: 1}) })
     // console.log(captureProcess);
     // captureUpdate
     //   .save()
