@@ -1,4 +1,4 @@
 module.exports = {
-  mongoURI: "mongodb://localhost/simple-email-confirmation",
+  mongoURI: "mongodb://18.191.23.96/simple-email-confirmation",
   secretOrKey: "secret"
 };
