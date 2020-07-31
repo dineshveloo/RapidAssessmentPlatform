@@ -1,5 +1,5 @@
 import React from 'react';
-import SelectOptions from './Options/SelectOption';
+import SelectOptions from './RoleOptions/SelectOption';
 import  "./components.css";
 
 const SelectRoles = (props) => {

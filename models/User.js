@@ -21,8 +21,8 @@ const UserSchema = new Schema({
   },
   //flag for approving email set to 0/ 1
   confirmed: {
-    type: String,
-    default: 0
+    type: Boolean,
+    default: false
   },
   company: {
     type: String,

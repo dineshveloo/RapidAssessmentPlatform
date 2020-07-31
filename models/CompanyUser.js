@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 // Create Schema
-const RoleSchema = new Schema({
+const CompanySchema = new Schema({
   role_name: {
     type: String,
     // required: true
@@ -17,4 +17,4 @@ const RoleSchema = new Schema({
   // },
 });
 
-module.exports = Role = mongoose.model("roles", RoleSchema);
+module.exports = CompanyUser = mongoose.model("products", CompanySchema);

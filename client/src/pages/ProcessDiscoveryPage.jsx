@@ -53,7 +53,7 @@ class ProcessDiscoveryPage extends React.Component {
                             </MDBCardTitle>
                             <MDBNavLink
                               tag='button'
-                              to='/captureprocesspage1'
+                              to='/captureprocesspage'
                               color='mdb-color'
                               className='btn btn-outline-mdb-color-new btn-sm btn-rounded d-inline'
                               onClick={this.scrollToTop}

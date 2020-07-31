@@ -8,7 +8,7 @@ import {
     MDBIcon,
     MDBInput,
     MDBBtn,
-    MDBAnimation
+    MDBAnimation,
 } from 'mdbreact';
 import 'react-toastify/dist/ReactToastify.css';
 import { confirmUser } from '../actions/authActions';
@@ -21,11 +21,13 @@ class EmailConfirmPage extends Component {
         name: '',
         email: '',
         company: '',
+        selectedCompany: '',
         msg: '',
         nameError: '',
         emailError: '',
         companyError: '',
         status: 0
+
     }
 
     validate = () => {
@@ -56,13 +58,22 @@ class EmailConfirmPage extends Component {
             const newUser = {
                 email: e.target.email.value,
                 name: e.target.name.value,
-                company: e.target.company.value
+                // company: this.state.selectedCompany
+                company: e.target.company.value,
             };
+
             this.props.confirmUser(newUser, this.props.history);
+            console.log(confirmUser);
             //reset form
             // this.setState({ initialState });
         }
     };
+
+    // handleChange = (event) => {
+    //     event.preventDefault();
+    //     this.setState({ selectedCompany: event.target.value, companyError: '' });
+    //     //console.log(event.target.value);
+    // }
 
     changeHandler = event => {
         switch (event.target.id) {
@@ -78,15 +89,26 @@ class EmailConfirmPage extends Component {
         this.setState({ [event.target.id]: event.target.value });
     };
 
+    // componentDidMount() {
+    //     fetch('http://localhost:5000/api/users/companynames')
+
+    //         .then(res => res.json())
+    //         .then(json => {
+    //             this.setState({ company: json.names });
+    //             console.log(this.state.company);
+    //         }
+    //         )
+    // }
+
     render() {
-        const { nameError, emailError, companyError } = this.state;
-        let isEnabledCheck = emailError || companyError || nameError;
-        let isEnabled = false;
-        if (isEnabledCheck.length > 0) {
-            isEnabled = true;
-        } else {
-            isEnabled = false;
-        }
+        // const { nameError, emailError, companyError } = this.state;
+        // let isEnabledCheck = emailError || companyError || nameError;
+        // let isEnabled = false;
+        // if (isEnabledCheck.length > 0) {
+        //     isEnabled = true;
+        // } else {
+        //     isEnabled = false;
+        // }
         return (
             <>
                 <MDBEdgeHeader color='indigo darken-3' className='sectionPage' />
@@ -130,6 +152,28 @@ class EmailConfirmPage extends Component {
                                             <div style={{ fontSize: 13, paddingLeft: 42, color: "red" }}>{this.state.emailError}</div>
                                         </div>
 
+                                        {/* <div>
+                                            <MDBInputGroup
+                                                // icon='pencil-alt'
+                                                containerClassName='mb-3'
+                                                prepend='Company Name'
+                                                inputs={
+                                                    <SelectCompany className='custom-select'
+                                                        company={this.state.company}
+                                                        changeValue={this.handleChange}
+                                                    //assignRole={this.assignHandler}
+                                                    //disabled={this.state.checkbox1.checked}
+                                                    //isCompanySelected={this.state.selectedCompany.length > 0 ? this.state.selectedCompany : ''}
+                                                    />
+
+                                                }
+
+                                            />
+                                            <div style={{ fontSize: 13, paddingLeft: 42, color: "red" }}>{this.state.companyError}</div>
+                                        </div> */}
+
+
+                                        
                                         <div className='grey-text'>
                                             <MDBInput
                                                 name='text'
@@ -144,8 +188,10 @@ class EmailConfirmPage extends Component {
                                             />
                                             <div style={{ fontSize: 13, paddingLeft: 42, color: "red" }}>{this.state.companyError}</div>
                                         </div>
+
+
                                         <div className='text-center'>
-                                            <MDBBtn outline color='info' type='submit' disabled={isEnabled}>
+                                            <MDBBtn outline color='info' type='submit' >
                                                 Send<MDBIcon icon='paper-plane' className='ml-1' />
                                             </MDBBtn>
                                         </div>

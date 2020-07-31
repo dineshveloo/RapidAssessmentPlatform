@@ -106,21 +106,17 @@ class App extends Component {
               <MDBCollapse id='mainNavbarCollapse' isOpen={collapseID} navbar>
                 <MDBNavbarNav right>
                   {role === 'admin' ? null :
-                    <MDBNavItem id="a">
-                  
-                  
-                    <a offset="100" href="/#about" style={{color:"white"}} className="pl-3">About</a>
-                    
+                  <MDBNavItem id="a">
+                      <a offset="100" href="/#about" style={{color:"white"}} className="pl-3">About</a>
                   </MDBNavItem>
                   }
                   {role === 'admin' ? null :
                    <MDBNavItem id="c" >
-                    
                     <a offset="100" href="/#contact" style={{color:"white"}} className="pl-3">Contact</a>
                   </MDBNavItem>
                   }
                   {role === 'admin' ? <MDBNavItem >
-                    <MDBLink to='/usermanagement'>Access Management</MDBLink>
+                    <MDBLink to='/accessmanagement'>Access Management</MDBLink>
                   </MDBNavItem>
                     : null}
                   {this.props.auth.isAuthenticated ?
@@ -185,4 +181,3 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, { loginUser })(App);
-

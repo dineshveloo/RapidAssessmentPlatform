@@ -38,6 +38,8 @@ class SigninPage extends Component {
       this.props.history.push("/");
     }
 
+
+
   }
 
   componentWillReceiveProps(nextProps) {
@@ -88,8 +90,22 @@ class SigninPage extends Component {
       toast('please enter approved email id to proceed');
     } else {
       //console.log(value);
-     // this.setState({ email_: 'anu' })
-      this.props.history.push('/resetpassword')
+      // this.setState({ email_: 'anu' })
+      fetch('http://localhost:5000/api/users/emailExist/' + this.state.email)
+        .then(res => res.json())
+        .then(json => {
+
+          console.log(json);
+          if (json.status === 1) {
+            localStorage.setItem("resetEmail", this.state.email);
+            this.props.history.push('/resetpassword')
+          } else {
+            toast('not a registered user');
+          }
+
+        }
+        )
+
     }
   }
 

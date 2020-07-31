@@ -104,6 +104,7 @@ class RegistrationPage extends Component {
             this.setState({ initialState });
         }
     };
+    
     render() {
         const { emailError, passwordError } = this.state;
         let isEnabledCheck = emailError || passwordError;
