@@ -194,6 +194,7 @@ class CaptureProcessPage extends Component {
                                     label='List the current pain points'
                                     id="list"
                                     rows='2'
+                                    disabled={this.state.isEditabled}
                                 />
                             </MDBCol>
                         </MDBRow>
@@ -202,11 +203,7 @@ class CaptureProcessPage extends Component {
                         <MDBBtn onClick={this.enableEdit}>Enable Edit </MDBBtn>
                         <MDBBtn onClick={this.refreshHandler}>Refresh</MDBBtn>
 
-                        <div id="capturelink" className='text-center'>
-
-                            <b>Do you want to Capture another process?! Please click<a href='/captureprocesspage1'> <MDBIcon icon='edit' className='indigo-text' /> </a>to Capture.</b>
-
-                        </div>
+                       
                         <div id="viewlink" className='text-center'>
 
                             <b>Please click<a href='/viewprocess'> <MDBIcon icon='eye' className='indigo-text' /> </a>to View the Captured Process.</b>
