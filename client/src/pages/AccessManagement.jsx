@@ -73,8 +73,8 @@ class AccessManagementPage extends Component {
         this.setState({ data });
 
       });
-      
-    fetch('http://localhost:5000/api/users/getallroles')
+
+    fetch('http://18.191.23.96:5000/api/users/getallroles')
 
       .then(res => res.json())
       .then(json => {

@@ -32,7 +32,6 @@ router.post("/register", (req, res) => {
   // Form validation
   //console.log("we are in regiser api");
   try {
-
     User.findOne({ email: req.body.email }).then(user => {
       if (user && user.confirmed) {
         let pass = req.body.password;
@@ -44,7 +43,6 @@ router.post("/register", (req, res) => {
             if (!user.password) {
               //pass = hash;
               User.findByIdAndUpdate(user.id, { password: hash })
-
                 .then(userRegister.emailRegister(user))
                 .then(() => {
                   const newRole = new RoleAssign({
@@ -264,19 +262,10 @@ router.post("/captureupdate", (req, res) => {
    
     CaptureProcessP1Model.findByIdAndUpdate(req.body.processId, captureUpdate)
       .then(user => { res.json({ msg: "successfully updated", status: 1}) })
-    // console.log(captureProcess);
-    // captureUpdate
-    //   .save()
-    //   
-    //   .catch(err => console.log(err))
-
-  } catch (e) {
-    res.json({ msg: "server error. ", status: -1 });
-    console.log(e);
-  }
-
-
-
+    } catch (e) {
+      res.json({ msg: "server error. ", status: -1 });
+      console.log(e);
+    }
 });
 
 
@@ -400,7 +389,6 @@ router.get('/companynames', (req, res) => {
     CompanyUser.find()
       .then(user => { res.json({ msg: 'list of company names', status: 0, names: user }) })
       .catch(err => console.log(err))
-
   } catch (e) {
     res.json({ msg: "server error. ", status: -1 });
     console.log(e);
@@ -422,13 +410,11 @@ router.get('/emailExist/:email', (req, res) => {
         }
       })
       .catch(err => console.log(err))
-
   } catch (e) {
     res.json({ msg: "server error. ", status: -1 });
     console.log(e);
   }
 });
-
 
 
 module.exports = router;

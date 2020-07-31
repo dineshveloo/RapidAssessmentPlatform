@@ -12,7 +12,6 @@ import CaptureProcessPage from './pages/CaptureProcessPage';
 import ViewProcessPage from './pages/ViewProcessPage';
 import ProcessDiscoveryPage from './pages/ProcessDiscoveryPage';
 
-
 class Routes extends React.Component {
   render() {
     return (

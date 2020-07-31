@@ -97,6 +97,7 @@ class App extends Component {
         <Router>
           <div className='flyout'>
             <MDBNavbar color='indigo' dark expand='md' fixed='top' scrolling>
+
              <MDBNavbarBrand id="h" className='py-0 font-weight-bold'>
               <a offset="100" href="/#home" style={{color:"white"}} className="pl-3">
                 <strong className='align-middle'>RAPID ASSESSMENT PLATFORM</strong></a>

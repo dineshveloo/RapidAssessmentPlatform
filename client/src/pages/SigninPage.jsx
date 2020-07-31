@@ -95,7 +95,7 @@ class SigninPage extends Component {
         .then(res => res.json())
         .then(json => {
 
-          console.log(json);
+          //console.log(json);
           if (json.status === 1) {
             localStorage.setItem("resetEmail", this.state.email);
             this.props.history.push('/resetpassword')
@@ -105,7 +105,6 @@ class SigninPage extends Component {
 
         }
         )
-
     }
   }
 
@@ -123,10 +122,8 @@ class SigninPage extends Component {
 
   render() {
     const { emailError, passwordError } = this.state;
-
     let isEnabledCheck = emailError || passwordError;
     let isEnabled = false;
-
     if (isEnabledCheck.length > 0) {
       isEnabled = true;
     } else {
