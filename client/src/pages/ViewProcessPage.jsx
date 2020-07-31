@@ -78,11 +78,10 @@ class ViewProcessPage extends React.Component {
       return (
         {
           clientName: post.clientName,
-          industry: post.industry,
           businessUnit: post.businessUnit,
           subBusinessUnit: post.subBusinessUnit,
           processName: post.processName,
-          processId: post.processId,
+         
           //clickEvent: () => this.handleClick(post),
           action: <MDBBtn color="default" rounded size="sm" onClick={() => { this.handleClick(post) }}>View</MDBBtn>
         }
