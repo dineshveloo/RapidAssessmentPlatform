@@ -103,6 +103,7 @@ class App extends Component {
               <a offset="100" href="/#home" style={{color:"white"}} className="pl-3">
                 { /*<strong className='align-middle'>RAPID ASSESSMENT PLATFORM</strong></a>*/}
                 <MDBIcon icon='home'/>
+               </a>
               </MDBNavbarBrand>
               <MDBNavbarToggler
                 onClick={this.toggleCollapse('mainNavbarCollapse')}
