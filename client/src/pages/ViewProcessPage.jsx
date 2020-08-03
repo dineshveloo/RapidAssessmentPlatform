@@ -111,11 +111,13 @@ class ViewProcessPage extends React.Component {
           <MDBCol md="12">
             <MDBCard >
               <MDBCardBody>
+                <div class="table-responsive-md">
                 <MDBDataTable
                   striped
                   bordered
                   hover
                   data={data} />
+                </div>
               </MDBCardBody>
             </MDBCard>
             <div id="viewlink" className='text-center'>
