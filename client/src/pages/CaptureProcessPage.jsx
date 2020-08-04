@@ -113,8 +113,8 @@ class CaptureProcessPage extends Component {
         return (
             <MDBContainer className='mt-5'>
         <h1 className='text-center'>
-          <MDBIcon icon='edit' className='indigo-text mr-2' />
-          <b>{this.state.processId.length > 0 ? 'Captured Process Details':'Capture Process'}</b>
+          <MDBIcon icon={this.state.processId.length > 0 ? 'eye':'edit'} className='indigo-text mr-2' />
+          <b>{this.state.processId.length > 0 ? 'View Captured Process Details':'Capture Process'}</b>
         </h1>
 
                 <SectionContainer>
