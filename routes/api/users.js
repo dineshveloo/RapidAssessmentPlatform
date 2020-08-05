@@ -1,4 +1,5 @@
 const express = require("express");
+var MongoClient = require('mongodb').MongoClient;
 const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -15,6 +16,13 @@ const { ADMIN, ADMIN_PASS } = require('../../config/info');
 // Load input validation
 const validateRegisterInput = require("../../validation/register");
 const validateLoginInput = require("../../validation/login");
+var url = "mongodb://127.0.0.1:27017/";
+const options = {
+  // keepAlive: 1,
+  useUnifiedTopology: true,
+  // s
+};
+const db = require("../../config/keys").mongoURI;
 
 // Load User model
 const User = require("../../models/User");
@@ -24,6 +32,7 @@ const CompanyAssign = require("../../models/CompanyAssign");
 const CompanyUser = require("../../models/CompanyUser");
 //Load CaptureProcessP1Model model
 const CaptureProcessP1Model = require("../../models/CaptureProcessP1Model");
+
 
 // @route POST api/users/register
 // @desc Register user
@@ -259,13 +268,13 @@ router.post("/captureupdate", (req, res) => {
       list: req.body.list
     };
 
-   
+
     CaptureProcessP1Model.findByIdAndUpdate(req.body.processId, captureUpdate)
-      .then(user => { res.json({ msg: "successfully updated", status: 1}) })
-    } catch (e) {
-      res.json({ msg: "server error. ", status: -1 });
-      console.log(e);
-    }
+      .then(user => { res.json({ msg: "successfully updated", status: 1 }) })
+  } catch (e) {
+    res.json({ msg: "server error. ", status: -1 });
+    console.log(e);
+  }
 });
 
 
@@ -360,25 +369,25 @@ router.post("/assignroles", (req, res) => {
   //console.log('i m in assigned roles');
   try {
     RoleAssign.findOne({ emailid: req.body.emailid }).then(user => {
-      
+
       if (user) {
-        if(user.roleid === req.body.roleid){
+        if (user.roleid === req.body.roleid) {
           res.json({ msg: "role is already assigned", status: 2 })
-        }else{
+        } else {
           console.log(user);
-          console.log("id" +user._id, "req"+req.body.roleid);
+          console.log("id" + user._id, "req" + req.body.roleid);
           RoleAssign.findByIdAndUpdate(user._id, { roleid: req.body.roleid })
-          .then(() => res.json({ msg: "roles are updated", status: 1 }))  
-        }   
+            .then(() => res.json({ msg: "roles are updated", status: 1 }))
+        }
       } else {
         const newRole = new RoleAssign({
           emailid: req.body.emailid,
           roleid: req.body.roleid
         });
         newRole
-        .save()
-        .then(() => res.json({ msg: "roles are assigned successfully", status: 0 }))
-        .catch(err => console.log(err));
+          .save()
+          .then(() => res.json({ msg: "roles are assigned successfully", status: 0 }))
+          .catch(err => console.log(err));
       }
     })
 
@@ -422,30 +431,58 @@ router.get('/emailExist/:email', (req, res) => {
   }
 });
 
-
+///join operation
 router.get('/userDetails/:email', (req, res) => {
-  //console.log("i m heree in company api");
   try {
-    let { email } = req.params;
-    User.findOne({ 'email': email })
-      .then(user => {
-        if (user) {
-
-          console.log("entering");
-          res.json({ msg: 'email exist', status: 1 })
-        } else {
-          res.json({ msg: 'not exist', status: 0 })
+    RoleAssign.aggregate([
+      {
+        $lookup:
+        {
+          from: 'users',
+          localField: 'emailid',
+          foreignField: 'email',
+          as: 'userdetails'
         }
-      })
-      .catch(err => console.log(err))
+      },
+      {
+        $unwind: "$userdetails"
+      },
+      {
+        $lookup: {
+          from: "roles",
+          localField: "roleid",
+          foreignField: "role_code",
+          as: "useraccess"
+        }
+      },
+      // {
+      //   $unwind: "$useraccess"
+      // },
+      {
+        "$project": {
+          "userdetails.name": 1,
+          "emailid": 1,
+          "roleid": 1,
+          "userdetails.company": 1,
+          // "useraccess.role_name": 1,
+          // "useraccess.role_id": 1
+        }
+      }
 
-  } catch (e) {
+    ], function (err, result) {
+      if (err) throw err;
+      else {
+        res.json({ msg: result, status: 1 });
+      }
+      // db.close();
+    });
+  }
+  catch (e) {
     res.json({ msg: "server error. ", status: -1 });
     console.log(e);
   }
+
 });
-
-
 
 module.exports = router;
 

@@ -27,30 +27,12 @@ app.use(bodyParser.json());
 const db = require("./config/keys").mongoURI;
 
 // Connect to MongoDB
-mongoose
-
-  .connect(
-    db,
-    { useNewUrlParser: true },()=>{
+mongoose.connect(db,{ useNewUrlParser: true },()=>{
       app.listen(PORT, () => console.log('conneted'))
     }
-    
   )
-  .then(() => console.log("MongoDB successfully connected"))
-  // .then(() => MongoClient.connect(url, function(err, db) {
-  //   if (err) throw err;
-  //   var dbo = db.db("simple-email-confirmation");
-  //   var myobj = [
-  //     { role_name: 'sales', role_code: '001'},
-  //     { role_name: 'finance', role_code: '002'}
-      
-  //   ];
-  //   dbo.collection("roles").insertMany(myobj, function(err, res) {
-  //     if (err) throw err;
-  //     console.log("Number of documents inserted: " + res.insertedCount);
-  //     db.close();
-  //   });
-  // }))
+  .then(() => console.log("MongoDB successfully connected")
+  ,()=>console.log("in server.js file"+db))
   .catch(err => console.log(err));
 
 // Passport middleware
