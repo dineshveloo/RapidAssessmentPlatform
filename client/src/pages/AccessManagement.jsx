@@ -26,7 +26,7 @@ class AccessManagementPage extends Component {
   }
 
   componentDidMount() {
-    fetch('http://18.191.23.96:5000/api/users/userlist')
+    fetch('http://localhost:5000/api/users/userlist')
       .then(res => res.json())
       .then(json => {
 
@@ -74,7 +74,7 @@ class AccessManagementPage extends Component {
 
       });
 
-    fetch('http://18.191.23.96:5000/api/users/getallroles')
+    fetch('http://localhost:5000/api/users/getallroles')
 
       .then(res => res.json())
       .then(json => {
@@ -115,7 +115,7 @@ class AccessManagementPage extends Component {
   assignHandler = (e) => {
     e.preventDefault();
     const assignRole = {
-      email: this.state.selectedEmail,
+      emailid: this.state.selectedEmail,
       roleid: this.state.selectedRole
     };
     //console.log(assignRole);

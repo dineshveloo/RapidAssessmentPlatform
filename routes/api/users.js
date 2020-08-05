@@ -359,21 +359,27 @@ router.post("/assignroles", (req, res) => {
   // Form validation
   //console.log('i m in assigned roles');
   try {
-    RoleAssign.findOne({ email: req.body.email }).then(user => {
+    RoleAssign.findOne({ emailid: req.body.emailid }).then(user => {
+      
       if (user) {
+        if(user.roleid === req.body.roleid){
+          res.json({ msg: "role is already assigned", status: 2 })
+        }else{
+          console.log(user);
+          console.log("id" +user._id, "req"+req.body.roleid);
+          RoleAssign.findByIdAndUpdate(user._id, { roleid: req.body.roleid })
+          .then(() => res.json({ msg: "roles are updated", status: 1 }))  
+        }   
+      } else {
         const newRole = new RoleAssign({
-          emailid: req.body.email,
+          emailid: req.body.emailid,
           roleid: req.body.roleid
         });
-        //console.log(newRole);
         newRole
-          .save()
-          .then(() => res.json({ msg: "roles are assigned successfully", status: 0 }))
-          .catch(err => console.log(err));
-      } else {
-        res.json({ msg: "already assigned", status: 1 })
+        .save()
+        .then(() => res.json({ msg: "roles are assigned successfully", status: 0 }))
+        .catch(err => console.log(err));
       }
-
     })
 
   } catch (e) {

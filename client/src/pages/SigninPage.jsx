@@ -91,7 +91,7 @@ class SigninPage extends Component {
     } else {
       //console.log(value);
       // this.setState({ email_: 'anu' })
-      fetch('http://18.191.23.96:5000/api/users/emailExist/' + this.state.email)
+      fetch('http://localhost:5000/api/users/emailExist/' + this.state.email)
         .then(res => res.json())
         .then(json => {
 
