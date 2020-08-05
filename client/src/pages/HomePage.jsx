@@ -17,6 +17,14 @@ import './HomePage.css';
 import { loginUser } from '../actions/authActions';
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import RPD from '../assets/rapid process discovery.jpg';
+import PFD from '../assets/processflowdocumentation.jpg';
+import BCRM from '../assets/BCRM.jpg';
+import RPAs from '../assets/rapid_process_assessment.jpg';
+import PD from '../assets/process_documentation.jpg';
+import OI from '../assets/OPPID.jpg';
+import VT from '../assets/VAT.jpg';
+          
 
 class HomePage extends React.Component {
   scrollToTop = () => window.scrollTo(0, 0);
@@ -47,12 +55,13 @@ class HomePage extends React.Component {
                     <MDBCol md='4'>
                       <MDBAnimation reveal type='fadeInLeft'>
                         <MDBCard cascade className='my-3 grey lighten-4'>
-                          <MDBCardImage
+                          <a  href={this.props.auth.isAuthenticated ? '/rapidprocessdiscovery': '/signin'}><MDBCardImage
                             cascade
+                           
                             className='img-fluid'
-                            src='https://mdbootstrap.com/wp-content/uploads/2016/08/mdb.jpg'
+                            src={RPD}
 
-                          />
+                          /></a>
                           <MDBCardBody  >
                             <MDBCardTitle>
                               <strong>Rapid Process Discovery</strong>
@@ -64,7 +73,7 @@ class HomePage extends React.Component {
                               className='btn btn-outline-mdb-color-new btn-sm btn-rounded d-inline'
                               onClick={this.scrollToTop}
                             >
-                              get started
+                              select
                           </MDBNavLink>
                           </MDBCardBody>
                         </MDBCard>
@@ -73,23 +82,24 @@ class HomePage extends React.Component {
                     <MDBCol md='4'>
                       <MDBAnimation reveal type='fadeInTop'>
                         <MDBCard cascade className='my-3 grey lighten-4'>
-                          <MDBCardImage
+                          <a href={this.props.auth.isAuthenticated ? '/': '/signin'}><MDBCardImage
                             cascade
                             className='img-fluid'
-                            src='https://mdbootstrap.com/img/Marketing/mdb-press-pack/mdb-main.jpg'
-                          />
+                            
+                            src={PFD}
+                          /></a>
                           <MDBCardBody  >
                             <MDBCardTitle>
                               <strong>Process Flow Documentation</strong>
                             </MDBCardTitle>
                             <MDBNavLink
                               tag='button'
-                              to='/'
+                              to={this.props.auth.isAuthenticated ? '/': '/signin'}
                               color='mdb-color'
                               className='btn btn-outline-mdb-color-new btn-sm btn-rounded d-inline'
                               onClick={this.scrollToTop}
                             >
-                               get started
+                               select
                           </MDBNavLink>
                           </MDBCardBody>
                         </MDBCard>
@@ -98,23 +108,23 @@ class HomePage extends React.Component {
                     <MDBCol md='4'>
                       <MDBAnimation reveal type='fadeInRight'>
                         <MDBCard cascade className='my-3 grey lighten-4'>
-                          <MDBCardImage
+                        <a href={this.props.auth.isAuthenticated ? '/': '/signin'}><MDBCardImage
                             cascade
                             className='img-fluid'
-                            src='https://mdbootstrap.com/wp-content/uploads/2018/11/mdb-jquery-free.jpg'
-                          />
+                            src={BCRM}
+                          /></a>
                           <MDBCardBody className='text-center'>
                             <MDBCardTitle>
                               <strong>Business Case & Road Map</strong>
                             </MDBCardTitle>
                             <MDBNavLink
                               tag='button'
-                              to='/'
+                              to={this.props.auth.isAuthenticated ? '/': '/signin'}
                               color='mdb-color'
                               className='btn btn-outline-mdb-color-new btn-sm btn-rounded d-inline'
                               onClick={this.scrollToTop}
                             >
-                               get started
+                               select
                           </MDBNavLink>
                           </MDBCardBody>
                         </MDBCard>
@@ -151,7 +161,7 @@ class HomePage extends React.Component {
                         <MDBCardImage
                           cascade
                           className='img-fluid'
-                          src='https://mdbootstrap.com/wp-content/uploads/2016/08/mdb.jpg'
+                          src={RPAs}
                         />
                         <MDBCardBody cascade className='text-center'>
                           <MDBCardTitle>
@@ -171,7 +181,7 @@ class HomePage extends React.Component {
                         <MDBCardImage
                           cascade
                           className='img-fluid'
-                          src='https://mdbootstrap.com/img/Marketing/mdb-press-pack/mdb-main.jpg'
+                          src={PD}
                         />
                         <MDBCardBody cascade className='text-center'>
                           <MDBCardTitle>
@@ -192,7 +202,7 @@ class HomePage extends React.Component {
                         <MDBCardImage
                           cascade
                           className='img-fluid'
-                          src='https://mdbootstrap.com/wp-content/uploads/2018/11/mdb-jquery-free.jpg'
+                          src={OI}
                         />
                         <MDBCardBody cascade className='text-center'>
                           <MDBCardTitle>
@@ -211,7 +221,7 @@ class HomePage extends React.Component {
                         <MDBCardImage
                           cascade
                           className='img-fluid'
-                          src='https://mdbootstrap.com/wp-content/uploads/2017/06/navigation-1.jpg'
+                          src={VT}
                         />
                         <MDBCardBody cascade className='text-center'>
                           <MDBCardTitle>
@@ -305,6 +315,7 @@ export default connect(
   { loginUser }
 )(HomePage);
 //export default HomePage;
+
 
 
 

@@ -12,6 +12,8 @@ import {
   MDBNavLink
 } from 'mdbreact';
 import './HomePage.css';
+import CP from '../assets/capture_process.png';
+import VP from '../assets/viewprocess.png';
 
 class ProcessDiscoveryPage extends React.Component {
   scrollToTop = () => window.scrollTo(0, 0);
@@ -41,12 +43,12 @@ class ProcessDiscoveryPage extends React.Component {
                     <MDBCol md='6'>
                       <MDBAnimation reveal type='fadeInLeft'>
                         <MDBCard cascade className='my-3 grey lighten-4'>
-                          <MDBCardImage
+                        <a  href='/captureprocesspage'><MDBCardImage
                             cascade
                             className='img-fluid'
-                            src='https://mdbootstrap.com/wp-content/uploads/2016/08/mdb.jpg'
+                            src={CP}
 
-                          />
+                          /></a>
                           <MDBCardBody  >
                             <MDBCardTitle>
                               <strong>Capture Process</strong>
@@ -67,11 +69,11 @@ class ProcessDiscoveryPage extends React.Component {
                     <MDBCol md='6'>
                       <MDBAnimation reveal type='fadeInRight'>
                         <MDBCard cascade className='my-3 grey lighten-4'>
-                          <MDBCardImage
+                        <a  href='/viewprocess'><MDBCardImage
                             cascade
                             className='img-fluid'
-                            src='https://mdbootstrap.com/img/Marketing/mdb-press-pack/mdb-main.jpg'
-                          />
+                            src={VP}
+                          /></a>
                           <MDBCardBody  >
                             <MDBCardTitle>
                               <strong>View Process</strong>
@@ -104,3 +106,4 @@ class ProcessDiscoveryPage extends React.Component {
 }
 
 export default ProcessDiscoveryPage;
+

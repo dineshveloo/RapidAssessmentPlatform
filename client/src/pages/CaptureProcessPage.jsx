@@ -110,8 +110,12 @@ class CaptureProcessPage extends Component {
         // let isEnabled = false;
         return (
             <MDBContainer className='mt-5'>
+        <h1 className='text-center'>
+          <MDBIcon icon={this.state.processId.length > 0 ? 'eye':'edit'} className='indigo-text mr-2' />
+          <b>{this.state.processId.length > 0 ? 'View Captured Process Details':'Capture Process'}</b>
+        </h1>
 
-                <SectionContainer header='Capture Process'>
+                <SectionContainer>
                     <form  onSubmit={this.onSubmit}>
                         <MDBRow>
                             <MDBCol md='6'>
@@ -197,12 +201,13 @@ class CaptureProcessPage extends Component {
                                 />
                             </MDBCol>
                         </MDBRow>
-
-        <MDBBtn type="submit">{this.state.processId.length > 0 ? 'Update Assessment':'Submit Assessment'}</MDBBtn>
-                        <MDBBtn onClick={this.enableEdit}>Enable Edit </MDBBtn>
-                        <MDBBtn onClick={this.refreshHandler}>Refresh</MDBBtn>
+                        <div  className='text-center'>
+        <MDBBtn color="indigo" type="submit">{this.state.processId.length > 0 ? 'Update Assessment':'Submit Assessment'}</MDBBtn>
+                        <MDBBtn color="indigo" onClick={this.enableEdit}>Enable Edit </MDBBtn>
+                        <MDBBtn color="indigo" onClick={this.refreshHandler}>Reset</MDBBtn>
+                        </div>
                         <div id="viewlink" className='text-center'>
-                            <b>Please click<a href='/viewprocess'> <MDBIcon icon='eye' className='indigo-text' /> </a>to View the Captured Process.</b>
+                            <b>Please click this<a href='/viewprocess'> <MDBIcon icon='table' className='indigo-text' /> </a>to View the List of Captured Processes.</b>
                         </div>
                     </form>
                 </SectionContainer>

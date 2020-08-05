@@ -6,7 +6,7 @@ import { Redirect } from "react-router-dom";
 import axios from 'axios';
 import './HomePage.css';
 
-const url = 'http://localhost:5000/api/users/viewprocessdata';
+const url = 'http://18.191.23.96:5000/api/users/viewprocessdata';
 
 class ViewProcessPage extends React.Component {
   constructor(props) {
@@ -61,7 +61,7 @@ class ViewProcessPage extends React.Component {
           subBusinessUnit: post.subBusinessUnit,
           processName: post.processName,
           //clickEvent: () => this.handleClick(post),
-          action: <MDBBtn color="default" rounded size="sm" onClick={() => { this.handleClick(post) }}>View</MDBBtn>
+          action: <MDBBtn color="indigo" rounded size="sm" onClick={() => { this.handleClick(post) }}><i class="far fa-eye"></i> View</MDBBtn>
         }
       )
     });
@@ -103,23 +103,25 @@ class ViewProcessPage extends React.Component {
       < MDBContainer id="UM" className='mt-3' >
         {this.redirect()}
         <h1 className='text-center'>
-          <MDBIcon icon='eye' className='indigo-text mr-2' />
-          <b>View Captured Process</b>
+          <MDBIcon icon='table' className='indigo-text mr-2' />
+          <b>List of Captured Processes</b>
         </h1>
 
         <MDBRow id="VP" className="mb-4">
           <MDBCol md="12">
             <MDBCard >
               <MDBCardBody>
+                <div class="table-responsive-md">
                 <MDBDataTable
                   striped
                   bordered
                   hover
                   data={data} />
+                  </div>
               </MDBCardBody>
             </MDBCard>
             <div id="viewlink" className='text-center'>
-              <b>Process not found?! Please click<a href='/captureprocesspage'> <MDBIcon icon='edit' className='indigo-text' /> </a>to Capture.</b>
+              <b>Process not found? Please click this<a href='/captureprocesspage'> <MDBIcon icon='edit' className='indigo-text' /> </a>to Capture a Process.</b>
             </div>
           </MDBCol>
         </MDBRow>

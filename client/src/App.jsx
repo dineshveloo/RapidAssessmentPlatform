@@ -26,6 +26,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import mphasis_logo from './assets/mphasis_logo.png';
 
 
 // Check for token to keep user logged in
@@ -97,10 +98,12 @@ class App extends Component {
         <Router>
           <div className='flyout'>
             <MDBNavbar color='indigo' dark expand='md' fixed='top' scrolling>
-
+             <img id="logo" src={mphasis_logo} alt="your logo" height="50px"/>
              <MDBNavbarBrand id="h" className='py-0 font-weight-bold'>
               <a offset="100" href="/#home" style={{color:"white"}} className="pl-3">
-                <strong className='align-middle'>RAPID ASSESSMENT PLATFORM</strong></a>
+                { /*<strong className='align-middle'>RAPID ASSESSMENT PLATFORM</strong></a>*/}
+                <MDBIcon icon='home'/>
+               </a>
               </MDBNavbarBrand>
               <MDBNavbarToggler
                 onClick={this.toggleCollapse('mainNavbarCollapse')}
