@@ -91,11 +91,11 @@ class SigninPage extends Component {
     } else {
       //console.log(value);
       // this.setState({ email_: 'anu' })
-      fetch('http://localhost:5000/api/users/emailExist/' + this.state.email)
+      fetch('http://18.191.23.96:5000/api/users/emailExist/' + this.state.email)
         .then(res => res.json())
         .then(json => {
 
-          console.log(json);
+          //console.log(json);
           if (json.status === 1) {
             localStorage.setItem("resetEmail", this.state.email);
             this.props.history.push('/resetpassword')
@@ -105,7 +105,6 @@ class SigninPage extends Component {
 
         }
         )
-
     }
   }
 
@@ -123,10 +122,8 @@ class SigninPage extends Component {
 
   render() {
     const { emailError, passwordError } = this.state;
-
     let isEnabledCheck = emailError || passwordError;
     let isEnabled = false;
-
     if (isEnabledCheck.length > 0) {
       isEnabled = true;
     } else {

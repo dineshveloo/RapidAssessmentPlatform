@@ -26,7 +26,7 @@ class AccessManagementPage extends Component {
   }
 
   componentDidMount() {
-    fetch('http://localhost:5000/api/users/userlist')
+    fetch('http://18.191.23.96:5000/api/users/userlist')
       .then(res => res.json())
       .then(json => {
 
@@ -74,7 +74,7 @@ class AccessManagementPage extends Component {
 
       });
 
-    fetch('http://localhost:5000/api/users/getallroles')
+    fetch('http://18.191.23.96:5000/api/users/getallroles')
 
       .then(res => res.json())
       .then(json => {

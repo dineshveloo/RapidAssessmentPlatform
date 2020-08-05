@@ -124,8 +124,8 @@ class CaptureProcessPage extends Component {
                                     group
                                     validate
                                     success='right'
-                                    required
                                     disabled={this.state.isEditabled}
+                                    required
                                 />
                             </MDBCol>
                             <MDBCol md='6'>
@@ -138,8 +138,8 @@ class CaptureProcessPage extends Component {
                                     group
                                     validate
                                     success='right'
-                                    required
                                     disabled={this.state.isEditabled}
+                                    required
                                 />
                             </MDBCol>
                             <MDBCol md='6'>
@@ -152,8 +152,8 @@ class CaptureProcessPage extends Component {
                                     group
                                     validate
                                     success='right'
-                                    required
                                     disabled={this.state.isEditabled}
+                                    required
                                 />
                             </MDBCol>
                             <MDBCol md='6'>
@@ -166,8 +166,8 @@ class CaptureProcessPage extends Component {
                                     group
                                     validate
                                     success='right'
-                                    required
                                     disabled={this.state.isEditabled}
+                                    required
                                 />
                             </MDBCol>
                             <MDBCol md='6'>
@@ -180,8 +180,8 @@ class CaptureProcessPage extends Component {
                                     group
                                     validate
                                     success='right'
-                                    required
                                     disabled={this.state.isEditabled}
+                                    required
                                 />
                             </MDBCol>
                             <MDBCol md='6'>
@@ -193,6 +193,7 @@ class CaptureProcessPage extends Component {
                                     id="list"
                                     rows='2'
                                     disabled={this.state.isEditabled}
+                                    required
                                 />
                             </MDBCol>
                         </MDBRow>
@@ -200,17 +201,11 @@ class CaptureProcessPage extends Component {
         <MDBBtn type="submit">{this.state.processId.length > 0 ? 'Update Assessment':'Submit Assessment'}</MDBBtn>
                         <MDBBtn onClick={this.enableEdit}>Enable Edit </MDBBtn>
                         <MDBBtn onClick={this.refreshHandler}>Refresh</MDBBtn>
-
-                       
                         <div id="viewlink" className='text-center'>
-
                             <b>Please click<a href='/viewprocess'> <MDBIcon icon='eye' className='indigo-text' /> </a>to View the Captured Process.</b>
-
                         </div>
                     </form>
                 </SectionContainer>
-
-
             </MDBContainer>
         );
     }
