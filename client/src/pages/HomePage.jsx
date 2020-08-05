@@ -18,12 +18,12 @@ import { loginUser } from '../actions/authActions';
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import RPD from '../assets/rapid process discovery.jpg';
-import PFD from '../assets/PFD.jpg';
+import PFD from '../assets/processflowdocumentation.jpg';
 import BCRM from '../assets/BCRM.jpg';
-import RPAs from '../assets/RPAs.jpg';
-import PD from '../assets/PD.png';
-import OI from '../assets/OI.jpg';
-import VT from '../assets/value tracking.jpg';
+import RPAs from '../assets/rapid_process_assessment.jpg';
+import PD from '../assets/process_documentation.jpg';
+import OI from '../assets/OPPID.jpg';
+import VT from '../assets/VAT.jpg';
           
 
 class HomePage extends React.Component {
