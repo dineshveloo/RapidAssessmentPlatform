@@ -12,8 +12,8 @@ import {
   MDBNavLink
 } from 'mdbreact';
 import './HomePage.css';
-import CP from '../assets/CP.jpg';
-import VP from '../assets/VP.jpg';
+import CP from '../assets/capture_process.png';
+import VP from '../assets/viewprocess.png';
 
 class ProcessDiscoveryPage extends React.Component {
   scrollToTop = () => window.scrollTo(0, 0);
