@@ -120,6 +120,10 @@ class App extends Component {
                     <MDBLink to='/accessmanagement'>Access Management</MDBLink>
                   </MDBNavItem>
                     : null}
+                    {/* {role === 'admin' ? <MDBNavItem >
+                    <MDBLink to='/usermanagement'>User Management</MDBLink>
+                  </MDBNavItem>
+                    : null} */}
                   {this.props.auth.isAuthenticated ?
                     <MDBNavItem >
                       <MDBLink to="" onClick={this.logoutHandler}>Logout</MDBLink>

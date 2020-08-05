@@ -40,7 +40,7 @@ class CaptureProcessPage extends Component {
     componentDidMount() {
 
         if (this.props.location.state) {
-            console.log("property_id", this.props.location.state.selectedrow);
+            //console.log("property_id", this.props.location.state.selectedrow);
             const res = this.props.location.state.selectedrow;
             console.log(res);
             this.setState({
@@ -85,8 +85,6 @@ class CaptureProcessPage extends Component {
             };
             this.props.CaptureProcess(newProcess, this.props.history);
         }
-
-
 
         //console.log(newProcess);
         this.setState({ clientName: "", businessUnit: "", subBusinessUnit: "", processName: "", processDescription: "", list: "" });

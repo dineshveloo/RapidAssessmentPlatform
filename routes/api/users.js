@@ -415,7 +415,7 @@ router.get('/emailExist/:email', (req, res) => {
       .then(user => {
         if (user) {
 
-          console.log("enering");
+          console.log("entering");
           res.json({ msg: 'email exist', status: 1 })
         } else {
           res.json({ msg: 'not exist', status: 0 })
@@ -428,6 +428,30 @@ router.get('/emailExist/:email', (req, res) => {
     console.log(e);
   }
 });
+
+
+router.get('/userDetails/:email', (req, res) => {
+  //console.log("i m heree in company api");
+  try {
+    let { email } = req.params;
+    User.findOne({ 'email': email })
+      .then(user => {
+        if (user) {
+
+          console.log("entering");
+          res.json({ msg: 'email exist', status: 1 })
+        } else {
+          res.json({ msg: 'not exist', status: 0 })
+        }
+      })
+      .catch(err => console.log(err))
+
+  } catch (e) {
+    res.json({ msg: "server error. ", status: -1 });
+    console.log(e);
+  }
+});
+
 
 
 module.exports = router;
