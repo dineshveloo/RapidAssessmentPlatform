@@ -16,12 +16,7 @@ const { ADMIN, ADMIN_PASS } = require('../../config/info');
 // Load input validation
 const validateRegisterInput = require("../../validation/register");
 const validateLoginInput = require("../../validation/login");
-var url = "mongodb://127.0.0.1:27017/";
-const options = {
-  // keepAlive: 1,
-  useUnifiedTopology: true,
-  // s
-};
+
 const db = require("../../config/keys").mongoURI;
 
 // Load User model
@@ -233,13 +228,34 @@ router.post("/confirm", (req, res) => {
 // @route POST api/users/capture1
 router.post("/capture1", (req, res) => {
   try {
+    //console.log(req.body.LevelofDocumentation);
     const captureProcess = new CaptureProcessP1Model({
       clientName: req.body.clientName,
       businessUnit: req.body.businessUnit,
       subBusinessUnit: req.body.subBusinessUnit,
       processName: req.body.processName,
       processDescription: req.body.processDescription,
-      list: req.body.list
+      list: req.body.list,
+      exceptions: req.body.exceptions,
+      transactionVolume: req.body.transactionVolume,
+      AverageHandlingTime: req.body.AverageHandlingTime,
+      TotalHeadcount: req.body.TotalHeadcount,
+      ProductiveFTEs: req.body.ProductiveFTEs,
+      ShiftTimings: req.body.ShiftTimings,
+      unstructuredData: req.body.unstructuredData,
+      listofNames: req.body.listofNames,
+      ProcessCount: req.body.ProcessCount,
+      NumberofScreens: req.body.NumberofScreens,
+      HumanDecisionPoints: req.body.HumanDecisionPoints,
+      StandardInputTemplate: req.body.StandardInputTemplate,
+      metrics: req.body.metrics,
+      LevelofDocumentation:req.body.LevelofDocumentation,
+      processInvolved:req.body.processInvolved,
+      BusinessProcessChange:req.body.BusinessProcessChange,
+      processSLA:req.body.processSLA, 
+      NatureofProcess:req.body.NatureofProcess, 
+      StructureofInputData:req.body.StructureofInputData, 
+      DocumentsProcessed:req.body.DocumentsProcessed,
     });
     //console.log(captureProcess);
     captureProcess
@@ -265,7 +281,27 @@ router.post("/captureupdate", (req, res) => {
       subBusinessUnit: req.body.subBusinessUnit,
       processName: req.body.processName,
       processDescription: req.body.processDescription,
-      list: req.body.list
+      list: req.body.list,
+      exceptions: req.body.exceptions,
+      transactionVolume: req.body.transactionVolume,
+      AverageHandlingTime: req.body.AverageHandlingTime,
+      TotalHeadcount: req.body.TotalHeadcount,
+      ProductiveFTEs: req.body.ProductiveFTEs,
+      ShiftTimings: req.body.ShiftTimings,
+      unstructuredData: req.body.unstructuredData,
+      listofNames: req.body.listofNames,
+      ProcessCount: req.body.ProcessCount,
+      NumberofScreens: req.body.NumberofScreens,
+      HumanDecisionPoints: req.body.HumanDecisionPoints,
+      StandardInputTemplate: req.body.StandardInputTemplate,
+      metrics: req.body.metrics,
+      LevelofDocumentation:req.body.LevelofDocumentation,
+      processInvolved:req.body.processInvolved,
+      BusinessProcessChange:req.body.BusinessProcessChange,
+      processSLA:req.body.processSLA, 
+      NatureofProcess:req.body.NatureofProcess, 
+      StructureofInputData:req.body.StructureofInputData, 
+      DocumentsProcessed:req.body.DocumentsProcessed,
     };
 
 

@@ -24,10 +24,17 @@ import RPAs from '../assets/rapid_process_assessment.jpg';
 import PD from '../assets/process_documentation.jpg';
 import OI from '../assets/OPPID.jpg';
 import VT from '../assets/VAT.jpg';
+// import { toast } from 'react-toastify';
           
 
 class HomePage extends React.Component {
   scrollToTop = () => window.scrollTo(0, 0);
+
+  // handler = (e)=>{
+  //   e.preventDefault();
+  //   console.log("hello");
+  //   toast("access denied");
+  // }
 
   render() {
 
@@ -90,7 +97,7 @@ class HomePage extends React.Component {
                           /></a>
                           <MDBCardBody  >
                             <MDBCardTitle>
-                              <strong>Process Flow Documentation</strong>
+                              <strong >Process Flow Documentation</strong>
                             </MDBCardTitle>
                             <MDBNavLink
                               tag='button'

@@ -114,6 +114,9 @@ class ViewProcessPage extends React.Component {
                 <div class="table-responsive-md">
                 <MDBDataTable
                   striped
+                  scrollX
+                  scrollY
+                  maxHeight='50vh'
                   bordered
                   hover
                   data={data} />

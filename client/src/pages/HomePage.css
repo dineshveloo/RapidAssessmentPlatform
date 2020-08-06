@@ -54,3 +54,10 @@ a.border.nav-link.border-light.rounded.mr-1:hover {
 #capturelink{
   padding-top: 2rem;
 }
+
+.dropdownTop{
+  margin-top: 30px;
+}
+.dropdownTopStructure{
+  margin-top: 40px;
+}

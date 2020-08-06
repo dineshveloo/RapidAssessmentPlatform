@@ -100,7 +100,7 @@ class App extends Component {
             <MDBNavbar color='indigo' dark expand='md' fixed='top' scrolling>
              <img id="logo" src={mphasis_logo} alt="your logo" height="50px"/>
              <MDBNavbarBrand id="h" className='py-0 font-weight-bold'>
-              <a offset="100" href="/#home" style={{color:"white"}} className="pl-3">
+              <a offset="100" href="/" style={{color:"white"}} className="pl-3">
                 { /*<strong className='align-middle'>RAPID ASSESSMENT PLATFORM</strong></a>*/}
                 <MDBIcon icon='home'/>
                </a>

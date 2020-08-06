@@ -31,8 +31,7 @@ mongoose.connect(db,{ useNewUrlParser: true },()=>{
       app.listen(PORT, () => console.log('conneted'))
     }
   )
-  .then(() => console.log("MongoDB successfully connected")
-  ,()=>console.log("in server.js file"+db))
+  .then(() => console.log("MongoDB successfully connected"))
   .catch(err => console.log(err));
 
 // Passport middleware
