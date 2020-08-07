@@ -114,13 +114,13 @@ class ViewProcessPage extends React.Component {
            <SectionContainer  noBorder>
             <MDBCard >
               <MDBCardBody>
-<!--                 <div class="table-responsive-md"> -->
+             
                 <MDBDataTableV5
                   scrollY 
                   maxHeight='50vh'
                   hover
                   data={data} />
-<!--                   </div> -->
+
               </MDBCardBody>
             </MDBCard>
            </SectionContainer>
