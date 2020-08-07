@@ -570,7 +570,7 @@ class CaptureProcessPage extends Component {
                         <MDBBtn  onClick={this.refreshHandler}>Reset</MDBBtn>
                         </div>
                         <div id="viewlink" className='text-center'>
-                            <b>Please click this<a href='/viewprocess'> <MDBIcon icon='table' className='indigo-text' /> </a>to View the List of Captured Processes.</b>
+                            <b>Please click<a href='/viewprocess'> <MDBIcon icon='table' className='indigo-text' /> </a>to View the List of Captured Processes.</b>
                         </div>
                     </form>
                 </SectionContainer>
