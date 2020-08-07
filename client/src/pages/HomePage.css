@@ -63,6 +63,8 @@ a.border.nav-link.border-light.rounded.mr-1:hover {
 }
 .tilepad{
   padding-bottom: 15px!important;
-  
+}
+.tilemidpad{
+  padding-bottom: 3px!important;
 }
 	
