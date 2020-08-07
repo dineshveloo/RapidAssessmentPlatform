@@ -168,7 +168,7 @@ class HomePage extends React.Component {
                             <strong>Rapid Process Assessment</strong>
                           </MDBCardTitle>
                           <MDBCardText>
-                           <p>Process assessment questionnaire can be captured online during discovery workshops</p>
+                           <p class="tilemidpad">Process assessment questionnaire can be captured online during discovery workshops</p>
                            <p class="tilepad">This can be performed remotely as well.</p>
                           </MDBCardText>
                         </MDBCardBody>
@@ -209,7 +209,7 @@ class HomePage extends React.Component {
                             <strong>Opportunity Identification</strong>
                           </MDBCardTitle>
                           <MDBCardText>
-                            <p><span class="font-weight-bold text-info">RAP</span> uses proven recommendation engine that is refined over multiple clinet enagements.</p>
+                            <p class="tilemidpad"><span class="font-weight-bold text-info">RAP</span> uses proven recommendation engine that is refined over multiple clinet enagements.</p>
                             <p class="tilepad">Used for identifying automation opportunities & maximizing ROI.</p>
                           </MDBCardText>
                         </MDBCardBody>
@@ -229,7 +229,7 @@ class HomePage extends React.Component {
                             <strong>Value Tracking Feature</strong>
                           </MDBCardTitle>
                           <MDBCardText>
-                            <p>Interactive dashboards for tracking automation opportunities, prioritization and benefits realization.</p>
+                            <p class="tilemidpad">Interactive dashboards for tracking automation opportunities, prioritization and benefits realization.</p>
                             <p class="tilepad">Prebuilt reports that can be exported in PDF format</p>
                           </MDBCardText>
                         </MDBCardBody>
