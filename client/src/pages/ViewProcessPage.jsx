@@ -121,7 +121,7 @@ class ViewProcessPage extends React.Component {
               </MDBCardBody>
             </MDBCard>
             <div id="viewlink" className='text-center'>
-              <b>Process not found? Please click this<a href='/captureprocesspage'> <MDBIcon icon='edit' className='indigo-text' /> </a>to Capture a Process.</b>
+              <b>Process not found? Please click<a href='/captureprocesspage'> <MDBIcon icon='edit' className='indigo-text' /> </a>to Capture a Process.</b>
             </div>
           </MDBCol>
         </MDBRow>
