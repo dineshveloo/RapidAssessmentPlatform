@@ -379,6 +379,7 @@ class CaptureProcessPage extends Component {
                             </MDBCol>
                             <MDBCol md='6'>
                             <select className="browser-default custom-select dropdownTop"
+                                    disabled={this.state.isEditabled}
                                     onChange={this.onChange}
                                     value={this.state.LevelofDocumentation}
                                     id="LevelofDocumentation">
@@ -395,6 +396,7 @@ class CaptureProcessPage extends Component {
                             <MDBCol md='6'>
                             <select className="browser-default custom-select dropdownTop"
                                     onChange={this.onChange}
+                                    disabled={this.state.isEditabled}
                                     value={this.state.NatureofProcess}
                                     id="NatureofProcess">
                                 <option value="-1">Nature of Process</option>
@@ -406,6 +408,7 @@ class CaptureProcessPage extends Component {
                             <MDBCol md='6'>
                             <select className="browser-default custom-select dropdownTopStructure"
                                     onChange={this.onChange}
+                                    disabled={this.state.isEditabled}
                                     value={this.state.StructureofInputData}
                                     id="StructureofInputData">
                                 <option value="-1">Structure of Input Data</option>
@@ -431,6 +434,7 @@ class CaptureProcessPage extends Component {
                             <MDBCol md='6'>
                             <select className="browser-default custom-select dropdownTop"
                                     onChange={this.onChange}
+                                    disabled={this.state.isEditabled}
                                     value={this.state.DocumentsProcessed}
                                     id="DocumentsProcessed">
                                 <option>Nature of Documents Processed/handled</option>
@@ -468,6 +472,7 @@ class CaptureProcessPage extends Component {
                             <MDBCol md='6'>
                             <select className="browser-default custom-select dropdownTop"
                                     onChange={this.onChange}
+                                    disabled={this.state.isEditabled}
                                     value={this.state.processInvolved}
                                     id="processInvolved">
                                 <option>Are there any 3rd Party/External Websites used in the Process?</option>
@@ -521,6 +526,7 @@ class CaptureProcessPage extends Component {
                             <MDBCol md='6'>  
                             <select className="browser-default custom-select dropdownTop"
                                     onChange={this.onChange}
+                                    disabled={this.state.isEditabled}
                                     value={this.state.BusinessProcessChange}
                                     id="BusinessProcessChange">
                                 <option value="-1">Frequency of Business Process Change</option>
@@ -532,6 +538,7 @@ class CaptureProcessPage extends Component {
                             <MDBCol md='6'>
                             <select className="browser-default custom-select dropdownTop"
                                     onChange={this.onChange}
+                                    disabled={this.state.isEditabled}
                                     value={this.state.processSLA}
                                     id="processSLA">
                                 <option value="-1">Turn Around Time (SLA) of the Process?</option>
@@ -558,9 +565,9 @@ class CaptureProcessPage extends Component {
 
                         </MDBRow>
                         <div  className='text-center'>
-                        <MDBBtn color="indigo" type="submit">{this.state.processId.length > 0 ? 'Update Assessment':'Submit Assessment'}</MDBBtn>
-                        { this.props.location.state ? <MDBBtn color="indigo" onClick={this.enableEdit}>Enable Edit </MDBBtn> : null}
-                        <MDBBtn color="indigo" onClick={this.refreshHandler}>Reset</MDBBtn>
+                        <MDBBtn type="submit">{this.state.processId.length > 0 ? 'Update Assessment':'Submit Assessment'}</MDBBtn>
+                        { this.props.location.state ? <MDBBtn  onClick={this.enableEdit}>Enable Edit </MDBBtn> : null}
+                        <MDBBtn  onClick={this.refreshHandler}>Reset</MDBBtn>
                         </div>
                         <div id="viewlink" className='text-center'>
                             <b>Please click this<a href='/viewprocess'> <MDBIcon icon='table' className='indigo-text' /> </a>to View the List of Captured Processes.</b>
