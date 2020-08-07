@@ -24,17 +24,10 @@ import RPAs from '../assets/rapid_process_assessment.jpg';
 import PD from '../assets/process_documentation.jpg';
 import OI from '../assets/OPPID.jpg';
 import VT from '../assets/VAT.jpg';
-// import { toast } from 'react-toastify';
           
 
 class HomePage extends React.Component {
   scrollToTop = () => window.scrollTo(0, 0);
-
-  // handler = (e)=>{
-  //   e.preventDefault();
-  //   console.log("hello");
-  //   toast("access denied");
-  // }
 
   render() {
 
@@ -97,7 +90,7 @@ class HomePage extends React.Component {
                           /></a>
                           <MDBCardBody  >
                             <MDBCardTitle>
-                              <strong >Process Flow Documentation</strong>
+                              <strong>Process Flow Documentation</strong>
                             </MDBCardTitle>
                             <MDBNavLink
                               tag='button'
@@ -151,13 +144,13 @@ class HomePage extends React.Component {
                   About Rapid Assesment Platform
                 </h2>
                 <p className='text-center text-muted mb-1'>
-                  "Rapid Assessment Platform” is a web-based toolkit that can be leveraged for remote Automation Assessments.
+                  "Rapid Assessment Platform” <span class="font-weight-bold text-info">(RAP)</span> is a web-based toolkit that can be leveraged for remote Automation Assessments.
                 </p>
                 <p className='text-center text-muted mb-1'>
-                  The tool generates recommendations based on response to the assessment questionnaire.
+                  <span class="font-weight-bold text-info">RAP</span> provides recommendations for automation opportunities and solutions based on response to the assessment questionnaire.
                 </p>
                 <p className='text-center text-muted'>
-                  Adoption of the Rapid Assessment Platform can help in accelerating the overall automation delivery leading to “Faster Time to Value”.
+                  Adoption of the <span class="font-weight-bold text-info">RAP</span> can help in accelerating the overall automation delivery leading to <strong>“Faster Time to Value”</strong>.
                 </p>
                 <hr className='my-5' />
 
@@ -196,7 +189,7 @@ class HomePage extends React.Component {
                           </MDBCardTitle>
                           <MDBCardText>
                           <p>Processes flows can be documented along with process related metrics viz. Automation Potential, Cycle Time etc.</p>
-                          <p> We also leverage Optimize.ai,the cognitive tool for process mining.</p>
+                          <p>We also leverage Optimize.ai,Mphasis's cognitive solution for process mining.</p>
                        
                           </MDBCardText>
                         </MDBCardBody>
@@ -216,7 +209,7 @@ class HomePage extends React.Component {
                             <strong>Opportunity Identification</strong>
                           </MDBCardTitle>
                           <MDBCardText>
-                            <p>We can call this as Recommendation engine that identify opportunities and helps to yield progress.</p><p>Used for identifying automation opportunities & maximizing ROI.</p>
+                            <p><span class="font-weight-bold text-info">(RAP)</span> uses proven recommendation engine that is refined over multiple clinet enagements.</p><p>Used for identifying automation opportunities & maximizing ROI.</p>
                           </MDBCardText>
                         </MDBCardBody>
                       </MDBCard>
@@ -235,8 +228,8 @@ class HomePage extends React.Component {
                             <strong>Value Tracking Feature</strong>
                           </MDBCardTitle>
                           <MDBCardText>
-                            <p> Dashboards for tracking benefits realization during implementation which helps to yield progress in the implementation.</p>
-                            <p>Mainly used for the realization of benifits.</p>
+                            <p>Interactive dashboards for tracking automation opportunities, prioritization and benefits realization during discovery and implementation.</p>
+                            <p>Prebuilt reports that can be exported in PDF format</p>
                           </MDBCardText>
                         </MDBCardBody>
                       </MDBCard>
@@ -256,7 +249,7 @@ class HomePage extends React.Component {
                 <h2 className='text-center my-5 font-weight-bold'>
                   Contact Us
                 </h2>
-                <p className='text-center text-muted mb-1'>Do you have any questions? Please do not hesitate to contact us directly.</p>
+                <p className='text-center text-muted mb-1'>Any questions? Please contact us directly.</p>
                 <hr className='my-5' />
                 <MDBRow id='categories'>
                   <MDBCol md='6'>
@@ -310,22 +303,13 @@ const mapStateToProps = state => ({
   auth: state.auth,
   errors: state.errors
 });
-
 HomePage.propTypes = {
   loginUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
 };
-
 export default connect(
   mapStateToProps,
   { loginUser }
 )(HomePage);
 //export default HomePage;
-
-
-
-
-
-
-
