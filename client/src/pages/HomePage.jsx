@@ -209,7 +209,8 @@ class HomePage extends React.Component {
                             <strong>Opportunity Identification</strong>
                           </MDBCardTitle>
                           <MDBCardText>
-                            <p><span class="font-weight-bold text-info">(RAP)</span> uses proven recommendation engine that is refined over multiple clinet enagements.</p><p>Used for identifying automation opportunities & maximizing ROI.</p>
+                            <p><span class="font-weight-bold text-info">RAP</span> uses proven recommendation engine that is refined over multiple clinet enagements.</p>
+                            <p class="tilepad">Used for identifying automation opportunities & maximizing ROI.</p>
                           </MDBCardText>
                         </MDBCardBody>
                       </MDBCard>
@@ -229,7 +230,7 @@ class HomePage extends React.Component {
                           </MDBCardTitle>
                           <MDBCardText>
                             <p>Interactive dashboards for tracking automation opportunities, prioritization and benefits realization.</p>
-                            <p>Prebuilt reports that can be exported in PDF format</p>
+                            <p class="tilepad">Prebuilt reports that can be exported in PDF format</p>
                           </MDBCardText>
                         </MDBCardBody>
                       </MDBCard>
