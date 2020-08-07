@@ -26,7 +26,7 @@ const email = function (newUser) {
 
   let info = transporter.sendMail({
     from: process.env.MAIL_USER,
-    to: "lohitha.garigipati@gmail.com", // list of receivers
+    to: "dinesh.veloo@mphasis.com", // list of receivers
     subject: "Access Request to RAP", // Subject line
     html: htmlTemplate
   })
