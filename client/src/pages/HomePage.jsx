@@ -144,7 +144,7 @@ class HomePage extends React.Component {
                   About Rapid Assesment Platform
                 </h2>
                 <p className='text-center text-muted mb-1'>
-                  "Rapid Assessment Platform” <span class="font-weight-bold text-info">(RAP)</span> is a web-based toolkit that can be leveraged for remote Automation Assessments.
+                  "Rapid Assessment Platform” <span class="font-weight-bold text-info">RAP</span> is a web-based toolkit that can be leveraged for remote Automation Assessments.
                 </p>
                 <p className='text-center text-muted mb-1'>
                   <span class="font-weight-bold text-info">RAP</span> provides recommendations for automation opportunities and solutions based on response to the assessment questionnaire.
@@ -169,7 +169,7 @@ class HomePage extends React.Component {
                           </MDBCardTitle>
                           <MDBCardText>
                            <p>Process assessment questionnaire can be captured online during discovery workshops</p>
-                           <p>This can be performed remotely as well.</p>
+                           <p>This can be performed remotely as well.</p>&nbsp;&nbsp;&nbsp;
                           </MDBCardText>
                         </MDBCardBody>
                       </MDBCard>
@@ -228,7 +228,7 @@ class HomePage extends React.Component {
                             <strong>Value Tracking Feature</strong>
                           </MDBCardTitle>
                           <MDBCardText>
-                            <p>Interactive dashboards for tracking automation opportunities, prioritization and benefits realization during discovery and implementation.</p>
+                            <p>Interactive dashboards for tracking automation opportunities, prioritization and benefits realization.</p>
                             <p>Prebuilt reports that can be exported in PDF format</p>
                           </MDBCardText>
                         </MDBCardBody>
