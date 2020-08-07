@@ -1,10 +1,11 @@
 import React from 'react';
 
-import { MDBDataTable, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBIcon, MDBContainer, MDBBtn } from 'mdbreact';
+import { MDBDataTable, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBIcon, MDBContainer, MDBBtn, MDBDataTableV5 } from 'mdbreact';
 import { Redirect } from "react-router-dom";
 //import Button from 'react-bootstrap/Button'
 import axios from 'axios';
 import './HomePage.css';
+import SectionContainer from '../components/sectionContainer';
 
 const url = 'http://18.191.23.96:5000/api/users/viewprocessdata';
 
@@ -107,22 +108,26 @@ class ViewProcessPage extends React.Component {
           <b>List of Captured Processes</b>
         </h1>
 
-        <MDBRow id="VP" className="mb-4">
+
+        <MDBRow id="VP" className="py-3">
           <MDBCol md="12">
+           <SectionContainer  noBorder>
             <MDBCard >
               <MDBCardBody>
                 <div class="table-responsive-md">
-                <MDBDataTable
-                  striped
-                  bordered
+                <MDBDataTableV5
+                  scrollY 
+                  maxHeight='50vh'
                   hover
                   data={data} />
                   </div>
               </MDBCardBody>
             </MDBCard>
+           </SectionContainer>
             <div id="viewlink" className='text-center'>
               <b>Process not found? Please click this<a href='/captureprocesspage'> <MDBIcon icon='edit' className='indigo-text' /> </a>to Capture a Process.</b>
             </div>
+              
           </MDBCol>
         </MDBRow>
       </MDBContainer >
