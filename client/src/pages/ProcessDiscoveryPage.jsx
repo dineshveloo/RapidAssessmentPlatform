@@ -85,7 +85,7 @@ class ProcessDiscoveryPage extends React.Component {
                               className='btn btn-outline-mdb-color-new btn-sm btn-rounded d-inline'
                               onClick={this.scrollToTop}
                             >
-                               get started
+                               Select
                           </MDBNavLink>
                           </MDBCardBody>
                         </MDBCard>
