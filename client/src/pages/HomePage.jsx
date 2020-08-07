@@ -144,13 +144,13 @@ class HomePage extends React.Component {
                   About Rapid Assesment Platform
                 </h2>
                 <p className='text-center text-muted mb-1'>
-                  "Rapid Assessment Platform” <span class="font-weight-bold text-info">RAP</span> is a web-based toolkit that can be leveraged for remote Automation Assessments.
+                  "Rapid Assessment Platform” <span class="font-weight-bold text-info">(RAP)</span> is a web-based toolkit that can be leveraged for remote Automation Assessments.
                 </p>
                 <p className='text-center text-muted mb-1'>
-                  <span class="font-weight-bold text-info">RAP</span> provides recommendations for automation opportunities and solutions based on response to the assessment questionnaire.
+                  <strong>RAP</strong> provides recommendations for automation opportunities and solutions based on response to the assessment questionnaire.
                 </p>
                 <p className='text-center text-muted'>
-                  Adoption of the <span class="font-weight-bold text-info">RAP</span> can help in accelerating the overall automation delivery leading to <strong>“Faster Time to Value”</strong>.
+                  Adoption of the <strong>RAP</strong> can help in accelerating the overall automation delivery leading to <strong>“Faster Time to Value”</strong>.
                 </p>
                 <hr className='my-5' />
 
@@ -209,7 +209,7 @@ class HomePage extends React.Component {
                             <strong>Opportunity Identification</strong>
                           </MDBCardTitle>
                           <MDBCardText>
-                            <p class="tilemidpad"><span class="font-weight-bold text-info">RAP</span> uses proven recommendation engine that is refined over multiple clinet enagements.</p>
+                            <p class="tilemidpad"><strong>RAP</strong> uses proven recommendation engine that is refined over multiple clinet enagements.</p>
                             <p class="tilepad">Used for identifying automation opportunities & maximizing ROI.</p>
                           </MDBCardText>
                         </MDBCardBody>
