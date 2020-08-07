@@ -462,7 +462,7 @@ class CaptureProcessPage extends Component {
                                     onChange={this.onChange}
                                     value={this.state.ProcessCount}
                                     id="ProcessCount"
-                                    type="text"
+                                    type="number"
                                     group
                                     validate
                                     success='right'
@@ -487,7 +487,7 @@ class CaptureProcessPage extends Component {
                                     onChange={this.onChange}
                                     value={this.state.NumberofScreens}
                                     id="NumberofScreens"
-                                    type="text"
+                                    type="number"
                                     group
                                     validate
                                     success='right'
@@ -501,7 +501,7 @@ class CaptureProcessPage extends Component {
                                     onChange={this.onChange}
                                     value={this.state.HumanDecisionPoints}
                                     id="HumanDecisionPoints"
-                                    type="text"
+                                    type="number"
                                     group
                                     validate
                                     success='right'
@@ -515,7 +515,7 @@ class CaptureProcessPage extends Component {
                                     onChange={this.onChange}
                                     value={this.state.StandardInputTemplate}
                                     id="StandardInputTemplate"
-                                    type="text"
+                                    type="number"
                                     group
                                     validate
                                     success='right'
