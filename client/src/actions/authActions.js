@@ -254,6 +254,7 @@ export const CaptureUpdate = (captureData, history) => dispatch => {
       }
       else {
         toast(res.data.msg);
+          history.push("/viewprocess")
       }
     
     })
