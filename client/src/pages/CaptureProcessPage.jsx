@@ -286,7 +286,7 @@ class CaptureProcessPage extends Component {
                                     type='textarea'
                                     onChange={this.onChange}
                                     value={this.state.list}
-                                    label='List the current pain points'
+                                    label='Current Pain Points'
                                     id="list"
                                     rows='2'
                                     disabled={this.state.isEditabled}
@@ -311,7 +311,7 @@ class CaptureProcessPage extends Component {
                             
                             <MDBCol md='6'>
                                 <MDBInput
-                                    label='Monthly transaction volume'
+                                    label='Monthly Transaction Volume'
                                     onChange={this.onChange}
                                     value={this.state.transactionVolume}
                                     id="transactionVolume"
@@ -416,7 +416,7 @@ class CaptureProcessPage extends Component {
                             </MDBCol>
                             <MDBCol md='6'>
                                 <MDBInput
-                                    label='what is the % of unstructured data in the mix?'
+                                    label='If mix of Structured and Unstructured, % of Unstructured Data?'
                                     onChange={this.onChange}
                                     value={this.state.unstructuredData}
                                     id="unstructuredData"
@@ -433,7 +433,7 @@ class CaptureProcessPage extends Component {
                                     onChange={this.onChange}
                                     value={this.state.DocumentsProcessed}
                                     id="DocumentsProcessed">
-                                <option>Nature of Documents processed/handled</option>
+                                <option>Nature of Documents Processed/handled</option>
                                 <option value="Digitized Documents - System Readable PDFs">Digitized Documents - System Readable PDFs</option>
                                 <option value="Non-Digitized Documents - Scanned PDFs">Non-Digitized Documents - Scanned PDFs</option>
                                 <option value="Handwritten Documents">Handwritten Documents</option>
@@ -470,7 +470,7 @@ class CaptureProcessPage extends Component {
                                     onChange={this.onChange}
                                     value={this.state.processInvolved}
                                     id="processInvolved">
-                                <option>Are there any 3rd Party/external websites involved in the Process?</option>
+                                <option>Are there any 3rd Party/External Websites used in the Process?</option>
                                 <option value="Yes">Yes</option>
                                 <option value="No">No</option>
                             </select>
@@ -492,7 +492,7 @@ class CaptureProcessPage extends Component {
                             </MDBCol>
                             <MDBCol md='6'>
                                 <MDBInput
-                                    label='Number of Human Decision Points involved in the Process'
+                                    label='Number of Human Decision Points in the Process'
                                     onChange={this.onChange}
                                     value={this.state.HumanDecisionPoints}
                                     id="HumanDecisionPoints"
@@ -534,7 +534,7 @@ class CaptureProcessPage extends Component {
                                     onChange={this.onChange}
                                     value={this.state.processSLA}
                                     id="processSLA">
-                                <option value="-1">Turn Around Time (SLA) of the Process ?</option>
+                                <option value="-1">Turn Around Time (SLA) of the Process?</option>
                                 <option value="Less than 8 Hrs">Less than 8 Hrs</option>
                                 <option value="Less than 24 Hrs">Less than 24 Hrs</option>
                                 <option value="Greater than 24 Hrs">Greater than 24 Hrs</option>
@@ -543,7 +543,7 @@ class CaptureProcessPage extends Component {
                             </MDBCol>
                             <MDBCol md='6'>
                                 <MDBInput
-                                    label='Any other Metrics that are tracked?'
+                                    label='Any other Metrics that are Tracked?'
                                     onChange={this.onChange}
                                     value={this.state.metrics}
                                     id="metrics"
