@@ -169,7 +169,7 @@ class HomePage extends React.Component {
                           </MDBCardTitle>
                           <MDBCardText>
                            <p>Process assessment questionnaire can be captured online during discovery workshops</p>
-                           <p>This can be performed remotely as well.</p>&nbsp;&nbsp;&nbsp;
+                           <p class="tilepad">This can be performed remotely as well.</p>
                           </MDBCardText>
                         </MDBCardBody>
                       </MDBCard>
