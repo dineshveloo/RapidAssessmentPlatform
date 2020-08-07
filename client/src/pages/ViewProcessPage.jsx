@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { MDBDataTable, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBIcon, MDBContainer, MDBBtn, MDBDataTableV5 } from 'mdbreact';
+import { MDBRow, MDBCol, MDBCard, MDBCardBody, MDBIcon, MDBContainer, MDBBtn, MDBDataTableV5 } from 'mdbreact';
 import { Redirect } from "react-router-dom";
 //import Button from 'react-bootstrap/Button'
 import axios from 'axios';
