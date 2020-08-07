@@ -61,7 +61,7 @@ class ViewProcessPage extends React.Component {
           subBusinessUnit: post.subBusinessUnit,
           processName: post.processName,
           //clickEvent: () => this.handleClick(post),
-          action: <MDBBtn color="indigo" rounded size="sm" onClick={() => { this.handleClick(post) }}><i class="far fa-eye"></i> View</MDBBtn>
+          action: <MDBBtn color="default" rounded size="sm" onClick={() => { this.handleClick(post) }}><i class="far fa-eye"></i> View</MDBBtn>
         }
       )
     });
@@ -114,9 +114,6 @@ class ViewProcessPage extends React.Component {
                 <div class="table-responsive-md">
                 <MDBDataTable
                   striped
-                  scrollX
-                  scrollY
-                  maxHeight='50vh'
                   bordered
                   hover
                   data={data} />
