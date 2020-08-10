@@ -75,29 +75,29 @@ class ViewProcessPage extends React.Component {
         {
           label: 'Client Name',
           field: 'clientName',
-           width: 210
+           width: 230
         },
 
         {
           label: 'Business Unit',
           field: 'businessUnit',
-           width: 210
+           width: 230
         },
         {
           label: 'Sub Business Unit',
           field: 'subBusinessUnit',
-           width: 210
+           width: 230
         },
         {
           label: 'Process Name',
           field: 'processName',
-           width: 210
+           width: 230
         },
         
         {
           label: 'Action',
           field: 'action',
-           width: 210
+           width: 230
         },
       ],
       rows: this.state.tableRows,
