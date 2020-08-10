@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {
   MDBContainer, MDBRow, MDBCol,
-  MDBCard, MDBCardBody, MDBDataTableV5,
+  MDBCard, MDBIcon, MDBCardBody, MDBDataTableV5,
 } from 'mdbreact';
 import SectionContainer from '../components/sectionContainer';
 //import Result from '../components/result';
@@ -10,6 +10,7 @@ import { RolesAssigned } from '../actions/authActions';
 import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from 'react-redux';
+import './HomePage.css';
 
 class AccessManagementPage extends Component {
   state = {
@@ -125,10 +126,14 @@ class AccessManagementPage extends Component {
   render() {
     const { data } = this.state;
     return (
-      <MDBContainer className='mt-3'>
+      <MDBContainer id="UM" className='mt-3'>
+         <h1 className='text-center'>
+          <MDBIcon icon='key' className='indigo-text mr-2' />
+          <b>Access Management</b>
+        </h1>
         <MDBRow className='py-3'>
           <MDBCol md='12'>
-            <SectionContainer title='Access Management' noBorder>
+            <SectionContainer  noBorder>
               <SelectRoles
                 roles={this.state.roles}
                 changeValue={this.handleChange}
