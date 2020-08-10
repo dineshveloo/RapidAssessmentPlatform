@@ -133,6 +133,7 @@ class AccessManagementPage extends Component {
         </h1>
         <MDBRow className='py-3'>
           <MDBCol md='12'>
+             <SectionContainer  noBorder>
            
               <MDBCard>
                 <MDBCardBody>
