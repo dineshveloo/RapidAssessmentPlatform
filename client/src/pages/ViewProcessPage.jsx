@@ -75,24 +75,29 @@ class ViewProcessPage extends React.Component {
         {
           label: 'Client Name',
           field: 'clientName',
+           width: 200
         },
 
         {
           label: 'Business Unit',
           field: 'businessUnit',
+           width: 200
         },
         {
           label: 'Sub Business Unit',
           field: 'subBusinessUnit',
+           width: 200
         },
         {
           label: 'Process Name',
           field: 'processName',
+           width: 200
         },
         
         {
           label: 'Action',
           field: 'action',
+           width: 200
         },
       ],
       rows: this.state.tableRows,
@@ -107,7 +112,7 @@ class ViewProcessPage extends React.Component {
           <b>List of Captured Processes</b>
         </h1>
 
-        <MDBRow id="VP" className="mb-4">
+        <MDBRow id="VP" className="py-3">
           <MDBCol md="12">
             <MDBCard >
               <MDBCardBody>
@@ -116,6 +121,9 @@ class ViewProcessPage extends React.Component {
                   striped
                   bordered
                   hover
+                  scrollX
+                  scrollY
+                  maxHeight='50vh'
                   data={data} />
                   </div>
               </MDBCardBody>
