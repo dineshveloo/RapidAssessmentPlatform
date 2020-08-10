@@ -4,9 +4,9 @@ import  "./components.css";
 
 const SelectRoles = (props) => {
     return (
-        <div>
+        <div id="allignment">
             
-            <button className="alignButton" onClick={props.assignRole} disabled={!(props.disabled) || (props.isRoleSelected=== '') || (props.isRoleSelected=== '-1')}>Update Role</button>
+           
             <select className="alignRoles" onChange={props.changeValue} >
                 {
                     props.roles.map(data => (
@@ -19,6 +19,7 @@ const SelectRoles = (props) => {
                     ))
                 }
             </select>
+             <button className="alignButton" onClick={props.assignRole} disabled={!(props.disabled) || (props.isRoleSelected=== '') || (props.isRoleSelected=== '-1')}>Update Role</button>
         </div>
     );
 }
