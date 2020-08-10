@@ -143,6 +143,7 @@ class AccessManagementPage extends Component {
               />
               <MDBCard>
                 <MDBCardBody>
+                  <div className="table-responsive-md">
                   {this.state.data['rows'].length > 0 ?
                     <MDBDataTableV5
                       hover
@@ -162,6 +163,7 @@ class AccessManagementPage extends Component {
                       checkboxFirstColumn
                     />
                     : null}
+                  </div>
                 </MDBCardBody>
               </MDBCard>
               {/* <Result> {checkbox1 && <p>{JSON.stringify(delete checkbox1.checkbox && checkbox1)}</p>}</Result> */}
