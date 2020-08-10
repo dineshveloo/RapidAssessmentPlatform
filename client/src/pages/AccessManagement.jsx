@@ -133,14 +133,7 @@ class AccessManagementPage extends Component {
         </h1>
         <MDBRow className='py-3'>
           <MDBCol md='12'>
-            <SectionContainer  noBorder>
-              <SelectRoles
-                roles={this.state.roles}
-                changeValue={this.handleChange}
-                assignRole={this.assignHandler}
-                disabled={this.state.checkbox1.checked}
-                isRoleSelected = {this.state.selectedRole.length > 0 ? this.state.selectedRole :''}
-              />
+           
               <MDBCard>
                 <MDBCardBody>
                   <div className="table-responsive-md">
